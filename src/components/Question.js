@@ -9,7 +9,6 @@ export default class ShortQuestionObject extends Component {
         return (
             <div className='short-question-object'>
                 <input type='text' ref={this.titleRef} className='question-entry' defaultValue={question} onChange={this.handleQuestionChange} />
-                <input type='text' className='short-answer' value='Short answer text' />
             </div>
         )
     }
