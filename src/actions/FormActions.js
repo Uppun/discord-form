@@ -10,4 +10,29 @@ export default {
             index,
         });
     },
+    add_question(format) {
+        Dispatcher.dispatch({
+            type: ActionTypes.ADD_QUESTION,
+            format,
+        });
+    },
+    update_question(index, question) {
+        Dispatcher.dispatch({
+            type: ActionTypes.UPDATE_QUESTION,
+            question,
+            index,
+        });
+    },
+    add_other(index) {
+        Dispatcher.dispatch({
+            type: ActionTypes.ADD_OTHER_OPTION,
+            index,
+        });
+    },
+    add_option(index) {
+        Dispatcher.dispatch({
+            type: ActionTypes.ADD_OPTION,
+            index,
+        });
+    },
 }

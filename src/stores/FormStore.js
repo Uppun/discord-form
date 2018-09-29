@@ -37,6 +37,29 @@ class FormStore extends ReduceStore {
                 };
             }
 
+            case ActionTypes.ADD_OTHER_OPTION: {
+                const {index} = action;
+
+                return {
+                    ...state,
+                    elements: updateElement(state.elements, index, element => ({
+                        ...element,
+                        other = false,
+                    }))
+                };
+            }
+
+            case ActionTypes.ADD_OPTION: {
+                const {index} = action;
+                //MAKE A DEEP CLONE OF THE ELEMENTS ARRAY HERE
+                return {
+                    ...state,
+                    elements: updateElement(state.elements, index, element => ({
+                        ...element,
+                    }))
+                }
+            }
+
             default: {
                 return state;
             }
