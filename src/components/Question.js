@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import FormActions from '../actions/FormActions';
-import QuestionTypes from '../Assets/QuestionTypes';
+import * as QuestionTypes from '../Assets/QuestionTypes/MultipleChoice';
 
-export default class ShortQuestionObject extends Component {
+export default class QuestionObject extends Component {
     questionRef = React.createRef();
     render() {
         const {form, title} = this.props;
         return (
             <div className='short-question-object'>
-                <input type='text' ref={this.titleRef} className='question-entry' defaultValue={question} onChange={this.handleQuestionChange} />
+                <MultipleChoice />
             </div>
         )
     }

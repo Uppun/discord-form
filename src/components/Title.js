@@ -6,11 +6,11 @@ export default class TitleObject extends Component {
     descriptionRef = React.createRef();
 
     handleChange = () => {
-        const {index} = this.props;
+        const {id} = this.props;
         const titleVal = this.titleRef.current.value;
         const descriptionVal = this.descriptionRef.current.value;
 
-        FormActions.update_title(index, titleVal, descriptionVal);
+        FormActions.update_title(id, titleVal, descriptionVal);
     }
 
     render() {

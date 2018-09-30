@@ -1,38 +1,42 @@
 import ActionTypes from './ActionTypes';
 import Dispatcher from '../Dispatcher';
 
+let idIncrementor = 0;
+
 export default {
-    update_title(index, title, description) {
+    update_title(id, title, description) {
         Dispatcher.dispatch({
             type: ActionTypes.UPDATE_TITLE,
             title,
             description,
-            index,
+            id,
         });
     },
     add_question(format) {
+        idIncrementor++;
         Dispatcher.dispatch({
             type: ActionTypes.ADD_QUESTION,
             format,
+            id: idIncrementor,
         });
     },
-    update_question(index, question) {
+    update_question(id, question) {
         Dispatcher.dispatch({
             type: ActionTypes.UPDATE_QUESTION,
             question,
-            index,
+            id,
         });
     },
-    add_other(index) {
+    add_other(id) {
         Dispatcher.dispatch({
             type: ActionTypes.ADD_OTHER_OPTION,
-            index,
+            id,
         });
     },
-    add_option(index) {
+    add_option(id) {
         Dispatcher.dispatch({
             type: ActionTypes.ADD_OPTION,
-            index,
+            id,
         });
     },
 }

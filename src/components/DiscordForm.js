@@ -1,24 +1,32 @@
 import React, { Component } from 'react';
 import FormStore from '../stores/FormStore';
+import FormOrderStore from '../stores/FormOrderStore';
 import {Container} from 'flux/utils';
 import TitleObject from './Title';
 
 class DiscordForm extends Component {
     static getStores() {
-        return [FormStore];
+        return [FormStore, FormOrderStore];
     }
     
     static calculateState(prevState) {
-        return FormStore.getState();
+        const formOrder = FormOrderStore.getState();
+        const formFields = FormStore.getState();
+
+        return {
+            order: formOrder.order,
+            idToFieldsMap: formFields.idToFieldsMap
+        };
     }
 
     render() {
-        const {elements} = this.state;
+        const {order, idToFieldsMap} = this.state;
 
         return(
-            elements.map((element, index) => {
+            order.map((id) => {
+                const element = idToFieldsMap.get(id);
                 if (element.type === 'title') {
-                    return <TitleObject key={index} index={index} title={element.title} description={element.description} />
+                    return <TitleObject key={id} id={id} title={element.title} description={element.description} />
                 }
             })
         )
