@@ -39,4 +39,12 @@ export default {
             id,
         });
     },
+    update_option(id, index, value) {
+        Dispatcher.dispatch({
+            type: ActionTypes.UPDATE_OPTION,
+            id,
+            index,
+            value,
+        });
+    },
 }
