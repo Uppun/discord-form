@@ -1,0 +1,70 @@
+.App {
+    width: 1200px;
+    position: relative;
+}
+
+.button-panel-wrapper {
+    width: 600px; 
+    margin: 15px auto; 
+    position: relative; 
+}
+
+.button-panel {
+    width: 100px; 
+    position: fixed; 
+    margin-left: 900px; 
+}
+
+.form-contents {
+    position: absolute;
+    box-shadow: 2px 2px 2px black;
+    left: 50%;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-object {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+
+.title-entry, .description-entry {
+    border: 0;
+    outline: 0;
+}
+
+.title-entry {
+    font-size: 40px;
+}
+
+.description-entry {
+    font-size: 20px;
+}
+
+.bar  { 
+    position: relative; 
+    display: block; 
+    width: 100%; 
+
+}
+.bar:before, .bar:after   {
+  content: '';
+  height: 3px; 
+  width: 0;
+  bottom: 1px; 
+  position: absolute;
+  background: blue; 
+  transition: 0.3s ease all; 
+}
+.bar:before {
+  left: 50%;
+}
+.bar:after {
+  right: 50%; 
+}
+
+input:focus + .bar:before, input:focus + .bar:after {
+  width: 50%;
+}
