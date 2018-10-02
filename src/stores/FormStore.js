@@ -2,6 +2,7 @@ import {ReduceStore} from 'flux/utils';
 import Dispatcher from '../Dispatcher';
 import ActionTypes from '../actions/ActionTypes';
 import {Map} from 'immutable';
+import QuestionTypes from '../Assets/QuestionTypes';
 
 class FormStore extends ReduceStore {
     constructor() {
@@ -11,7 +12,7 @@ class FormStore extends ReduceStore {
     getInitialState() {
         const initialIdToFieldsMap = Map();
         const idToFieldsMap = initialIdToFieldsMap.set(0, {
-            type: 'title',
+            type: QuestionTypes.TITLE,
             title: 'Enter title',
             description: 'Enter description',
         });
@@ -38,6 +39,32 @@ class FormStore extends ReduceStore {
                 }
             }
 
+            case ActionTypes.ADD_QUESTION: {
+                const {id, format} = action;
+                let idToFieldsMap; 
+                if (format === QuestionTypes.SHORT || format === QuestionTypes.PARAGRAPH) {
+                    idToFieldsMap = state.idToFieldsMap.set(id,
+                        {
+                            type: format,
+                            question: 'Enter Question',
+                            answer: 'Enter Answer'
+                        });
+                } else {
+                    idToFieldsMap = state.idToFieldsMap.set(id,
+                        {
+                            type: format,
+                            question: 'Enter Question',
+                            options: ['option 1'],
+                            otherNotSet: true,
+                        })
+                }
+                
+                return {
+                    ...state,
+                    idToFieldsMap,
+                }
+            }
+
             case ActionTypes.ADD_OTHER_OPTION: {
                 const {id} = action;
                 const element = state.idToFieldsMap.get(id);
@@ -56,10 +83,11 @@ class FormStore extends ReduceStore {
             case ActionTypes.ADD_OPTION: {
                 const {id} = action;
                 const element = state.idToFieldsMap.get(id);
+                const newElementNumber = element.options.length + 1;
                 const idToFieldsMap = state.idToFieldsMap.set(id,
                     {
                         ...element,
-                        options: [...element.options, ('option ' + element.options.length + 2)],
+                        options: [...element.options, 'option ' + newElementNumber],
                     });
 
                 return {

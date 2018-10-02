@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FormActions from '../actions/FormActions';
+import '../Assets/Forms.css';
 
 export default class TitleObject extends Component {
     titleRef = React.createRef();
@@ -18,10 +19,9 @@ export default class TitleObject extends Component {
         return(
             <div className='title-object'>
                 <input type='text' ref={this.titleRef} className='title-entry' defaultValue={title} onChange={this.handleChange} />
+                <span className='bar' />
                 <input type='description' ref={this.descriptionRef} className='description-entry' defaultValue={description} onChange={this.handleChange} />
-
-                {title}
-                {description}
+                <span className='bar' />
             </div>
         )
     }

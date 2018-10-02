@@ -1,4 +1,5 @@
 export default {
+    TITLE: 'TITLE',
     SHORT: 'SHORT',
     PARAGRAPH: 'PARAGRAPH',
     MULTIPLE_CHOICE: 'MULTIPLE_CHOICE',
