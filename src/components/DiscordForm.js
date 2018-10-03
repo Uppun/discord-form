@@ -23,8 +23,35 @@ class DiscordForm extends Component {
         };
     }
 
-    handleMultiClick = () => {
-        FormActions.add_question(QuestionTypes.MULTIPLE_CHOICE);
+    handleClick = (event) => {
+        const buttonClass = event.target.className;
+        console.log(buttonClass)
+        
+        switch(buttonClass) {
+            case 'add-short': {
+                FormActions.add_question(QuestionTypes.SHORT);
+                break;
+            }
+            case 'add-paragraph': {
+                FormActions.add_question(QuestionTypes.PARAGRAPH);
+                break;
+            }
+            case 'add-multi': {
+                FormActions.add_question(QuestionTypes.MULTIPLE_CHOICE);
+                break;
+            }
+            case 'add-checkbox': {
+                FormActions.add_question(QuestionTypes.CHECKBOX);
+                break;
+            }
+            case 'add-dropdown': {
+                FormActions.add_question(QuestionTypes.DROPDOWN);
+                break;
+            }
+            default: {
+                break;
+            }
+        }
     }
 
     render() {
@@ -35,16 +62,38 @@ class DiscordForm extends Component {
                 <div className='form-contents'>
                     {order.map((id) => {
                         const element = idToFieldsMap.get(id);
-                        if (element.type === QuestionTypes.TITLE) {
-                            return <TitleObject key={id} id={id} title={element.title} description={element.description} />
-                        } else if (element.type === QuestionTypes.MULTIPLE_CHOICE) {
-                            return <Question key={id} id={id} question={element.question} options={element.options} otherNotSet={element.otherNotSet} format={element.type} />
+                        switch(element.type) {
+                            case QuestionTypes.TITLE: {
+                                return <TitleObject key={id} id={id} title={element.title} description={element.description} />
+                            }
+                            case QuestionTypes.SHORT || QuestionTypes.PARAGRAPH: {
+                                return <Question key={id} id={id} question={element.question} format={element.type} />
+                            }
+                            case QuestionTypes.PARAGRAPH: {
+                                return <Question key={id} id={id} question={element.question} format={element.type} />
+                            }
+                            case QuestionTypes.MULTIPLE_CHOICE: {
+                                return <Question key={id} id={id} question={element.question} options={element.options} otherNotSet={element.otherNotSet} format={element.type} />
+                            }
+                            case QuestionTypes.CHECKBOX: { 
+                                return <Question key={id} id={id} question={element.question} options={element.options} otherNotSet={element.otherNotSet} format={element.type} />
+                            }
+                            case QuestionTypes.DROPDOWN: {
+                                return <Question key={id} id={id} question={element.question} options={element.options} format={element.type} />
+                            }
+                            default: {
+                                return null;
+                            }
                         }
                     })}
                 </div>
                 <div className='button-panel-wrapper'>
                     <div className="button-panel">
-                            <button className='add-multi' onClick={this.handleMultiClick}>Add Multi</button>
+                        <button className='add-short' onClick={this.handleClick}>Add Short</button>
+                        <button className='add-paragraph' onClick={this.handleClick}>Add Paragraph</button>
+                        <button className='add-multi' onClick={this.handleClick}>Add Multi</button>
+                        <button className='add-checkbox' onClick={this.handleClick}>Add Checkbox</button>
+                        <button className='add-dropdown' onClick={this.handleClick}>Add Dropdown</button>
                     </div>
                 </div>
             </div>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import FormActions from '../../actions/FormActions';
 import '../../Assets/Forms.css';
 
-export default class MultipleChoice extends Component {
+export default class CheckBox extends Component {
     handleOtherClick = () => {
         const {id} = this.props;
         FormActions.add_other(id);
@@ -22,10 +22,10 @@ export default class MultipleChoice extends Component {
     render() {
         const {options, otherNotSet, id} = this.props;
         return(
-            <div className='multiple-choice-options'>
+            <div className='checkbox-choice-options'>
                 {options.map((option, index) => {
                     return(
-                        <MultipleChoiceOption key={index} index={index} option={option} id={id} onChange={this.handleOptionChange} />
+                        <CheckBoxOption key={index} index={index} option={option} id={id} onChange={this.handleOptionChange} />
                     )})}
                 {otherNotSet ? 
                     <div className='other-or-another'>
@@ -33,7 +33,7 @@ export default class MultipleChoice extends Component {
                     </div>
                     :
                     <div className='other-and-another'>
-                        <input type='radio' className='multi-choice-other' disabled />
+                        <input type='checkbox' className='checkbox-choice-other' disabled />
                         <input type='text' className='other-text' defaultValue='Other' readOnly />
                         <div className='another' onClick={this.handleAnotherClick}>Add Another</div>
                     </div>
@@ -43,7 +43,7 @@ export default class MultipleChoice extends Component {
     }
 }
 
-class MultipleChoiceOption extends Component {
+class CheckBoxOption extends Component {
     handleChange = (event) => {
         const {index, onChange} = this.props;
         const {value} = event.target;
@@ -54,9 +54,9 @@ class MultipleChoiceOption extends Component {
     render() {
         const {option} = this.props;
         return (
-            <div className='multi-choice'>
-                <input type='radio' className='multi-choice-option' disabled={true} />
-                <input type='text' className='multi-choice-text' defaultValue={option} onChange={this.handleChange} />
+            <div className='checkbox-choice'>
+                <input type='checkbox' className='checkbox-choice-option' disabled={true} />
+                <input type='text' className='checkbox-choice-text' defaultValue={option} onChange={this.handleChange} />
                 <span className='bar' />
             </div>
         )

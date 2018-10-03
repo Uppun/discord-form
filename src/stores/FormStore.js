@@ -49,13 +49,20 @@ class FormStore extends ReduceStore {
                             question: 'Enter Question',
                             answer: 'Enter Answer'
                         });
-                } else {
+                } else if (format === QuestionTypes.MULTIPLE_CHOICE || format === QuestionTypes.CHECKBOX) {
                     idToFieldsMap = state.idToFieldsMap.set(id,
                         {
                             type: format,
                             question: 'Enter Question',
                             options: ['option 1'],
                             otherNotSet: true,
+                        })
+                } else {
+                    idToFieldsMap = state.idToFieldsMap.set(id,
+                        {
+                            type: format,
+                            question: 'Enter Question',
+                            options: ['option 1'],
                         })
                 }
                 
