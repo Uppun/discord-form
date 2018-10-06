@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../../Assets/Forms.css';
 
 export default class ShortAnswer extends Component {
     render() {

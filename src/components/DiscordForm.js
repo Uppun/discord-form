@@ -7,6 +7,7 @@ import '../Assets/Forms.css';
 import QuestionTypes from '../Assets/QuestionTypes';
 import Question from './Question';
 import FormActions from '../actions/FormActions';
+import { Link } from 'react-router-dom';
 
 class DiscordForm extends Component {
     static getStores() {
@@ -59,6 +60,7 @@ class DiscordForm extends Component {
 
         return(
             <div className='form'>
+                <Link to="/preview" target="_blank">Preview</Link>
                 <div className='form-contents'>
                     {order.map((id) => {
                         const element = idToFieldsMap.get(id);

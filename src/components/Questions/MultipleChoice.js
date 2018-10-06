@@ -55,7 +55,7 @@ class MultipleChoiceOption extends Component {
         const {option} = this.props;
         return (
             <div className='multi-choice'>
-                <input type='radio' className='multi-choice-option' disabled={true} />
+                <input type='radio' className='multi-choice-option' disabled />
                 <input type='text' className='multi-choice-text' defaultValue={option} onChange={this.handleChange} />
                 <span className='bar' />
             </div>

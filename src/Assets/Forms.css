@@ -1,6 +1,8 @@
 .App {
     width: 1200px;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .button-panel-wrapper {
@@ -10,9 +12,12 @@
 }
 
 .button-panel {
+    padding-left: 10px;
     width: 100px; 
     position: fixed; 
-    margin-left: 900px; 
+    margin-left: 900px;
+    display: flex;
+    flex-direction: column;
 }
 
 .form-contents {
@@ -46,7 +51,7 @@
     font-size: 40px;
 }
 
-.description-entry, .multi-choice-text, .checkbox-choice-text, .dropdown-choice-text {
+.description-entry, .multi-choice-text, .checkbox-choice-text, .dropdown-choice-text, .other-text {
     font-size: 20px;
 }
 
@@ -85,4 +90,13 @@ input:focus + .bar:before, input:focus + .bar:after {
 .multi-choice-text, .checkbox-choice-text, .dropdown-choice-text, {
     display: flex;
     align-content: left;
+}
+
+.survey-contents {
+    position: absolute;
+    box-shadow: 2px 2px 2px black;
+    left: 50%;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
 }
