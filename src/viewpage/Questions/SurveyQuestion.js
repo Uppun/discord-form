@@ -11,7 +11,7 @@ export default class QuestionObject extends Component {
         const {id} = this.props;
         const questionVal = this.questionRefRef.current.value;
 
-        FormActions.update_question(id, questionVal);
+        FormActions.updateQuestion(id, questionVal);
     }
 
     render() {

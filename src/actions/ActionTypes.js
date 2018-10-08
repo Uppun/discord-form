@@ -1,8 +1,8 @@
 export default {
     UPDATE_TITLE: 'UPDATE_TITLE',
-    ADD_QUESTION: 'ADD_QUESTION',
-    UPDATE_QUESTION: 'UPDATE_QUESTION',
-    ADD_OTHER_OPTION: 'ADD_OTHER_OPTION',
-    ADD_OPTION: 'ADD_OPTION',
-    UPDATE_OPTION: 'UPDATE_OPTION'
+    addQuestion: 'addQuestion',
+    updateQuestion: 'updateQuestion',
+    addOther_OPTION: 'addOther_OPTION',
+    addOption: 'addOption',
+    updateOption: 'updateOption'
 }

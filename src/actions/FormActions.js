@@ -12,36 +12,36 @@ export default {
             id,
         });
     },
-    add_question(format) {
+    addQuestion(format) {
         idIncrementor++;
         Dispatcher.dispatch({
-            type: ActionTypes.ADD_QUESTION,
+            type: ActionTypes.addQuestion,
             format,
             id: idIncrementor,
         });
     },
-    update_question(id, question) {
+    updateQuestion(id, question) {
         Dispatcher.dispatch({
-            type: ActionTypes.UPDATE_QUESTION,
+            type: ActionTypes.updateQuestion,
             question,
             id,
         });
     },
-    add_other(id) {
+    addOther(id) {
         Dispatcher.dispatch({
-            type: ActionTypes.ADD_OTHER_OPTION,
+            type: ActionTypes.addOther_OPTION,
             id,
         });
     },
-    add_option(id) {
+    addOption(id) {
         Dispatcher.dispatch({
-            type: ActionTypes.ADD_OPTION,
+            type: ActionTypes.addOption,
             id,
         });
     },
-    update_option(id, index, value) {
+    updateOption(id, index, value) {
         Dispatcher.dispatch({
-            type: ActionTypes.UPDATE_OPTION,
+            type: ActionTypes.updateOption,
             id,
             index,
             value,

@@ -30,23 +30,23 @@ class DiscordForm extends Component {
         
         switch(buttonClass) {
             case 'add-short': {
-                FormActions.add_question(QuestionTypes.SHORT);
+                FormActions.addQuestion(QuestionTypes.SHORT);
                 break;
             }
             case 'add-paragraph': {
-                FormActions.add_question(QuestionTypes.PARAGRAPH);
+                FormActions.addQuestion(QuestionTypes.PARAGRAPH);
                 break;
             }
             case 'add-multi': {
-                FormActions.add_question(QuestionTypes.MULTIPLE_CHOICE);
+                FormActions.addQuestion(QuestionTypes.MULTIPLE_CHOICE);
                 break;
             }
             case 'add-checkbox': {
-                FormActions.add_question(QuestionTypes.CHECKBOX);
+                FormActions.addQuestion(QuestionTypes.CHECKBOX);
                 break;
             }
             case 'add-dropdown': {
-                FormActions.add_question(QuestionTypes.DROPDOWN);
+                FormActions.addQuestion(QuestionTypes.DROPDOWN);
                 break;
             }
             default: {

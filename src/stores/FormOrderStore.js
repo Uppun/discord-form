@@ -14,7 +14,7 @@ class FormOrderStore extends ReduceStore {
     }
     reduce(state, action) {
         switch(action.type) {
-            case ActionTypes.ADD_QUESTION: {
+            case ActionTypes.addQuestion: {
                 return {
                     order: [...state.order, action.id]
                 };

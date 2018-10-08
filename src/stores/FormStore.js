@@ -39,7 +39,7 @@ class FormStore extends ReduceStore {
                 }
             }
 
-            case ActionTypes.ADD_QUESTION: {
+            case ActionTypes.addQuestion: {
                 const {id, format} = action;
                 let idToFieldsMap; 
                 if (format === QuestionTypes.SHORT || format === QuestionTypes.PARAGRAPH) {
@@ -72,7 +72,7 @@ class FormStore extends ReduceStore {
                 }
             }
 
-            case ActionTypes.ADD_OTHER_OPTION: {
+            case ActionTypes.addOther_OPTION: {
                 const {id} = action;
                 const element = state.idToFieldsMap.get(id);
                 const idToFieldsMap = state.idToFieldsMap.set(id,
@@ -87,7 +87,7 @@ class FormStore extends ReduceStore {
                 };
             }
 
-            case ActionTypes.ADD_OPTION: {
+            case ActionTypes.addOption: {
                 const {id} = action;
                 const element = state.idToFieldsMap.get(id);
                 const newElementNumber = element.options.length + 1;

@@ -6,13 +6,13 @@ export default class dropdown extends Component {
 
     handleAnotherClick = () => {
         const {id} = this.props;
-        FormActions.add_option(id);
+        FormActions.addOption(id);
     }
 
     handleOptionChange = (index, value) => {
         const {id} = this.props;
 
-        FormActions.update_option(id, index, value);
+        FormActions.updateOption(id, index, value);
     }
 
     render() {

@@ -5,18 +5,18 @@ import '../../Assets/Forms.css';
 export default class CheckBox extends Component {
     handleOtherClick = () => {
         const {id} = this.props;
-        FormActions.add_other(id);
+        FormActions.addOther(id);
     }
 
     handleAnotherClick = () => {
         const {id} = this.props;
-        FormActions.add_option(id);
+        FormActions.addOption(id);
     }
 
     handleOptionChange = (index, value) => {
         const {id} = this.props;
 
-        FormActions.update_option(id, index, value);
+        FormActions.updateOption(id, index, value);
     }
 
     render() {
