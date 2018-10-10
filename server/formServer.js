@@ -51,6 +51,19 @@ app.get('/forms/:formId', (req, res, next) => {
   })
 });
 
+app.get('/forms/', (req, res, next) => {
+  db.collection('forms').find({}, (err, docs) => {
+    docs.forEach((doc, err) => {
+      if (doc) {
+        res.json(doc);
+      } else {
+        res.end();
+        return;
+      }
+    })
+  })
+});
+
 app.post('/forms/', asyncMiddleware(async (req, res, next) => {
   const _id = uuidv4();
   const form = {

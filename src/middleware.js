@@ -27,8 +27,18 @@ function getForm(formData, formId) {
     }).then(response => response.json());
 }
 
+function getForms() {
+    return fetch(`http://localhost:5000/forms/`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+        },
+    }).then(response => response.json());
+}
+
 export {
     createForm,
     updateForm,
     getForm,
+    getForms,
 }
