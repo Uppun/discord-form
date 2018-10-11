@@ -67,11 +67,12 @@ app.get('/forms/:formId', (req, res, next) => {
   })
 });
 
-app.post('/newform/:name', asyncMiddleware(async (req, res, next) => {
+app.post('/forms/', asyncMiddleware(async (req, res, next) => {
   const _id = uuidv4();
+  const name = req.body;
   const form = {
     order: [0],
-    name: req.params.name, 
+    name, 
     objects: {
       0: {
         type: 'TITLE',
