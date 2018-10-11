@@ -1,5 +1,3 @@
-import QuestionTypes from '../src/Assets/QuestionTypes';
-
 const express = require('express');
 const mongodb = require('mongodb');
 const uuidv4 = require('uuid/v4');
@@ -37,9 +35,27 @@ MongoClient.connect(url, { useNewUrlParser: true }, (err, mongoClient) => {
   app.listen(port, () => console.log(`Listening on port ${port}`));
 });
 
-// Reuse database object in request handlers
+// Database manipulation functions
+
+app.get('/forms/', (req, res, next) => {
+  db.collection('forms').find({}, (err, docs) => {
+    const formsArray = [];
+    docs.forEach(doc => {
+      formsArray.push(doc);
+    },
+    err => {
+      if (!err) {
+        res.json(formsArray);
+      } else {
+        res.status(500);
+        res.send('Something went wrong!');
+      }
+    })
+  })
+});
+
 app.get('/forms/:formId', (req, res, next) => {
-  db.collection('forms').findOne({formId: req.params.formId}, (err, doc) => {
+  db.collection('forms').findOne({_id: req.params.formId}, (err, doc) => {
     if (doc) {
       res.json(doc);
       return;
@@ -51,26 +67,14 @@ app.get('/forms/:formId', (req, res, next) => {
   })
 });
 
-app.get('/forms/', (req, res, next) => {
-  db.collection('forms').find({}, (err, docs) => {
-    docs.forEach((doc, err) => {
-      if (doc) {
-        res.json(doc);
-      } else {
-        res.end();
-        return;
-      }
-    })
-  })
-});
-
-app.post('/forms/', asyncMiddleware(async (req, res, next) => {
+app.post('/newform/:name', asyncMiddleware(async (req, res, next) => {
   const _id = uuidv4();
   const form = {
-    order: [0], 
+    order: [0],
+    name: req.params.name, 
     objects: {
       0: {
-        type: QuestionTypes.TITLE,
+        type: 'TITLE',
         title: 'Enter title',
         description: 'Enter description',
       }

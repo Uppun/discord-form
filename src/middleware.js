@@ -1,5 +1,5 @@
-function createForm() {
-    return fetch(`http://localhost:5000/forms/`, {
+function createForm(name) {
+    return fetch(`http://localhost:5000/newform/${name}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json; charset=utf-8",
@@ -36,7 +36,7 @@ function getForms() {
     }).then(response => response.json());
 }
 
-export {
+export default {
     createForm,
     updateForm,
     getForm,
