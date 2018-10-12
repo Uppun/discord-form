@@ -19,7 +19,7 @@ function updateForm(formData, formId) {
     }).then(response => response.json());
 }
 
-function getForm(formData, formId) {
+function getForm(formId) {
     return fetch(`http://localhost:5000/forms/${formId}`, {
         method: "GET",
         headers: {

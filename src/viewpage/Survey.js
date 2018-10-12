@@ -6,6 +6,8 @@ import SurveyTitle from './SurveyTitle';
 import SurveyQuestion from './Questions/SurveyQuestion';
 import QuestionTypes from '../Assets/QuestionTypes';
 import '../Assets/Forms.css';
+import middleware from '../middleware';
+import FormActions from '../actions/FormActions';
 
 class Survey extends Component {
     static getStores() {
@@ -21,6 +23,15 @@ class Survey extends Component {
             idToFieldsMap: formFields.idToFieldsMap
         };
     }
+
+    componentDidMount() {
+        const { formId } = this.props.match.params;
+        middleware.getForm(formId).then(res => FormActions.loadForm(
+            form.order,
+            form.objects,
+        ));
+    }
+
 
     render() {
         const {order, idToFieldsMap} = this.state;

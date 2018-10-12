@@ -23,7 +23,7 @@ class FormStore extends ReduceStore {
 
     reduce(state, action) {
         switch(action.type) {
-            case ActionTypes.UPDATE_TITLE: {
+            case ActionTypes.UPDATETITLE: {
                 const {id, title, description} = action;
                 const element = state.idToFieldsMap.get(id);
                 const idToFieldsMap = state.idToFieldsMap.set(id, 
@@ -39,7 +39,7 @@ class FormStore extends ReduceStore {
                 }
             }
 
-            case ActionTypes.addQuestion: {
+            case ActionTypes.ADDQUESTION: {
                 const {id, format} = action;
                 let idToFieldsMap; 
                 if (format === QuestionTypes.SHORT || format === QuestionTypes.PARAGRAPH) {
@@ -72,7 +72,7 @@ class FormStore extends ReduceStore {
                 }
             }
 
-            case ActionTypes.addOther_OPTION: {
+            case ActionTypes.ADDOTHEROPTION: {
                 const {id} = action;
                 const element = state.idToFieldsMap.get(id);
                 const idToFieldsMap = state.idToFieldsMap.set(id,
@@ -87,7 +87,7 @@ class FormStore extends ReduceStore {
                 };
             }
 
-            case ActionTypes.addOption: {
+            case ActionTypes.ADDOPTION: {
                 const {id} = action;
                 const element = state.idToFieldsMap.get(id);
                 const newElementNumber = element.options.length + 1;
@@ -100,6 +100,13 @@ class FormStore extends ReduceStore {
                 return {
                     ...state,
                     idToFieldsMap,
+                }
+            }
+
+            case ActionTypes.LOADFORM: {
+                return {
+                    order: action.order,
+                    idToFieldsMap: Map(action.objects),
                 }
             }
 

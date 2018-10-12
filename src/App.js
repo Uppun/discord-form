@@ -11,8 +11,8 @@ class App extends Component {
       <div className="App">
         <Switch>
           <Route exact path='/' component={Landing} />
-          <Route path='/edit' component={DiscordForm} />
-          <Route path='/preview' component={Survey} />
+          <Route path='/edit/:formId' component={DiscordForm} />
+          <Route path='/preview/:formId' component={Survey} />
         </Switch>
       </div>
     );

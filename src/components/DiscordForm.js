@@ -8,6 +8,7 @@ import QuestionTypes from '../Assets/QuestionTypes';
 import Question from './Question';
 import FormActions from '../actions/FormActions';
 import { Link } from 'react-router-dom';
+import middleware from '../middleware';
 
 class DiscordForm extends Component {
     static getStores() {
@@ -24,9 +25,16 @@ class DiscordForm extends Component {
         };
     }
 
+    componentDidMount() {
+        const { formId } = this.props.match.params;
+        middleware.getForm(formId).then(res => FormActions.loadForm(
+            form.order,
+            form.objects,
+        ));
+    }
+
     handleClick = (event) => {
         const buttonClass = event.target.className;
-        console.log(buttonClass)
         
         switch(buttonClass) {
             case 'add-short': {

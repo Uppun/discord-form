@@ -6,7 +6,7 @@ let idIncrementor = 0;
 export default {
     update_title(id, title, description) {
         Dispatcher.dispatch({
-            type: ActionTypes.UPDATE_TITLE,
+            type: ActionTypes.UPDATETITLE,
             title,
             description,
             id,
@@ -15,33 +15,33 @@ export default {
     addQuestion(format) {
         idIncrementor++;
         Dispatcher.dispatch({
-            type: ActionTypes.addQuestion,
+            type: ActionTypes.ADDQUESTION,
             format,
             id: idIncrementor,
         });
     },
     updateQuestion(id, question) {
         Dispatcher.dispatch({
-            type: ActionTypes.updateQuestion,
+            type: ActionTypes.UPDATEQUESTION,
             question,
             id,
         });
     },
     addOther(id) {
         Dispatcher.dispatch({
-            type: ActionTypes.addOther_OPTION,
+            type: ActionTypes.ADDOTHEROPTION,
             id,
         });
     },
     addOption(id) {
         Dispatcher.dispatch({
-            type: ActionTypes.addOption,
+            type: ActionTypes.ADDOPTION,
             id,
         });
     },
     updateOption(id, index, value) {
         Dispatcher.dispatch({
-            type: ActionTypes.updateOption,
+            type: ActionTypes.UPDATEOPTION,
             id,
             index,
             value,
