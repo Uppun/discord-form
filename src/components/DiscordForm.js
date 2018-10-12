@@ -65,10 +65,10 @@ class DiscordForm extends Component {
 
     render() {
         const {order, idToFieldsMap} = this.state;
-
+        const path = `/preview/${this.props.match.formId}`
         return(
             <div className='form'>
-                <Link to="/preview" target="_blank">Preview</Link>
+                <Link to={path} target='_blank'>Preview</Link>
                 <div className='form-contents'>
                     {order.map((id) => {
                         const element = idToFieldsMap.get(id);
