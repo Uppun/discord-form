@@ -5,14 +5,14 @@ import '../../Assets/Forms.css';
 export default class dropdown extends Component {
 
     handleAnotherClick = () => {
-        const {id} = this.props;
-        FormActions.addOption(id);
+        const {id, formId} = this.props;
+        FormActions.addOption(id, formId);
     }
 
     handleOptionChange = (index, value) => {
-        const {id} = this.props;
+        const {id, formId} = this.props;
 
-        FormActions.updateOption(id, index, value);
+        FormActions.updateOption(id, index, value, formId);
     }
 
     render() {

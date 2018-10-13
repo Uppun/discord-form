@@ -21,7 +21,7 @@ export default class FormCreationPage extends Component {
                 {res ? res.map((form, index) => {
                     const path = `/edit/${form._id}`;
                     return(
-                        <div className='form-preview'>
+                        <div className='form-preview' key={index}>
                             <Link to={path}>
                                 {form.form.name}
                             </Link>

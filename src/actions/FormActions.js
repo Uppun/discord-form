@@ -4,7 +4,7 @@ import Dispatcher from '../Dispatcher';
 let idIncrementor = 0;
 
 export default {
-    update_title(id, title, description) {
+    update_title(id, title, description, formId) {
         Dispatcher.dispatch({
             type: ActionTypes.UPDATETITLE,
             title,
@@ -12,7 +12,7 @@ export default {
             id,
         });
     },
-    addQuestion(format) {
+    addQuestion(format, formId) {
         idIncrementor++;
         Dispatcher.dispatch({
             type: ActionTypes.ADDQUESTION,
@@ -20,31 +20,38 @@ export default {
             id: idIncrementor,
         });
     },
-    updateQuestion(id, question) {
+    updateQuestion(id, question, formId) {
         Dispatcher.dispatch({
             type: ActionTypes.UPDATEQUESTION,
             question,
             id,
         });
     },
-    addOther(id) {
+    addOther(id, formId) {
         Dispatcher.dispatch({
             type: ActionTypes.ADDOTHEROPTION,
             id,
         });
     },
-    addOption(id) {
+    addOption(id, formId) {
         Dispatcher.dispatch({
             type: ActionTypes.ADDOPTION,
             id,
         });
     },
-    updateOption(id, index, value) {
+    updateOption(id, index, value, formId) {
         Dispatcher.dispatch({
             type: ActionTypes.UPDATEOPTION,
             id,
             index,
             value,
         });
+    },
+    loadForm(name, order, objects) {
+        Dispatcher.dispatch({
+            type: ActionTypes.LOADFORM,
+            order,
+            objects,
+        })
     },
 }

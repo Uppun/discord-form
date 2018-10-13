@@ -10,23 +10,15 @@ class FormStore extends ReduceStore {
     }
 
     getInitialState() {
-        const initialIdToFieldsMap = Map();
-        const idToFieldsMap = initialIdToFieldsMap.set(0, {
-            type: QuestionTypes.TITLE,
-            title: 'Enter title',
-            description: 'Enter description',
-        });
-        return {
-            idToFieldsMap,
-        }
+        return null;
     }
 
     reduce(state, action) {
         switch(action.type) {
             case ActionTypes.UPDATETITLE: {
                 const {id, title, description} = action;
-                const element = state.idToFieldsMap.get(id);
-                const idToFieldsMap = state.idToFieldsMap.set(id, 
+                const element = state.idToFieldsMap.get(id.toString());
+                const idToFieldsMap = state.idToFieldsMap.set(id.toString(), 
                     {
                         ...element,
                         title,
@@ -43,14 +35,14 @@ class FormStore extends ReduceStore {
                 const {id, format} = action;
                 let idToFieldsMap; 
                 if (format === QuestionTypes.SHORT || format === QuestionTypes.PARAGRAPH) {
-                    idToFieldsMap = state.idToFieldsMap.set(id,
+                    idToFieldsMap = state.idToFieldsMap.set(id.toString(),
                         {
                             type: format,
                             question: 'Enter Question',
                             answer: 'Enter Answer'
                         });
                 } else if (format === QuestionTypes.MULTIPLE_CHOICE || format === QuestionTypes.CHECKBOX) {
-                    idToFieldsMap = state.idToFieldsMap.set(id,
+                    idToFieldsMap = state.idToFieldsMap.set(id.toString(),
                         {
                             type: format,
                             question: 'Enter Question',
@@ -58,7 +50,7 @@ class FormStore extends ReduceStore {
                             otherNotSet: true,
                         })
                 } else {
-                    idToFieldsMap = state.idToFieldsMap.set(id,
+                    idToFieldsMap = state.idToFieldsMap.set(id.toString(),
                         {
                             type: format,
                             question: 'Enter Question',
@@ -74,8 +66,8 @@ class FormStore extends ReduceStore {
 
             case ActionTypes.ADDOTHEROPTION: {
                 const {id} = action;
-                const element = state.idToFieldsMap.get(id);
-                const idToFieldsMap = state.idToFieldsMap.set(id,
+                const element = state.idToFieldsMap.get(id.toString());
+                const idToFieldsMap = state.idToFieldsMap.set(id.toString(),
                     {
                         ...element,
                         otherNotSet: false,
@@ -89,9 +81,9 @@ class FormStore extends ReduceStore {
 
             case ActionTypes.ADDOPTION: {
                 const {id} = action;
-                const element = state.idToFieldsMap.get(id);
+                const element = state.idToFieldsMap.get(id.toString());
                 const newElementNumber = element.options.length + 1;
-                const idToFieldsMap = state.idToFieldsMap.set(id,
+                const idToFieldsMap = state.idToFieldsMap.set(id.toString(),
                     {
                         ...element,
                         options: [...element.options, 'option ' + newElementNumber],
@@ -105,7 +97,8 @@ class FormStore extends ReduceStore {
 
             case ActionTypes.LOADFORM: {
                 return {
-                    order: action.order,
+                    ...state,
+                    name: action.name,
                     idToFieldsMap: Map(action.objects),
                 }
             }

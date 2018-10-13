@@ -15,32 +15,31 @@ class Survey extends Component {
     }
     
     static calculateState(prevState) {
-        const formOrder = FormOrderStore.getState();
-        const formFields = FormStore.getState();
-
         return {
-            order: formOrder.order,
-            idToFieldsMap: formFields.idToFieldsMap
+            ...FormOrderStore.getState(),
+            ...FormStore.getState(),
         };
     }
 
     componentDidMount() {
         const { formId } = this.props.match.params;
         middleware.getForm(formId).then(res => FormActions.loadForm(
-            form.order,
-            form.objects,
+            res.from.name,
+            res.form.order,
+            res.form.objects,
         ));
     }
 
 
     render() {
-        const {order, idToFieldsMap} = this.state;
+        const {order, idToFieldsMap, name} = this.state;
         return (
             <div className='survey-form'>
+                {name}
                 <div className='survey-contents'>
                     <form>
-                        {order.map(id => {
-                            const element = idToFieldsMap.get(id);
+                        {order ? order.map(id => {
+                            const element = idToFieldsMap.get(id.toString());
                             switch(element.type) {
                                 case QuestionTypes.TITLE: {
                                     return <SurveyTitle key={id} id={id} title={element.title} description={element.description} />
@@ -64,7 +63,8 @@ class Survey extends Component {
                                     return null;
                                 }
                             }
-                        })}
+                        }) :
+                        null}
                     </form>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FormStore from '../stores/FormStore';
 import FormOrderStore from '../stores/FormOrderStore';
+import ListenStore from '../stores/ListenStore';
 import {Container} from 'flux/utils';
 import TitleObject from './Title';
 import '../Assets/Forms.css';
@@ -11,50 +12,53 @@ import { Link } from 'react-router-dom';
 import middleware from '../middleware';
 
 class DiscordForm extends Component {
+    name = '';
+
     static getStores() {
         return [FormStore, FormOrderStore];
     }
     
     static calculateState(prevState) {
-        const formOrder = FormOrderStore.getState();
-        const formFields = FormStore.getState();
-
         return {
-            order: formOrder.order,
-            idToFieldsMap: formFields.idToFieldsMap
+            ...FormOrderStore.getState(),
+            ...FormStore.getState(),
         };
     }
 
     componentDidMount() {
         const { formId } = this.props.match.params;
-        middleware.getForm(formId).then(res => FormActions.loadForm(
-            form.order,
-            form.objects,
-        ));
+        middleware.getForm(formId).then(res => {
+            this.name
+            FormActions.loadForm(
+                res.form.name,
+                res.form.order,
+                res.form.objects,
+            )});
     }
 
     handleClick = (event) => {
         const buttonClass = event.target.className;
+        const { formId } = this.props.match.params;
         
         switch(buttonClass) {
             case 'add-short': {
-                FormActions.addQuestion(QuestionTypes.SHORT);
+                FormActions.addQuestion(QuestionTypes.SHORT, formId);
                 break;
             }
             case 'add-paragraph': {
-                FormActions.addQuestion(QuestionTypes.PARAGRAPH);
+                FormActions.addQuestion(QuestionTypes.PARAGRAPH, formId);
                 break;
             }
             case 'add-multi': {
-                FormActions.addQuestion(QuestionTypes.MULTIPLE_CHOICE);
+                FormActions.addQuestion(QuestionTypes.MULTIPLE_CHOICE, formId);
                 break;
             }
             case 'add-checkbox': {
-                FormActions.addQuestion(QuestionTypes.CHECKBOX);
+                FormActions.addQuestion(QuestionTypes.CHECKBOX, formId);
                 break;
             }
             case 'add-dropdown': {
-                FormActions.addQuestion(QuestionTypes.DROPDOWN);
+                FormActions.addQuestion(QuestionTypes.DROPDOWN, formId);
                 break;
             }
             default: {
@@ -64,17 +68,19 @@ class DiscordForm extends Component {
     }
 
     render() {
-        const {order, idToFieldsMap} = this.state;
-        const path = `/preview/${this.props.match.formId}`
+        const {order, idToFieldsMap, name} = this.state;
+        const {formId}= this.props.match.params;
+        const path = `/preview/${formId}`
         return(
             <div className='form'>
+                {name}
                 <Link to={path} target='_blank'>Preview</Link>
                 <div className='form-contents'>
-                    {order.map((id) => {
-                        const element = idToFieldsMap.get(id);
+                    {order ? order.map((id) => {
+                        const element = idToFieldsMap.get(id.toString());
                         switch(element.type) {
                             case QuestionTypes.TITLE: {
-                                return <TitleObject key={id} id={id} title={element.title} description={element.description} />
+                                return <TitleObject key={id} id={id} title={element.title} description={element.description} formId={formId} />
                             }
                             case QuestionTypes.SHORT || QuestionTypes.PARAGRAPH: {
                                 return <Question key={id} id={id} question={element.question} format={element.type} />
@@ -83,19 +89,36 @@ class DiscordForm extends Component {
                                 return <Question key={id} id={id} question={element.question} format={element.type} />
                             }
                             case QuestionTypes.MULTIPLE_CHOICE: {
-                                return <Question key={id} id={id} question={element.question} options={element.options} otherNotSet={element.otherNotSet} format={element.type} />
+                                return <Question 
+                                    key={id} 
+                                    id={id} 
+                                    question={element.question} 
+                                    options={element.options} 
+                                    otherNotSet={element.otherNotSet} 
+                                    format={element.type} 
+                                    formId={formId} 
+                                />
                             }
                             case QuestionTypes.CHECKBOX: { 
-                                return <Question key={id} id={id} question={element.question} options={element.options} otherNotSet={element.otherNotSet} format={element.type} />
+                                return <Question 
+                                    key={id} 
+                                    id={id} 
+                                    question={element.question} 
+                                    options={element.options} 
+                                    otherNotSet={element.otherNotSet} 
+                                    format={element.type} 
+                                    formId={formId} 
+                                />
                             }
                             case QuestionTypes.DROPDOWN: {
-                                return <Question key={id} id={id} question={element.question} options={element.options} format={element.type} />
+                                return <Question key={id} id={id} question={element.question} options={element.options} format={element.type} formId={formId} />
                             }
                             default: {
                                 return null;
                             }
                         }
-                    })}
+                    })  :
+                    null}
                 </div>
                 <div className='button-panel-wrapper'>
                     <div className="button-panel">

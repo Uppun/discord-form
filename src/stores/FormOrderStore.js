@@ -8,9 +8,7 @@ class FormOrderStore extends ReduceStore {
     }
 
     getInitialState() {
-        return {
-            order: [0],
-        }
+        return null;
     }
     reduce(state, action) {
         switch(action.type) {
@@ -18,6 +16,11 @@ class FormOrderStore extends ReduceStore {
                 return {
                     order: [...state.order, action.id]
                 };
+            }
+            case ActionTypes.LOADFORM: {
+                return {
+                    order: action.order,
+                }
             }
 
             default: {
