@@ -11,7 +11,8 @@ export default class FormCreationPage extends Component {
     }
 
     handleClick = () => {
-        Middleware.createForm('test form');
+        const formName = {name: 'test form'}
+        Middleware.createForm(formName);
     }
 
     render() {

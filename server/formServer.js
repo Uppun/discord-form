@@ -22,6 +22,7 @@ const asyncMiddleware = fn =>
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
     next();
   });
 
@@ -69,7 +70,7 @@ app.get('/forms/:formId', (req, res, next) => {
 
 app.post('/forms/', asyncMiddleware(async (req, res, next) => {
   const _id = uuidv4();
-  const name = req.body;
+  const name = req.body.name;
   const form = {
     order: [0],
     name, 
@@ -98,13 +99,14 @@ app.post('/forms/', asyncMiddleware(async (req, res, next) => {
 app.put('/forms/:formId', asyncMiddleware(async (req, res, next) => {
   const form = req.body;
   const _id = req.params.formId;
-  const insertObject = {_id: formId, form};
-  const result = await db.findOneAndReplace({_id}, insertObject);
+  const insertObject = {_id, form};
+  const result = await db.collection('forms').findOneAndReplace({_id}, insertObject);
 
   if (result.ok === 1) {
     res.json(insertObject);
     return;
   } else {
+    console.log("oops")
     res.status(500);
     res.send('Update failed.');
     return;

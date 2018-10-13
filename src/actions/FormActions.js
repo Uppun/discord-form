@@ -10,6 +10,7 @@ export default {
             title,
             description,
             id,
+            formId,
         });
     },
     addQuestion(format, formId) {
@@ -18,6 +19,7 @@ export default {
             type: ActionTypes.ADDQUESTION,
             format,
             id: idIncrementor,
+            formId,
         });
     },
     updateQuestion(id, question, formId) {
@@ -25,18 +27,21 @@ export default {
             type: ActionTypes.UPDATEQUESTION,
             question,
             id,
+            formId,
         });
     },
     addOther(id, formId) {
         Dispatcher.dispatch({
             type: ActionTypes.ADDOTHEROPTION,
             id,
+            formId,
         });
     },
     addOption(id, formId) {
         Dispatcher.dispatch({
             type: ActionTypes.ADDOPTION,
             id,
+            formId,
         });
     },
     updateOption(id, index, value, formId) {
@@ -45,6 +50,7 @@ export default {
             id,
             index,
             value,
+            formId,
         });
     },
     loadForm(name, order, objects) {

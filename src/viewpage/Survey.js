@@ -24,7 +24,7 @@ class Survey extends Component {
     componentDidMount() {
         const { formId } = this.props.match.params;
         middleware.getForm(formId).then(res => FormActions.loadForm(
-            res.from.name,
+            res.form.name,
             res.form.order,
             res.form.objects,
         ));

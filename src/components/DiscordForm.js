@@ -12,7 +12,6 @@ import { Link } from 'react-router-dom';
 import middleware from '../middleware';
 
 class DiscordForm extends Component {
-    name = '';
 
     static getStores() {
         return [FormStore, FormOrderStore];
@@ -28,7 +27,7 @@ class DiscordForm extends Component {
     componentDidMount() {
         const { formId } = this.props.match.params;
         middleware.getForm(formId).then(res => {
-            this.name
+            console.log(res.form.objects)
             FormActions.loadForm(
                 res.form.name,
                 res.form.order,
@@ -77,6 +76,8 @@ class DiscordForm extends Component {
                 <Link to={path} target='_blank'>Preview</Link>
                 <div className='form-contents'>
                     {order ? order.map((id) => {
+                        console.log(order)
+                        console.log(this.state)
                         const element = idToFieldsMap.get(id.toString());
                         switch(element.type) {
                             case QuestionTypes.TITLE: {

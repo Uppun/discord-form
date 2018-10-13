@@ -7,50 +7,56 @@ import middleware from '../middleware';
 Dispatcher.register(action => {
     switch(action.type) {
         case ActionTypes.ADDQUESTION: {
-            Dispatcher.waitFor([FormStore.dispatchToken, FormOrderStore.dispatchToken]);
+            Dispatcher.waitFor([FormStore.getDispatchToken(), FormOrderStore.getDispatchToken()]); 
             middleware.updateForm({
                 ...FormOrderStore.getState(),
-                ...FormStore.getState(),
+                name: FormStore.getState().name,
+                objects: FormStore.getState().idToFieldsMap,
             }, action.formId);
             break;
         }
         case ActionTypes.ADDOPTION: {
-            Dispatcher.waitFor([FormStore.dispatchToken, FormOrderStore.dispatchToken]);
+            Dispatcher.waitFor([FormStore.getDispatchToken(), FormOrderStore.getDispatchToken()]);
             middleware.updateForm({
                 ...FormOrderStore.getState(),
-                ...FormStore.getState(),
+                name: FormStore.getState().name,
+                objects: FormStore.getState().idToFieldsMap,
             }, action.formId);
             break;
         }
         case ActionTypes.ADDOTHEROPTION: {
-            Dispatcher.waitFor([FormStore.dispatchToken, FormOrderStore.dispatchToken]);
+            Dispatcher.waitFor([FormStore.getDispatchToken(), FormOrderStore.getDispatchToken()]);
             middleware.updateForm({
                 ...FormOrderStore.getState(),
-                ...FormStore.getState(),
+                name: FormStore.getState().name,
+                objects: FormStore.getState().idToFieldsMap,
             }, action.formId);
             break;
         }
         case ActionTypes.UPDATEOPTION: {
-            Dispatcher.waitFor([FormStore.dispatchToken, FormOrderStore.dispatchToken]);
+            Dispatcher.waitFor([FormStore.getDispatchToken(), FormOrderStore.getDispatchToken()]);
             middleware.updateForm({
                 ...FormOrderStore.getState(),
-                ...FormStore.getState(),
+                name: FormStore.getState().name,
+                objects: FormStore.getState().idToFieldsMap,
             }, action.formId);
             break;
         }
         case ActionTypes.UPDATEQUESTION: {
-            Dispatcher.waitFor([FormStore.dispatchToken, FormOrderStore.dispatchToken]);
+            Dispatcher.waitFor([FormStore.getDispatchToken(), FormOrderStore.getDispatchToken()]);
             middleware.updateForm({
                 ...FormOrderStore.getState(),
-                ...FormStore.getState(),
+                name: FormStore.getState().name,
+                objects: FormStore.getState().idToFieldsMap,
             }, action.formId);
             break;
         }
         case ActionTypes.UPDATETITLE: {
-            Dispatcher.waitFor([FormStore.dispatchToken, FormOrderStore.dispatchToken]);
+            Dispatcher.waitFor([FormStore.getDispatchToken(), FormOrderStore.getDispatchToken()]);
             middleware.updateForm({
                 ...FormOrderStore.getState(),
-                ...FormStore.getState(),
+                name: FormStore.getState().name,
+                objects: FormStore.getState().idToFieldsMap,
             }, action.formId);
             break;
         }
