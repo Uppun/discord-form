@@ -106,7 +106,6 @@ app.put('/forms/:formId', asyncMiddleware(async (req, res, next) => {
     res.json(insertObject);
     return;
   } else {
-    console.log("oops")
     res.status(500);
     res.send('Update failed.');
     return;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FormStore from '../stores/FormStore';
 import FormOrderStore from '../stores/FormOrderStore';
-import ListenStore from '../stores/ListenStore';
+import '../stores/ListenStore';
 import {Container} from 'flux/utils';
 import TitleObject from './Title';
 import '../Assets/Forms.css';
@@ -27,7 +27,6 @@ class DiscordForm extends Component {
     componentDidMount() {
         const { formId } = this.props.match.params;
         middleware.getForm(formId).then(res => {
-            console.log(res.form.objects)
             FormActions.loadForm(
                 res.form.name,
                 res.form.order,
@@ -76,8 +75,6 @@ class DiscordForm extends Component {
                 <Link to={path} target='_blank'>Preview</Link>
                 <div className='form-contents'>
                     {order ? order.map((id) => {
-                        console.log(order)
-                        console.log(this.state)
                         const element = idToFieldsMap.get(id.toString());
                         switch(element.type) {
                             case QuestionTypes.TITLE: {

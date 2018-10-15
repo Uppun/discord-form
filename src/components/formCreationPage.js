@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import FormActions from '../actions/FormActions';
 import Middleware from '../middleware';
 import { Link } from 'react-router-dom';
 

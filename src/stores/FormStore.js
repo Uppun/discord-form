@@ -4,6 +4,10 @@ import ActionTypes from '../actions/ActionTypes';
 import {Map} from 'immutable';
 import QuestionTypes from '../Assets/QuestionTypes';
 
+function updateElement(array, index, updateFunc) {
+    return array.map((item, i) => (i === index ? updateFunc(item) : item))
+}
+
 class FormStore extends ReduceStore {
     constructor() {
         super(Dispatcher);
@@ -25,6 +29,37 @@ class FormStore extends ReduceStore {
                         description,
                     });
 
+                return {
+                    ...state,
+                    idToFieldsMap,
+                }
+            }
+
+            case ActionTypes.UPDATEQUESTION: {
+                const {id, question} = action;
+                const element = state.idToFieldsMap.get(id.toString());
+                const idToFieldsMap = state.idToFieldsMap.set(id.toString(),
+                    {
+                        ...element,
+                        question,
+                    });
+                return {
+                    ...state,
+                    idToFieldsMap,
+                }
+            }
+
+            case ActionTypes.UPDATEOPTION: {
+                const {id, index, value} = action;
+                const element = state.idToFieldsMap.get(id.toString());
+                const idToFieldsMap = state.idToFieldsMap.set(id.toString(),
+                    {
+                        ...element,
+                        options: updateElement(element.options, index, option => [
+                            ...option,
+                            value,
+                        ]),
+                    });
                 return {
                     ...state,
                     idToFieldsMap,

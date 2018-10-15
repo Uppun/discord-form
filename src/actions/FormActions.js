@@ -4,7 +4,7 @@ import Dispatcher from '../Dispatcher';
 let idIncrementor = 0;
 
 export default {
-    update_title(id, title, description, formId) {
+    updateTitle(id, title, description, formId) {
         Dispatcher.dispatch({
             type: ActionTypes.UPDATETITLE,
             title,

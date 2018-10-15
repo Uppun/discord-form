@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import FormActions from '../actions/FormActions';
 import '../Assets/Forms.css';
+import {debounce} from 'underscore';
 
 export default class TitleObject extends Component {
     titleRef = React.createRef();
     descriptionRef = React.createRef();
 
-    handleChange = () => {
-        const {id} = this.props;
+    handleChange = debounce(() => {
+        const {id, formId} = this.props;
         const titleVal = this.titleRef.current.value;
         const descriptionVal = this.descriptionRef.current.value;
 
-        FormActions.update_title(id, titleVal, descriptionVal);
-    }
+        FormActions.updateTitle(id, titleVal, descriptionVal, formId);
+    }, 2000)
 
     render() {
         const {title, description} = this.props;

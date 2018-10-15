@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FormActions from '../../actions/FormActions';
 import '../../Assets/Forms.css';
+import {debounce} from 'underscore';
 
 export default class MultipleChoice extends Component {
     handleOtherClick = () => {
@@ -13,11 +14,11 @@ export default class MultipleChoice extends Component {
         FormActions.addOption(id, formId);
     }
 
-    handleOptionChange = (index, value) => {
+    handleOptionChange = debounce((index, value) => {
         const {id, formId} = this.props;
 
         FormActions.updateOption(id, index, value, formId);
-    }
+    }, 2000)
 
     render() {
         const {options, otherNotSet, id} = this.props;
