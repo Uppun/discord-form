@@ -15,6 +15,15 @@ Dispatcher.register(action => {
             }, action.formId);
             break;
         }
+        case ActionTypes.DELETEQUESTION: {
+            Dispatcher.waitFor([FormStore.getDispatchToken(), FormOrderStore.getDispatchToken()]); 
+            middleware.updateForm({
+                ...FormOrderStore.getState(),
+                name: FormStore.getState().name,
+                objects: FormStore.getState().idToFieldsMap,
+            }, action.formId);
+            break;
+        }
         case ActionTypes.ADDOPTION: {
             Dispatcher.waitFor([FormStore.getDispatchToken(), FormOrderStore.getDispatchToken()]);
             middleware.updateForm({
@@ -24,7 +33,25 @@ Dispatcher.register(action => {
             }, action.formId);
             break;
         }
+        case ActionTypes.DELETEOPTION: {
+            Dispatcher.waitFor([FormStore.getDispatchToken(), FormOrderStore.getDispatchToken()]);
+            middleware.updateForm({
+                ...FormOrderStore.getState(),
+                name: FormStore.getState().name,
+                objects: FormStore.getState().idToFieldsMap,
+            }, action.formId);
+            break;
+        }
         case ActionTypes.ADDOTHEROPTION: {
+            Dispatcher.waitFor([FormStore.getDispatchToken(), FormOrderStore.getDispatchToken()]);
+            middleware.updateForm({
+                ...FormOrderStore.getState(),
+                name: FormStore.getState().name,
+                objects: FormStore.getState().idToFieldsMap,
+            }, action.formId);
+            break;
+        }
+        case ActionTypes.DELETEOTHER: {
             Dispatcher.waitFor([FormStore.getDispatchToken(), FormOrderStore.getDispatchToken()]);
             middleware.updateForm({
                 ...FormOrderStore.getState(),
