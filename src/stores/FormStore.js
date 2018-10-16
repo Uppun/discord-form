@@ -49,6 +49,45 @@ class FormStore extends ReduceStore {
                 }
             }
 
+            case ActionTypes.DELETEQUESTION: {
+                const {id} = action;
+                const idToFieldsMap = state.idToFieldsMap.delete(id.toString());
+                return {
+                    ...state,
+                    idToFieldsMap,
+                }
+            }
+
+            case ActionTypes.DELETEOPTION: {
+                const {id, index} = action;
+                const element = state.idToFieldsMap.get(id.toString());
+                const idToFieldsMap = state.idToFieldsMap.set(id.toString(),
+                    {
+                        ...element,
+                        options: options.filter((option, i) => {
+                            return i !== index;
+                        }),
+                    });
+                return {
+                    ...state,
+                    idToFieldsMap,
+                }
+            }
+
+            case ActionTypes.DELETEOTHER: {
+                const {id} = action;
+                const element = state.idToFieldsMap.get(id.toString()); 
+                const idToFieldsMap = state.idToFieldsMap.set(id.toString(),
+                    {
+                        ...element,
+                        otherNotSet: true,
+                    });
+                return {
+                    ...state,
+                    idToFieldsMap,
+                }
+            }
+
             case ActionTypes.UPDATEOPTION: {
                 const {id, index, value} = action;
                 const element = state.idToFieldsMap.get(id.toString());

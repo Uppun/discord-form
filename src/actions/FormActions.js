@@ -22,6 +22,13 @@ export default {
             formId,
         });
     },
+    deleteQuestion(id, formId) {
+        Dispatcher.dispatch({
+            type: ActionTypes.DELETEQUESTION,
+            id,
+            formId,
+        });
+    },
     updateQuestion(id, question, formId) {
         Dispatcher.dispatch({
             type: ActionTypes.UPDATEQUESTION,
@@ -37,10 +44,25 @@ export default {
             formId,
         });
     },
+    deleteOther(id, formId) {
+        Dispatcher.dispatch({
+            type: ActionTypes.DELETEOTHER,
+            id,
+            formId,
+        });
+    },
     addOption(id, formId) {
         Dispatcher.dispatch({
             type: ActionTypes.ADDOPTION,
             id,
+            formId,
+        });
+    },
+    deleteOption(id, index, formId) {
+        Dispatcher.dispatch({
+            type: ActionTypes.DELETEOPTION,
+            id,
+            index,
             formId,
         });
     },
