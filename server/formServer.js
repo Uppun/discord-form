@@ -42,14 +42,12 @@ MongoClient.connect(url, { useNewUrlParser: true }, (err, mongoClient) => {
   app.listen(port, () => console.log(`Listening on port ${port}`));
 });
 
-app.use(express.cookieParser('b1d30G4m35'));
-app.use(express.cookieSession());
-app.use(app.router);
-
-app.use(express.cookieSession({
-  key: 'app.sess',
-  secret: 'videoGames'
+app.use(cookieParser('b1d30G4m35'));
+app.use(cookieSession({
+  secret: 'b1d30G4m35',
+  maxAge:  7 * 24 * 60 * 60,
 }));
+
 // Database manipulation functions
 
 passport.use(new DiscordStrategy({
@@ -82,8 +80,7 @@ app.use((req, res, next) => {
   if (req.isAuthenticated()) {
       next()
   }
-  res.status(401);
-  res.send("Not authenticated!");
+  res.redirect(401, 'http://localhost:5000/login');
 });
 
 app.get('/forms/', (req, res, next) => {
