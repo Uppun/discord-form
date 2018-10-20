@@ -20,13 +20,19 @@ export default class CheckBox extends Component {
         FormActions.updateOption(id, index, value, formId);
     }, 2000)
 
+    handleOtherRemoveClick = () => {
+        const {id, formId} = this.props;
+
+        FormActions.deleteOther(id, formId);
+    }
+
     render() {
-        const {options, otherNotSet, id} = this.props;
+        const {options, otherNotSet, id, formId} = this.props;
         return(
             <div className='checkbox-choice-options'>
                 {options.map((option, index) => {
                     return(
-                        <CheckBoxOption key={index} index={index} option={option} id={id} onChange={this.handleOptionChange} />
+                        <CheckBoxOption key={index} index={index} option={option} id={id} onChange={this.handleOptionChange} formId={formId} />
                     )})}
                 {otherNotSet ? 
                     <div className='other-or-another'>
@@ -52,10 +58,17 @@ class CheckBoxOption extends Component {
         onChange(index, value);
     }
 
+    handleRemoveClick = () => {
+        const {id, index, formId} = this.props;
+
+        FormActions.deleteOption(id, index, formId);
+    }
+
     render() {
         const {option} = this.props;
         return (
             <div className='checkbox-choice'>
+                <span className="remove-option" onClick={this.handleRemoveClick}>&times;</span>
                 <input type='checkbox' className='checkbox-choice-option' disabled={true} />
                 <input type='text' className='checkbox-choice-text' defaultValue={option} onChange={this.handleChange} />
                 <span className='bar' />

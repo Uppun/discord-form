@@ -15,6 +15,11 @@ export default class QuestionObject extends Component {
         FormActions.updateQuestion(id, questionVal, formId);
     }, 2000)
 
+    handleRemoveClick = () => {
+        const {id, formId} = this.props;
+        FormActions.deleteQuestion(id, formId);
+    }
+
     render() {
         const {format, question, id, formId} = this.props;
         let questionAnswers;
@@ -46,6 +51,7 @@ export default class QuestionObject extends Component {
                 <div className='question-answers'>
                     {questionAnswers}
                 </div>
+                <span className="remove-question" onClick={this.handleRemoveClick}>&times;</span>
             </div>
         )
     }

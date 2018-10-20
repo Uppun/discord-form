@@ -64,7 +64,7 @@ class FormStore extends ReduceStore {
                 const idToFieldsMap = state.idToFieldsMap.set(id.toString(),
                     {
                         ...element,
-                        options: options.filter((option, i) => {
+                        options: this.state.options.filter((option, i) => {
                             return i !== index;
                         }),
                     });
