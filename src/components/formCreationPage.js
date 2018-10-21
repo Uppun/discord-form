@@ -7,13 +7,10 @@ export default class FormCreationPage extends Component {
 
     componentDidMount() {
         Middleware.getForms().then(res => {
-            if (res.status !== 401) {
-                this.setState({res}); 
-            } else {
-                window.location.href = 'http://localhost:5000/login';
-            }
-        });
-            
+            this.setState({res}); 
+        }).catch(err => {
+            window.location.href = 'http://localhost:5000/login';
+        });         
     }
 
     handleClick = () => {

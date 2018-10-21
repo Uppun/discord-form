@@ -80,7 +80,8 @@ app.use((req, res, next) => {
   if (req.isAuthenticated()) {
       next()
   }
-  res.redirect(401, 'http://localhost:5000/login');
+  res.status(401);
+  res.json("not authorized!");
 });
 
 app.get('/forms/', (req, res, next) => {
