@@ -77,11 +77,10 @@ app.get('/login',
 app.get('/auth', passport.authenticate('discord', {failureRedirect: 'http://localhost:3000/'}), (req, res) => res.redirect('http://localhost:3000/'));
 
 app.use((req, res, next) => {
-  if (req.isAuthenticated()) {
-      next()
+  if (!req.isAuthenticated()) {
+    res.status(401);
+    res.json("not authorized!");
   }
-  res.status(401);
-  res.json("not authorized!");
 });
 
 app.get('/forms/', (req, res, next) => {
