@@ -26,9 +26,10 @@ const asyncMiddleware = fn =>
   };
 
 app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Credentials', 'true');
     next();
   });
 
@@ -48,6 +49,8 @@ app.use(cookieSession({
   maxAge:  7 * 24 * 60 * 60,
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
 // Database manipulation functions
 
 passport.use(new DiscordStrategy({
@@ -67,9 +70,6 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.get('/login', 
   passport.authenticate('discord', {scope: SCOPES})
 );
@@ -77,10 +77,12 @@ app.get('/login',
 app.get('/auth', passport.authenticate('discord', {failureRedirect: 'http://localhost:3000/'}), (req, res) => res.redirect('http://localhost:3000/'));
 
 app.use((req, res, next) => {
-  if (!req.isAuthenticated()) {
+  if (!req.isAuthenticated() && req.method !== 'OPTIONS') {
     res.status(401);
     res.json("not authorized!");
+    return;
   }
+  next();
 });
 
 app.get('/forms/', (req, res, next) => {

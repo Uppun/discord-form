@@ -80,6 +80,7 @@ export default {
             type: ActionTypes.LOADFORM,
             order,
             objects,
+            name,
         })
     },
 }

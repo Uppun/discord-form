@@ -4,7 +4,9 @@ function createForm(name) {
         headers: {
             "Content-Type": "application/json; charset=utf-8",
         },
+        mode: 'cors',
         body: JSON.stringify(name),
+        credentials: 'include',
     })
     .then(response => response.json())
 }
@@ -15,6 +17,8 @@ function updateForm(formData, formId) {
         headers: {
             "Content-Type": "application/json; charset=utf-8",
         },
+        mode: 'cors',
+        credentials: 'include',
         body: JSON.stringify(formData),
     }).then(response => response.json());
 }
@@ -22,18 +26,16 @@ function updateForm(formData, formId) {
 function getForm(formId) {
     return fetch(`http://localhost:5000/forms/${formId}`, {
         method: "GET",
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-        },
+        mode: 'cors',
+        credentials: 'include',
     }).then(response => response.json());
 }
 
 function getForms() {
     return fetch(`http://localhost:5000/forms/`, {
         method: "GET",
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-        },
+        mode: 'cors',
+        credentials: 'include',
     }).then(response => response.json());
 }
 
