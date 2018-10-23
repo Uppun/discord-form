@@ -86,7 +86,8 @@ app.use((req, res, next) => {
 });
 
 app.get('/forms/', (req, res, next) => {
-  db.collection('forms').find({}, (err, docs) => {
+  const userId = req.user.id;
+  db.collection('forms').find({userId}, (err, docs) => {
     const formsArray = [];
     docs.forEach(doc => {
       formsArray.push(doc);
@@ -103,7 +104,9 @@ app.get('/forms/', (req, res, next) => {
 });
 
 app.get('/forms/:formId', (req, res, next) => {
-  db.collection('forms').findOne({_id: req.params.formId}, (err, doc) => {
+  const _id = req.params.formId;
+  const userId = req.user.id;
+  db.collection('forms').findOne({_id, userId}, (err, doc) => {
     if (doc) {
       res.json(doc);
       return;
@@ -118,6 +121,7 @@ app.get('/forms/:formId', (req, res, next) => {
 app.post('/forms/', asyncMiddleware(async (req, res, next) => {
   const _id = uuidv4();
   const name = req.body.name;
+  const userId = req.user.id;
   const form = {
     order: [0],
     name, 
@@ -129,7 +133,7 @@ app.post('/forms/', asyncMiddleware(async (req, res, next) => {
       }
     }
   }
-  const insertObject = {_id, form};
+  const insertObject = {_id, userId, form};
 
   const result = await db.collection('forms').insertOne(insertObject);
   
@@ -145,9 +149,10 @@ app.post('/forms/', asyncMiddleware(async (req, res, next) => {
 
 app.put('/forms/:formId', asyncMiddleware(async (req, res, next) => {
   const form = req.body;
+  const userId = req.user.id;
   const _id = req.params.formId;
-  const insertObject = {_id, form};
-  const result = await db.collection('forms').findOneAndReplace({_id}, insertObject);
+  const insertObject = {_id, userId, form};
+  const result = await db.collection('forms').findOneAndReplace({_id, userId}, insertObject);
 
   if (result.ok === 1) {
     res.json(insertObject);
