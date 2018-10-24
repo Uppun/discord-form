@@ -7,9 +7,9 @@ export default class dropdown extends Component {
         return(
             <div className='survey-dropdown-choice-options'>
                 <select>
-                    {options.map(option => {
+                    {options.map((option, index) => {
                         return(
-                            <option value='survey-option'>{option}</option>
+                            <option value='survey-option' key={index}>{option}</option>
                         )})}
                 </select>
             </div>

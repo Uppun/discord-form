@@ -30,14 +30,19 @@ class Survey extends Component {
         ));
     }
 
+    handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(event);
+    }
 
     render() {
         const {order, idToFieldsMap, name} = this.state;
+        const submitUrl = `localhost:5000/submit/${this.props.match.params.formId}`;
         return (
             <div className='survey-form'>
                 {name}
                 <div className='survey-contents'>
-                    <form>
+                    <form action={submitUrl} method='POST'>
                         {order ? order.map(id => {
                             const element = idToFieldsMap.get(id.toString());
                             switch(element.type) {
@@ -65,6 +70,7 @@ class Survey extends Component {
                             }
                         }) :
                         null}
+                        <input type='submit' value='Submit' />
                     </form>
                 </div>
             </div>
