@@ -163,3 +163,8 @@ app.put('/forms/:formId', asyncMiddleware(async (req, res, next) => {
     return;
   }
 }));
+
+app.post('/submit/:formId', asyncMiddleware(async (req, res, next) => {
+  console.log(req.body);
+  res.redirect('http://localhost:3000/');
+}));

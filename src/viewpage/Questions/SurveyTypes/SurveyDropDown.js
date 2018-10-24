@@ -3,13 +3,13 @@ import '../../../Assets/Forms.css';
 
 export default class dropdown extends Component {
     render() {
-        const {options} = this.props;
+        const {options, id} = this.props;
         return(
             <div className='survey-dropdown-choice-options'>
-                <select>
+                <select name={id}>
                     {options.map((option, index) => {
                         return(
-                            <option value='survey-option' key={index}>{option}</option>
+                            <option value={option} key={index}>{option}</option>
                         )})}
                 </select>
             </div>
