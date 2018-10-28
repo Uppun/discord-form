@@ -70,8 +70,16 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-app.get('/login', 
-  passport.authenticate('discord', {scope: SCOPES})
+app.get('/login', (req, res, next) => {
+    const state = req.query ? req.query.id : null;
+    if (state) {
+      const authentication = passport.authenticate('discord', {state, scope: SCOPES});
+      authentication(req, res, next);
+    } else {
+      const authentication = passport.authenticate('discord', {scope: SCOPES});
+      authentication(req, res, next);
+    }
+  }
 );
 
 app.get('/auth', passport.authenticate('discord', {failureRedirect: 'http://localhost:3000/'}), (req, res) => res.redirect('http://localhost:3000/'));
