@@ -75,14 +75,23 @@ app.get('/login', (req, res, next) => {
     if (state) {
       const authentication = passport.authenticate('discord', {state, scope: SCOPES});
       authentication(req, res, next);
+      return;
     } else {
       const authentication = passport.authenticate('discord', {scope: SCOPES});
       authentication(req, res, next);
+      return;
     }
   }
 );
 
-app.get('/auth', passport.authenticate('discord', {failureRedirect: 'http://localhost:3000/'}), (req, res) => res.redirect('http://localhost:3000/'));
+app.get('/auth', passport.authenticate('discord', {failureRedirect: 'http://localhost:3000/'}), (req, res) => {
+  const formId = req.query ? req.query.state : null;
+  if (formId) {
+    res.redirect(`http://localhost:3000/preview/${formId}`);
+    return;
+  }
+  res.redirect('http://localhost:3000/');
+});
 
 app.use((req, res, next) => {
   if (!req.isAuthenticated() && req.method !== 'OPTIONS') {
