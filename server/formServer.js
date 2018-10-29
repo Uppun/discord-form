@@ -87,7 +87,7 @@ app.get('/login', (req, res, next) => {
 app.get('/auth', passport.authenticate('discord', {failureRedirect: 'http://localhost:3000/'}), (req, res) => {
   const formId = req.query ? req.query.state : null;
   if (formId) {
-    res.redirect(`http://localhost:3000/preview/${formId}`);
+    res.redirect(`http://localhost:3000/#/preview/${formId}`);
     return;
   }
   res.redirect('http://localhost:3000/');

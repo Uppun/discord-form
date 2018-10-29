@@ -27,17 +27,15 @@ class Survey extends Component {
             res.form.name,
             res.form.order,
             res.form.objects,
-        ));
-    }
-
-    handleSubmit = () => {
-        console.log('help')
+        )).catch(err => {
+            console.log('wot')
+            window.location.href = `http://localhost:5000/login?id=${this.props.match.params.formId}`;
+        });
     }
 
     render() {
         const {order, idToFieldsMap, name} = this.state;
         const submitUrl = `http://localhost:5000/submit/${this.props.match.params.formId}`;
-        console.log(submitUrl)
 
         return (
             <div className='survey-form'>
