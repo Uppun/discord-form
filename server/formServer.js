@@ -151,10 +151,12 @@ app.post('/forms/', asyncMiddleware(async (req, res, next) => {
     }
   }
   const insertObject = {_id, userId, form};
+  const resultsInsertObject = {_id, userId, results: []};
 
   const result = await db.collection('forms').insertOne(insertObject);
+  const resultsResult = result.insertedCount ? await db.collection('results').insertOne(resultsInsertObject) : null; 
   
-  if(result.insertedCount) {
+  if(resultsResult.insertedCount) {
     res.json(insertObject);
     return;
   } else {
@@ -182,6 +184,35 @@ app.put('/forms/:formId', asyncMiddleware(async (req, res, next) => {
 }));
 
 app.post('/submit/:formId', asyncMiddleware(async (req, res, next) => {
-  console.log(req.body);
-  res.redirect('http://localhost:3000/');
+  const _id = req.params.formId;
+  const userId = req.user.id;
+  const submission = req.body;
+
+  db.collection('results').findOne({_id}, (err, doc) => {
+    if (doc) {
+      let results = doc.results;
+      let found = false;
+      for (let i = 0; i < results.length; i++) {
+        if(results[i].userId == userId) {
+          results[i] = {userId, submission};
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        results.push({userId, submission});
+      }
+      const insertRes = await db.collection('results').updateOne({_id}, {$set: {results}});
+      if (insertRes.ok === 1) {
+        res.send('Submission inserted.');
+        res.redirect('http://localhost:3000/');
+        return;
+      } else {
+        res.status(500);
+        res.send('Submission failed!');
+        res.redirect('http://localhost:3000/');
+        return;
+      }
+    }
+  });
 }));
