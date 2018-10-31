@@ -35,7 +35,7 @@ class Survey extends Component {
 
     render() {
         const {order, idToFieldsMap, name} = this.state;
-        const submitUrl = `http://localhost:5000/submit/${this.props.match.params.formId}`;
+        const submitUrl = `http://localhost:5000/results/${this.props.match.params.formId}`;
 
         return (
             <div className='survey-form'>

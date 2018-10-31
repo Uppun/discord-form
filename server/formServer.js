@@ -183,7 +183,23 @@ app.put('/forms/:formId', asyncMiddleware(async (req, res, next) => {
   }
 }));
 
-app.post('/submit/:formId', asyncMiddleware(async (req, res, next) => {
+app.get('/results/:formId', asyncMiddleware(async (req, res, next) => {
+  const _id = req.params.formId;
+  const userId = req.user.id;
+
+  db.collection('results').findOne({_id, userId}, (err, doc) => {
+    if (doc) {
+      res.json(doc.results);
+      return;
+    } else {
+      res.status(404);
+      res.send('Document not found.')
+      return;
+    }
+  })
+}))
+
+app.post('/results/:formId', asyncMiddleware(async (req, res, next) => {
   const _id = req.params.formId;
   const userId = req.user.id;
   const submission = req.body;

@@ -1,6 +1,6 @@
 function createForm(name) {
     return fetch(`http://localhost:5000/forms/`, {
-        method: "POST",
+        method: 'POST',
         headers: {
             "Content-Type": "application/json; charset=utf-8",
         },
@@ -13,7 +13,7 @@ function createForm(name) {
 
 function updateForm(formData, formId) {
     return fetch(`http://localhost:5000/forms/${formId}`, {
-        method: "PUT",
+        method: 'PUT',
         headers: {
             "Content-Type": "application/json; charset=utf-8",
         },
@@ -25,7 +25,7 @@ function updateForm(formData, formId) {
 
 function getForm(formId) {
     return fetch(`http://localhost:5000/forms/${formId}`, {
-        method: "GET",
+        method: 'GET',
         mode: 'cors',
         credentials: 'include',
     }).then(response => response.json());
@@ -33,7 +33,15 @@ function getForm(formId) {
 
 function getForms() {
     return fetch(`http://localhost:5000/forms/`, {
-        method: "GET",
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'include',
+    }).then(response => response.json());
+}
+
+function getResults(formId) {
+    return fetch(`http://localhost:5000/submit/${formId}`, {
+        method: 'GET',
         mode: 'cors',
         credentials: 'include',
     }).then(response => response.json());
