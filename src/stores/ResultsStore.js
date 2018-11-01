@@ -9,8 +9,19 @@ class ResultsStore extends ReduceStore {
         super(Dispatcher);
     }
 
+    getInitialState() {
+        return null;
+    }
+
     reduce(state, action) {
-        
+        switch(action.type) {
+            case ActionTypes.SETRESULTS: {
+                const {results} = action;
+                return {
+                    results,
+                }
+            }
+        }
     }
 }
 

@@ -83,4 +83,10 @@ export default {
             name,
         })
     },
+    setResults(results) {
+        Dispatcher.dispatch({
+            type: ActionTypes.SETRESULTS,
+            results,
+        })
+    },
 }

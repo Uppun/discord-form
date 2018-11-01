@@ -17,6 +17,17 @@ class FormOrderStore extends ReduceStore {
                     order: [...state.order, action.id]
                 };
             }
+            case ActionTypes.DELETEQUESTION: {
+                const order = [];
+                for (let id in state.order) {
+                    if (parseInt(id) !== action.id) {
+                        order.push(id);
+                    }
+                }
+                return {
+                    order,
+                };
+            }
             case ActionTypes.LOADFORM: {
                 return {
                     order: action.order,
