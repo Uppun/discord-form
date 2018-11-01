@@ -25,6 +25,7 @@ export default class FullResults extends Component {
                     for (const key in result.submission) {
                         const question = idToFieldsMap.get(key);
                         if (question) {
+                            fields.push({answer: result.submission.key, question});
                         }
                     }
                     return (
@@ -32,7 +33,14 @@ export default class FullResults extends Component {
                             <div className='result-user'>
                                 {result.username}
                             </dv>
-                            {}
+                            {fields.map((field, index) => {
+                                return (
+                                    <div className='result-field'>
+                                        {field.question}
+                                        {field.answer}
+                                    </div>
+                                )
+                            })}
                         </div>
                 )})}
             </div>
