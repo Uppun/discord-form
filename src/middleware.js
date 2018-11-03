@@ -24,6 +24,7 @@ function updateForm(formData, formId) {
 }
 
 function getForm(formId) {
+    console.log(formId)
     return fetch(`http://localhost:5000/forms/${formId}`, {
         method: 'GET',
         mode: 'cors',
@@ -40,7 +41,7 @@ function getForms() {
 }
 
 function getResults(formId) {
-    return fetch(`http://localhost:5000/submit/${formId}`, {
+    return fetch(`http://localhost:5000/results/${formId}`, {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
@@ -52,4 +53,5 @@ export default {
     updateForm,
     getForm,
     getForms,
+    getResults,
 }

@@ -28,7 +28,6 @@ class Survey extends Component {
             res.form.order,
             res.form.objects,
         )).catch(err => {
-            console.log('wot')
             window.location.href = `http://localhost:5000/login?id=${this.props.match.params.formId}`;
         });
     }

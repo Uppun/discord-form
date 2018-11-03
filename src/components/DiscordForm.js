@@ -25,7 +25,7 @@ class DiscordForm extends Component {
     }
 
     componentDidMount() {
-        const { formId } = this.props.match.params;
+        const { formId } = this.props.formId;
         middleware.getForm(formId).then(res => {
             FormActions.loadForm(
                 res.form.name,
@@ -36,7 +36,7 @@ class DiscordForm extends Component {
 
     handleClick = (event) => {
         const buttonClass = event.target.className;
-        const { formId } = this.props.match.params;
+        const { formId } = this.props.formId;
         
         switch(buttonClass) {
             case 'add-short': {
@@ -67,7 +67,7 @@ class DiscordForm extends Component {
 
     render() {
         const {order, idToFieldsMap, name} = this.state;
-        const {formId}= this.props.match.params;
+        const {formId}= this.props.formId;
         const path = `/preview/${formId}`
         return(
             <div className='form'>

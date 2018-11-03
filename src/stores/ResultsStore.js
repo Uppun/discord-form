@@ -21,6 +21,9 @@ class ResultsStore extends ReduceStore {
                     results,
                 }
             }
+            default: {
+                return state;
+            }
         }
     }
 }

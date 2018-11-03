@@ -199,12 +199,11 @@ app.get('/results/:formId', asyncMiddleware(async (req, res, next) => {
   })
 }))
 
-app.post('/results/:formId', asyncMiddleware(async (req, res, next) => {
+app.post('/results/:formId', (req, res, next) => {
   const _id = req.params.formId;
   const userId = req.user.id;
   const username = req.user.username;
   const submission = req.body;
-  console.log(submission)
 
   db.collection('results').findOne({_id}, (err, doc) => {
     if (doc) {
@@ -222,16 +221,13 @@ app.post('/results/:formId', asyncMiddleware(async (req, res, next) => {
       }
       db.collection('results').updateOne({_id}, {$set: {results}}, (err, result) => {
         if (result.result.ok === 1) {
-          res.send('Submission inserted.');
           res.redirect('http://localhost:3000/');
           return;
         } else {
-          res.status(500);
-          res.send('Submission failed!');
           res.redirect('http://localhost:3000/');
           return;
         }
       });
     }
   });
-}));
+});

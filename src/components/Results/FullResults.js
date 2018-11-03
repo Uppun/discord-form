@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import FormStore from '../../stores/FormStore';
 import FormOrderStore from '../../stores/FormOrderStore';
 import ResultsStore from '../../stores/ResultsStore';
+import Middleware from '../../middleware';
+import FormActions from '../../actions/FormActions';
+import {Container} from 'flux/utils';
 
-export default class FullResults extends Component {
+class FullResults extends Component {
     static getStores() {
         return [FormStore, FormOrderStore, ResultsStore];
     }
@@ -16,35 +19,49 @@ export default class FullResults extends Component {
         };
     }
 
+    componentDidMount() {
+        const {formId} = this.props.formId;
+        Middleware.getResults(formId).then(result => {
+            FormActions.setResults(result);
+        }).catch(error => {
+            FormActions.setResults(null);
+        });
+    }
+
     render() {
         const {results, order, idToFieldsMap} = this.state;
         return (
             <div className='full-results-page'>
-                {results.map((result, index) => {
+                {results ? results.map((result, index) => {
                     const fields = []; 
                     for (const key in result.submission) {
                         const question = idToFieldsMap.get(key);
                         if (question) {
-                            fields.push({answer: result.submission.key, question});
+                            fields.push({answer: result.submission[key], question});
                         }
                     }
                     return (
                         <div className='result-form'>
                             <div className='result-user'>
                                 {result.username}
-                            </dv>
+                            </div>
                             {fields.map((field, index) => {
                                 return (
                                     <div className='result-field'>
-                                        {field.question}
+                                        {field.question.question}
                                         {field.answer}
                                     </div>
                                 )
                             })}
                         </div>
-                )})}
+                )}) 
+                : <div className='empty-results'>
+                    There are no results to display
+                </div>}
             </div>
         )
     }
     
 }
+
+export default Container.create(FullResults);
