@@ -48,8 +48,12 @@ class FullResults extends Component {
                             {fields.map((field, index) => {
                                 return (
                                     <div className='result-field'>
-                                        {field.question.question}
-                                        {field.answer}
+                                        <div className='result-question'>
+                                            {field.question.question}
+                                        </div>
+                                        <div className='result-answer'>
+                                            {field.answer}
+                                        </div>
                                     </div>
                                 )
                             })}
