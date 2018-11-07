@@ -5,6 +5,7 @@ import ResultsStore from '../../stores/ResultsStore';
 import Middleware from '../../middleware';
 import FormActions from '../../actions/FormActions';
 import {Container} from 'flux/utils';
+import * as ResultComponents from './ResultObjects';
 
 class AggregateResults extends Component {
     static getStores() {
@@ -52,7 +53,35 @@ class AggregateResults extends Component {
             }
         }
 
-        return ();
+        return (
+            <div className='aggregate-responses'>
+                {order.map(id => {
+                    const element = idToFieldsMap.get(id);
+                    if (element) {
+                        switch(element.type) {
+                            case 'CHECKBOX': {
+                                return <ResultComponents.CheckBox options={aggResults.get(id)} />;
+                            }
+                            case 'DROPDOWN': {
+                                return <ResultComponents.DropDown options={aggResults.get(id)} />;
+                            }
+                            case 'MULTIPLE_CHOICE': {
+                                return <ResultComponents.MultipleChoice options={aggResults.get(id)} />
+                            }
+                            case 'PARAGRAPH': {
+                                return <ResultComponents.TextResult responses={aggregate.get(id)} />
+                            }
+                            case 'SHORT': {
+                                return <ResultComponents.TextResult responses={aggregate.get(id)} />
+                            }
+                            default: {
+                                return null;
+                            }
+                        }
+                    }
+                })}
+            </div>
+        );
     }
 }
 
