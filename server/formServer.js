@@ -204,6 +204,7 @@ app.post('/results/:formId', (req, res, next) => {
   const userId = req.user.id;
   const username = req.user.username;
   const submission = req.body;
+  console.log(submission)
 
   db.collection('results').findOne({_id}, (err, doc) => {
     if (doc) {

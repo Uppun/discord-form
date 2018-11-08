@@ -1,7 +1,6 @@
 import {ReduceStore} from 'flux/utils';
 import Dispatcher from '../Dispatcher';
 import ActionTypes from '../actions/ActionTypes';
-import QuestionTypes from '../Assets/QuestionTypes';
 
 class ResultsStore extends ReduceStore {
     constructor() {
@@ -19,7 +18,7 @@ class ResultsStore extends ReduceStore {
                 const aggregate = new Map();
 
                 for (const result of results) {
-                    for (key in result.submission) {
+                    for (const key in result.submission) {
                         if (aggregate.has(key)) {
                             aggregate.set(
                                 key, 
@@ -31,10 +30,10 @@ class ResultsStore extends ReduceStore {
                                 )
                             );
                         } else {
-                            aggregate.set(key, {
+                            aggregate.set(key, [{
                                 username: result.username,
                                 response: result.submission[key],
-                            });
+                            }]);
                         }
                     }
                 }

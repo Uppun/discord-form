@@ -31,13 +31,24 @@ class AggregateResults extends Component {
 
     render() {
         const {aggregate, order, idToFieldsMap} = this.state;
-        const aggResults = new Map();
+        if (!aggregate) {
+            return (
+                <div>
+                    There are no results to display.
+                </div>
+            );
+        }
+        const aggResults = new Map([]);
         for (const id of order) {
-            const element = idToFieldsMap.get(id);
+            const element = idToFieldsMap.get(id.toString());
             if (element) {
                 if (element.type === 'CHECKBOX' || element.type === 'DROPDOWN' || element.type === 'MULTIPLE_CHOICE') {
                     for (const option of element.options) {
-                        aggResults.set(id, new Map(option, 0));
+                        if (!aggResults.get(id.toString())) {
+                            aggResults.set(id.toString(), new Map([[option, 0]]));
+                        } else {
+                            aggResults.set(id.toString(), aggResults.get(id.toString()).set(option, 0));
+                        }
                     }
                 }
             }
@@ -47,7 +58,13 @@ class AggregateResults extends Component {
             const optionsMap = aggResults.get(key);
             if (optionsMap) {
                 for (const answer of value) {
-                    optionsMap.set(answer.response, optionsMap.get(answer) + 1);
+                    if (Array.isArray(answer.response)) {
+                        for (const option of answer.response) {
+                            optionsMap.set(option, optionsMap.get(option) + 1);
+                        }
+                    } else {
+                        optionsMap.set(answer.response, optionsMap.get(answer.response) + 1);
+                    }
                 }
                 aggResults.set(key, optionsMap);
             }
@@ -56,29 +73,30 @@ class AggregateResults extends Component {
         return (
             <div className='aggregate-responses'>
                 {order.map(id => {
-                    const element = idToFieldsMap.get(id);
+                    const element = idToFieldsMap.get(id.toString());
                     if (element) {
                         switch(element.type) {
                             case 'CHECKBOX': {
-                                return <ResultComponents.CheckBox options={aggResults.get(id)} />;
+                                return <ResultComponents.CheckBox key={id} options={aggResults.get(id.toString())} />;
                             }
                             case 'DROPDOWN': {
-                                return <ResultComponents.DropDown options={aggResults.get(id)} />;
+                                return <ResultComponents.DropDown key={id} options={aggResults.get(id.toString())} />;
                             }
                             case 'MULTIPLE_CHOICE': {
-                                return <ResultComponents.MultipleChoice options={aggResults.get(id)} />
+                                return <ResultComponents.MultipleChoice key={id} options={aggResults.get(id.toString())} />
                             }
                             case 'PARAGRAPH': {
-                                return <ResultComponents.TextResult responses={aggregate.get(id)} />
+                                return <ResultComponents.TextResult key={id} responses={aggregate.get(id.toString())} />
                             }
                             case 'SHORT': {
-                                return <ResultComponents.TextResult responses={aggregate.get(id)} />
+                                return <ResultComponents.TextResult key={id} responses={aggregate.get(id.toString())} />
                             }
                             default: {
                                 return null;
                             }
                         }
                     }
+                    return null;
                 })}
             </div>
         );

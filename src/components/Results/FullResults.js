@@ -29,7 +29,7 @@ class FullResults extends Component {
     }
 
     render() {
-        const {results, order, idToFieldsMap} = this.state;
+        const {results, idToFieldsMap} = this.state;
         return (
             <div className='full-results-page'>
                 {results ? results.map((result, index) => {

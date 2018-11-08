@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import DiscordForm from './components/DiscordForm';
 import SwitchComponents from './components/SwitchComponents';
 import Survey from './viewpage/Survey';
 import Landing from './components/formCreationPage';

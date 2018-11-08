@@ -18,7 +18,7 @@ class SingleTextBox extends Component {
         const {user, response} = this.props;
         return (
             <div className='text-response-box'>
-                <h className='text-response-user'>{user}</h>
+                <h1 className='text-response-user'>{user}</h1>
                 <div className='text-response-response'>{response}</div>
             </div>
         );

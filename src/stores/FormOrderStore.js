@@ -20,7 +20,7 @@ class FormOrderStore extends ReduceStore {
             case ActionTypes.DELETEQUESTION: {
                 const order = [];
                 for (let id in state.order) {
-                    if (parseInt(id) !== action.id) {
+                    if (parseInt(id, 10) !== action.id) {
                         order.push(id);
                     }
                 }
