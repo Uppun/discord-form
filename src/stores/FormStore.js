@@ -95,7 +95,6 @@ class FormStore extends ReduceStore {
                     {
                         ...element,
                         options: updateElement(element.options, index, option => [
-                            ...option,
                             value,
                         ]),
                     });

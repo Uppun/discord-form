@@ -157,7 +157,7 @@ app.post('/forms/', asyncMiddleware(async (req, res, next) => {
   const resultsResult = result.insertedCount ? await db.collection('results').insertOne(resultsInsertObject) : null; 
   
   if(resultsResult.insertedCount) {
-    res.json(insertObject);
+    res.json(_id);
     return;
   } else {
     res.status(500);
@@ -204,7 +204,6 @@ app.post('/results/:formId', (req, res, next) => {
   const userId = req.user.id;
   const username = req.user.username;
   const submission = req.body;
-  console.log(submission)
 
   db.collection('results').findOne({_id}, (err, doc) => {
     if (doc) {
@@ -218,7 +217,7 @@ app.post('/results/:formId', (req, res, next) => {
         }
       }
       if (!found) {
-        results.push({userId, submission});
+        results.push({userId, username, submission});
       }
       db.collection('results').updateOne({_id}, {$set: {results}}, (err, result) => {
         if (result.result.ok === 1) {

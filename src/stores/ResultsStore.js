@@ -15,32 +15,37 @@ class ResultsStore extends ReduceStore {
         switch(action.type) {
             case ActionTypes.SETRESULTS: {
                 const {results} = action;
-                const aggregate = new Map();
-
-                for (const result of results) {
-                    for (const key in result.submission) {
-                        if (aggregate.has(key)) {
-                            aggregate.set(
-                                key, 
-                                aggregate.get(key).push(
-                                    {
-                                        username: result.username, 
-                                        response: result.submission[key],
-                                    }
-                                )
-                            );
-                        } else {
-                            aggregate.set(key, [{
-                                username: result.username,
-                                response: result.submission[key],
-                            }]);
+                if (results) {
+                    const aggregate = new Map();
+                    for (const result of results) {
+                        for (const key in result.submission) {
+                            if (aggregate.has(key)) {
+                                aggregate.set(
+                                    key, 
+                                    aggregate.get(key).push(
+                                        {
+                                            username: result.username, 
+                                            response: result.submission[key],
+                                        }
+                                    )
+                                );
+                            } else {
+                                aggregate.set(key, [{
+                                    username: result.username,
+                                    response: result.submission[key],
+                                }]);
+                            }
                         }
                     }
-                }
 
-                return {
-                    results,
-                    aggregate,
+                    return {
+                        results,
+                        aggregate,
+                    }
+                } else {
+                    return {
+                        results,
+                    }
                 }
             }
             default: {

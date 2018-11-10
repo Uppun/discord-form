@@ -24,7 +24,6 @@ function updateForm(formData, formId) {
 }
 
 function getForm(formId) {
-    console.log(formId)
     return fetch(`http://localhost:5000/forms/${formId}`, {
         method: 'GET',
         mode: 'cors',

@@ -16,7 +16,7 @@ export default class MultipleChoice extends Component {
 
     handleOptionChange = debounce((index, value) => {
         const {id, formId} = this.props;
-
+        
         FormActions.updateOption(id, index, value, formId);
     }, 2000)
 

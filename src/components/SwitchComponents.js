@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import DiscordForm from './DiscordForm';
-import FullResults from './Results/FullResults';
-import AggregateResults from './Results/Aggregate';
+import ResultsSwitch from './Results/ResultSwitch';
 
 export default class ComponentManager extends Component {
     state = {
@@ -19,7 +18,7 @@ export default class ComponentManager extends Component {
     render() {
         const renderedComponent = this.state.editing ? 
             <DiscordForm formId={this.props.match.params} /> 
-            : <AggregateResults formId={this.props.match.params} />;
+            : <ResultsSwitch formId={this.props.match.params} />;
         return(
             <div className='switching-component'>
             <button className='edit-button' onClick={this.handleEditClick}>Edit</button>

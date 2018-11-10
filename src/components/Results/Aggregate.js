@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import FormStore from '../../stores/FormStore';
 import FormOrderStore from '../../stores/FormOrderStore';
 import ResultsStore from '../../stores/ResultsStore';
-import Middleware from '../../middleware';
-import FormActions from '../../actions/FormActions';
 import {Container} from 'flux/utils';
 import * as ResultComponents from './ResultObjects';
 
@@ -18,15 +16,6 @@ class AggregateResults extends Component {
             ...FormStore.getState(),
             ...ResultsStore.getState(),
         };
-    }
-
-    componentDidMount() {
-        const {formId} = this.props.formId;
-        Middleware.getResults(formId).then(result => {
-            FormActions.setResults(result);
-        }).catch(error => {
-            FormActions.setResults(null);
-        });
     }
 
     render() {

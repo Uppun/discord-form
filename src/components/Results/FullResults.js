@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import FormStore from '../../stores/FormStore';
 import FormOrderStore from '../../stores/FormOrderStore';
 import ResultsStore from '../../stores/ResultsStore';
-import Middleware from '../../middleware';
-import FormActions from '../../actions/FormActions';
 import {Container} from 'flux/utils';
 
 class FullResults extends Component {
@@ -19,15 +17,6 @@ class FullResults extends Component {
         };
     }
 
-    componentDidMount() {
-        const {formId} = this.props.formId;
-        Middleware.getResults(formId).then(result => {
-            FormActions.setResults(result);
-        }).catch(error => {
-            FormActions.setResults(null);
-        });
-    }
-
     render() {
         const {results, idToFieldsMap} = this.state;
         return (
@@ -41,13 +30,13 @@ class FullResults extends Component {
                         }
                     }
                     return (
-                        <div className='result-form'>
+                        <div key={index} className='result-form'>
                             <div className='result-user'>
                                 {result.username}
                             </div>
                             {fields.map((field, index) => {
                                 return (
-                                    <div className='result-field'>
+                                    <div key={index} className='result-field'>
                                         <div className='result-question'>
                                             {field.question.question}
                                         </div>
