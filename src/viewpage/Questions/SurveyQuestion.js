@@ -15,27 +15,27 @@ export default class QuestionObject extends Component {
     }
 
     render() {
-        const {format, question, id} = this.props;
+        const {format, question, id, required} = this.props;
         let questionAnswers;
         switch(format) {
             case QuestionTypes.MULTIPLE_CHOICE: {
-                questionAnswers = <Questions.MultipleChoice options={this.props.options} otherNotSet={this.props.otherNotSet} id={id} />
+                questionAnswers = <Questions.MultipleChoice options={this.props.options} otherNotSet={this.props.otherNotSet} id={id} required={required} />
                 break;
             }
             case QuestionTypes.CHECKBOX: {
-                questionAnswers = <Questions.CheckBox options={this.props.options} otherNotSet={this.props.otherNotSet} id={id} />
+                questionAnswers = <Questions.CheckBox options={this.props.options} otherNotSet={this.props.otherNotSet} id={id} required={required} />
                 break;
             }
             case QuestionTypes.DROPDOWN: {
-                questionAnswers = <Questions.DropDown options={this.props.options} id={id} />
+                questionAnswers = <Questions.DropDown options={this.props.options} id={id} required={required} />
                 break;
             }
             case QuestionTypes.PARAGRAPH: {
-                questionAnswers = <Questions.Paragraph id={id} />
+                questionAnswers = <Questions.Paragraph id={id} required={required} />
                 break;
             }
             default: {
-                questionAnswers = <Questions.ShortAnswer id={id} />
+                questionAnswers = <Questions.ShortAnswer id={id} required={required} />
             }
         }
         return (

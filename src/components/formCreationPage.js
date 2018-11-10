@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default class FormCreationPage extends Component {
     state = {};
+    nameBoxRef = React.createRef();
 
     componentDidMount() {
         Middleware.getForms().then(res => {
@@ -14,7 +15,8 @@ export default class FormCreationPage extends Component {
     }
 
     handleClick = () => {
-        const formName = {name: 'test form'}
+        const name = this.nameBoxRef.current.value;
+        const formName = name ? {name} : {name: 'Untitled form'};
         Middleware.createForm(formName);
     }
 
@@ -33,6 +35,7 @@ export default class FormCreationPage extends Component {
                     )})
                 :
                 null}
+                <input type='text' className='name-box' ref={this.nameBoxRef} placeholder='Enter form name' />
                 <button className='form-create' onClick={this.handleClick}>Create Form</button>
             </div>
         )
