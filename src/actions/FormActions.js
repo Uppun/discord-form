@@ -89,4 +89,11 @@ export default {
             results,
         })
     },
+    updateAnswer(id, answer) {
+        Dispatcher.dispatch({
+            type: ActionTypes.UPDATEANSWER,
+            id, 
+            answer,
+        })
+    }
 }

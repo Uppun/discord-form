@@ -18,7 +18,8 @@ export default class FormCreationPage extends Component {
         const name = this.nameBoxRef.current.value;
         const formName = name ? {name} : {name: 'Untitled form'};
         Middleware.createForm(formName).then(res => {
-            window.location.href = `http://localhost:3000/#/edit/${res._id}`;
+            console.log('wew ' + res)
+            window.location.href = `http://localhost:3000/#/edit/${res}`;
         }).catch(err => {
             console.log(err);
         });

@@ -40,56 +40,27 @@ class Survey extends Component {
             <div className='survey-form'>
                 {name}
                 <div className='survey-contents'>
-                    <form action={submitUrl} method='post' onSubmit={this.handleSubmit}>
+                    <form action={submitUrl} method='post'>
                         {order ? order.map(id => {
                             const element = idToFieldsMap.get(id.toString());
                             switch(element.type) {
                                 case QuestionTypes.TITLE: {
-                                    return <SurveyTitle 
-                                        key={id} 
-                                        id={id} 
-                                        title={element.title} 
-                                        description={element.description} 
-                                        required={element.required} 
-                                    />
+                                    return <SurveyTitle key={id} id={id} title={element.title} description={element.description} />
                                 }
                                 case QuestionTypes.SHORT || QuestionTypes.PARAGRAPH: {
-                                    return <SurveyQuestion key={id} id={id} question={element.question} format={element.type} required={element.required} />
+                                    return <SurveyQuestion key={id} id={id} question={element.question} format={element.type} />
                                 }
                                 case QuestionTypes.PARAGRAPH: {
-                                    return <SurveyQuestion key={id} id={id} question={element.question} format={element.type} required={element.required} />
+                                    return <SurveyQuestion key={id} id={id} question={element.question} format={element.type} />
                                 }
                                 case QuestionTypes.MULTIPLE_CHOICE: {
-                                    return <SurveyQuestion 
-                                        key={id} 
-                                        id={id} 
-                                        question={element.question} 
-                                        options={element.options} 
-                                        otherNotSet={element.otherNotSet} 
-                                        format={element.type}
-                                        required={element.required} 
-                                    />
+                                    return <SurveyQuestion key={id} id={id} question={element.question} options={element.options} otherNotSet={element.otherNotSet} format={element.type} />
                                 }
                                 case QuestionTypes.CHECKBOX: { 
-                                    return <SurveyQuestion 
-                                        key={id} 
-                                        id={id} 
-                                        question={element.question} 
-                                        options={element.options} 
-                                        otherNotSet={element.otherNotSet} 
-                                        format={element.type}
-                                        required={element.required} 
-                                    />
+                                    return <SurveyQuestion key={id} id={id} question={element.question} options={element.options} otherNotSet={element.otherNotSet} format={element.type} />
                                 }
                                 case QuestionTypes.DROPDOWN: {
-                                    return <SurveyQuestion 
-                                        key={id} 
-                                        id={id} 
-                                        question={element.question} 
-                                        options={element.options} 
-                                        format={element.type}
-                                        required={element.required}  
-                                    />
+                                    return <SurveyQuestion key={id} id={id} question={element.question} options={element.options} format={element.type} />
                                 }
                                 default: {
                                     return null;
