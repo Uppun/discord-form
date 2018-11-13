@@ -24,7 +24,7 @@ class Checkbox extends Component {
         }
 
         if (event.target.checked) {
-            Answers.push(event.target.value);
+            Answers = [...Answers, event.target.value];
         } else {
             const index = Answers.indexOf(event.target.value);
             if (index !== -1) {
