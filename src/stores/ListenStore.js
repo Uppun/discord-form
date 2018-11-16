@@ -80,7 +80,15 @@ Dispatcher.register(action => {
         }
         case ActionTypes.UPDATETITLE: {
             Dispatcher.waitFor([FormStore.getDispatchToken(), FormOrderStore.getDispatchToken()]);
-            console.log(FormStore.getState())
+            middleware.updateForm({
+                ...FormOrderStore.getState(),
+                name: FormStore.getState().name,
+                objects: FormStore.getState().idToFieldsMap,
+            }, action.formId);
+            break;
+        }
+        case ActionTypes.SETREQUIRED: {
+            Dispatcher.waitFor([FormStore.getDispatchToken(), FormOrderStore.getDispatchToken()]);
             middleware.updateForm({
                 ...FormOrderStore.getState(),
                 name: FormStore.getState().name,

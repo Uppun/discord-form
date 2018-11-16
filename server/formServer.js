@@ -171,8 +171,9 @@ app.put('/forms/:formId', asyncMiddleware(async (req, res, next) => {
   const userId = req.user.id;
   const _id = req.params.formId;
   const insertObject = {_id, userId, form};
-  const result = await db.collection('forms').findOneAndReplace({_id, userId}, insertObject);
 
+  const result = await db.collection('forms').findOneAndReplace({_id, userId}, insertObject);
+  
   if (result.ok === 1) {
     res.json(insertObject);
     return;

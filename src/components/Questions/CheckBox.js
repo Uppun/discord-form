@@ -26,8 +26,13 @@ export default class CheckBox extends Component {
         FormActions.deleteOther(id, formId);
     }
 
+    handleRequireChange = () => {
+        const {id, formId} = this.props;
+        FormActions.setRequired(id, formId);
+    }
+
     render() {
-        const {options, otherNotSet, id, formId} = this.props;
+        const {options, otherNotSet, id, formId, required} = this.props;
         return(
             <div className='checkbox-choice-options'>
                 {options.map((option, index) => {
@@ -45,6 +50,9 @@ export default class CheckBox extends Component {
                         <div className='another' onClick={this.handleAnotherClick}>Add Another</div>
                     </div>
                     }
+                    <div className='required-check'>
+                        <input type='checkbox' className='required-button' checked={required} onChange={this.handleRequireChange} /> Required
+                    </div>
             </div>
         )
     }

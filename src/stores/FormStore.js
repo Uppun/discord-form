@@ -112,7 +112,8 @@ class FormStore extends ReduceStore {
                         {
                             type: format,
                             question: 'Enter Question',
-                            answer: 'Enter Answer'
+                            answer: 'Enter Answer',
+                            required: false,
                         });
                 } else if (format === QuestionTypes.MULTIPLE_CHOICE || format === QuestionTypes.CHECKBOX) {
                     idToFieldsMap = state.idToFieldsMap.set(id.toString(),
@@ -121,6 +122,7 @@ class FormStore extends ReduceStore {
                             question: 'Enter Question',
                             options: ['option 1'],
                             otherNotSet: true,
+                            required: false,
                         })
                 } else {
                     idToFieldsMap = state.idToFieldsMap.set(id.toString(),
@@ -128,6 +130,7 @@ class FormStore extends ReduceStore {
                             type: format,
                             question: 'Enter Question',
                             options: ['option 1'],
+                            required: false,
                         })
                 }
                 
@@ -173,6 +176,21 @@ class FormStore extends ReduceStore {
                     ...state,
                     name: action.name,
                     idToFieldsMap: Map(action.objects),
+                }
+            }
+
+            case ActionTypes.SETREQUIRED: {
+                const {id} = action;
+                const element = state.idToFieldsMap.get(id.toString());
+                const required = element.required ? false : true;
+                const idToFieldsMap = state.idToFieldsMap.set(id.toString(), 
+                {
+                    ...element,
+                    required,
+                });
+                return {
+                    ...state,
+                    idToFieldsMap,
                 }
             }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FormStore from '../stores/FormStore';
 import FormOrderStore from '../stores/FormOrderStore';
+import AnswerStore from '../stores/AnswerStore';
 import {Container} from 'flux/utils';
 import SurveyTitle from './SurveyTitle';
 import SurveyQuestion from './Questions/SurveyQuestion';
@@ -11,13 +12,14 @@ import FormActions from '../actions/FormActions';
 
 class Survey extends Component {
     static getStores() {
-        return [FormStore, FormOrderStore];
+        return [FormStore, FormOrderStore, AnswerStore];
     }
     
     static calculateState(prevState) {
         return {
             ...FormOrderStore.getState(),
             ...FormStore.getState(),
+            ...AnswerStore.getState(),
         };
     }
 
@@ -33,7 +35,7 @@ class Survey extends Component {
     }
 
     render() {
-        const {order, idToFieldsMap, name} = this.state;
+        const {order, idToFieldsMap, name, canSubmit} = this.state;
         const submitUrl = `http://localhost:5000/results/${this.props.match.params.formId}`;
 
         return (
@@ -69,7 +71,7 @@ class Survey extends Component {
                         }) :
                         null}
                         <div>
-                            <input type='submit' value='Submit' />
+                            {canSubmit ? <input type='submit' value='Submit' /> : <input type='submit' value='Submit' disabled />}
                         </div>
                     </form>
                 </div>

@@ -81,19 +81,26 @@ export default {
             order,
             objects,
             name,
-        })
+        });
     },
     setResults(results) {
         Dispatcher.dispatch({
             type: ActionTypes.SETRESULTS,
             results,
-        })
+        });
     },
     updateAnswer(id, answer) {
         Dispatcher.dispatch({
             type: ActionTypes.UPDATEANSWER,
             id, 
             answer,
-        })
-    }
+        });
+    },
+    setRequired(id, formId) {
+        Dispatcher.dispatch({
+            type: ActionTypes.SETREQUIRED,
+            id,
+            formId,
+        });
+    },
 }

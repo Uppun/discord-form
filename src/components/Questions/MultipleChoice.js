@@ -20,8 +20,13 @@ export default class MultipleChoice extends Component {
         FormActions.updateOption(id, index, value, formId);
     }, 2000)
 
+    handleRequireChange = () => {
+        const {id, formId} = this.props;
+        FormActions.setRequired(id, formId);
+    }
+
     render() {
-        const {options, otherNotSet, id} = this.props;
+        const {options, otherNotSet, id, required} = this.props;
         return(
             <div className='multiple-choice-options'>
                 {options.map((option, index) => {
@@ -39,6 +44,9 @@ export default class MultipleChoice extends Component {
                         <div className='another' onClick={this.handleAnotherClick}>Add Another</div>
                     </div>
                     }
+                    <div className='required-check'>
+                        <input type='checkbox' className='required-button' checked={required} onChange={this.handleRequireChange} /> Required
+                    </div>
             </div>
         )
     }

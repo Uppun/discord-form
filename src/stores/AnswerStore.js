@@ -16,23 +16,47 @@ class AnswerStore extends ReduceStore {
         switch(action.type) {
             case ActionTypes.LOADFORM: {
                 const Answers = [];
-                const {objects} = action; 
+                const {objects} = action;
+                const required = [];
 
                 for (const [id, object] of Object.entries(objects)) {
                     if (object.type !== 'TITLE') {
-                        Answers.push([id, ''])
+                        Answers.push([id, '']);
+                        if (object.required) {
+                            required.push(id);
+                        }
                     }
                 }
                 const AnswersMap = Map(Answers);
+                let canSubmit = true;
+
+                for (const id of required) {
+                    if (!AnswersMap.get(id)) {
+                        canSubmit = false;
+                    }
+                }
 
                 return {
+                    canSubmit,
+                    required,
                     AnswersMap,
                 }
             }
 
             case ActionTypes.UPDATEANSWER: {
                 const AnswersMap = state.AnswersMap.set(action.id.toString(), action.answer);
+                const {required} = state;
+                let canSubmit = true;
+
+                for (const id of required) {
+                    if (AnswersMap.get(id) == '') {
+                        canSubmit = false;
+                    }
+                }
+
                 return {
+                    ...state, 
+                    canSubmit,
                     AnswersMap,
                 }
             }

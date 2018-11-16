@@ -68,7 +68,7 @@ class DiscordForm extends Component {
     render() {
         const {order, idToFieldsMap, name} = this.state;
         const {formId}= this.props.formId;
-        const path = `/preview/${formId}`
+        const path = `/preview/${formId}`;
         return(
             <div className='form'>
                 {name}
@@ -81,10 +81,22 @@ class DiscordForm extends Component {
                                 return <TitleObject key={id} id={id} title={element.title} description={element.description} formId={formId} />
                             }
                             case QuestionTypes.SHORT || QuestionTypes.PARAGRAPH: {
-                                return <Question key={id} id={id} question={element.question} format={element.type} />
+                                return <Question 
+                                    key={id} 
+                                    id={id} 
+                                    question={element.question} 
+                                    format={element.type} 
+                                    required={element.required} 
+                                />
                             }
                             case QuestionTypes.PARAGRAPH: {
-                                return <Question key={id} id={id} question={element.question} format={element.type} />
+                                return <Question 
+                                    key={id} 
+                                    id={id} 
+                                    question={element.question} 
+                                    format={element.type} 
+                                    required={element.required} 
+                                />
                             }
                             case QuestionTypes.MULTIPLE_CHOICE: {
                                 return <Question 
@@ -94,7 +106,8 @@ class DiscordForm extends Component {
                                     options={element.options} 
                                     otherNotSet={element.otherNotSet} 
                                     format={element.type} 
-                                    formId={formId} 
+                                    formId={formId}
+                                    required={element.required} 
                                 />
                             }
                             case QuestionTypes.CHECKBOX: { 
@@ -105,11 +118,20 @@ class DiscordForm extends Component {
                                     options={element.options} 
                                     otherNotSet={element.otherNotSet} 
                                     format={element.type} 
-                                    formId={formId} 
+                                    formId={formId}
+                                    required={element.required} 
                                 />
                             }
                             case QuestionTypes.DROPDOWN: {
-                                return <Question key={id} id={id} question={element.question} options={element.options} format={element.type} formId={formId} />
+                                return <Question 
+                                    key={id} 
+                                    id={id} 
+                                    question={element.question} 
+                                    options={element.options} 
+                                    format={element.type} 
+                                    formId={formId}
+                                    required={element.required} 
+                                />
                             }
                             default: {
                                 return null;
