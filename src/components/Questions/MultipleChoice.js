@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FormActions from '../../actions/FormActions';
 import '../../Assets/Forms.css';
-import {debounce} from 'underscore';
 
 export default class MultipleChoice extends Component {
     handleOtherClick = () => {
@@ -14,11 +13,11 @@ export default class MultipleChoice extends Component {
         FormActions.addOption(id, formId);
     }
 
-    handleOptionChange = debounce((index, value) => {
+    handleOptionChange = (index, value) => {
         const {id, formId} = this.props;
         
         FormActions.updateOption(id, index, value, formId);
-    }, 2000)
+    }
 
     handleRequireChange = () => {
         const {id, formId} = this.props;
@@ -39,8 +38,11 @@ export default class MultipleChoice extends Component {
                     </div>
                     :
                     <div className='other-and-another'>
-                        <input type='radio' className='multi-choice-other' disabled />
-                        <input type='text' className='other-text' defaultValue='Other' readOnly />
+                        <div className='other-grouping'>
+                            <input type='checkbox' className='checkbox-choice-other' disabled />
+                            <input type='text' className='other-text' defaultValue='Other' readOnly />
+                            <span className="remove-option" onClick={this.handleOtherRemoveClick}>&times;</span>
+                        </div>
                         <div className='another' onClick={this.handleAnotherClick}>Add Another</div>
                     </div>
                     }
@@ -60,13 +62,19 @@ class MultipleChoiceOption extends Component {
         onChange(index, value);
     }
 
+    handleRemoveClick = () => {
+        const {id, index, formId} = this.props;
+
+        FormActions.deleteOption(id, index, formId);
+    }
+
     render() {
         const {option} = this.props;
         return (
             <div className='multi-choice'>
                 <input type='radio' className='multi-choice-option' disabled />
-                <input type='text' className='multi-choice-text' defaultValue={option} onChange={this.handleChange} />
-                <span className='bar' />
+                <input type='text' className='multi-choice-text' value={option} onChange={this.handleChange} />
+                <span className="remove-option" onClick={this.handleRemoveClick}>&times;</span>
             </div>
         )
     }

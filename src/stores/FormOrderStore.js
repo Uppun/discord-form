@@ -15,7 +15,7 @@ class FormOrderStore extends ReduceStore {
             case ActionTypes.ADDQUESTION: {
                 const order = [...state.order, action.id];
                 return {
-                    order: [...state.order, action.id],
+                    order,
                 };
             }
             case ActionTypes.DELETEQUESTION: {

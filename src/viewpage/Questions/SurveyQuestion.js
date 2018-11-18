@@ -15,7 +15,7 @@ export default class QuestionObject extends Component {
     }
 
     render() {
-        const {format, question, id} = this.props;
+        const {format, question, id, required} = this.props;
         let questionAnswers;
         switch(format) {
             case QuestionTypes.MULTIPLE_CHOICE: {
@@ -44,6 +44,10 @@ export default class QuestionObject extends Component {
                 <div className='survey-question-answers'>
                     {questionAnswers}
                 </div>
+                {required ? 
+                    <div className='required-notice'>* This field is required. </div> :
+                    null
+                }
             </div>
         )
     }

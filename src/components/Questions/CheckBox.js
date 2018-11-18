@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FormActions from '../../actions/FormActions';
 import '../../Assets/Forms.css';
-import {debounce} from 'underscore';
 
 export default class CheckBox extends Component {
     handleOtherClick = () => {
@@ -14,11 +13,11 @@ export default class CheckBox extends Component {
         FormActions.addOption(id, formId);
     }
 
-    handleOptionChange = debounce((index, value) => {
+    handleOptionChange = (index, value) => {
         const {id, formId} = this.props;
 
         FormActions.updateOption(id, index, value, formId);
-    }, 2000)
+    }
 
     handleOtherRemoveClick = () => {
         const {id, formId} = this.props;
@@ -45,8 +44,11 @@ export default class CheckBox extends Component {
                     </div>
                     :
                     <div className='other-and-another'>
-                        <input type='checkbox' className='checkbox-choice-other' disabled />
-                        <input type='text' className='other-text' defaultValue='Other' readOnly />
+                        <div className='other-grouping'>
+                            <input type='checkbox' className='checkbox-choice-other' disabled />
+                            <input type='text' className='other-text' defaultValue='Other' readOnly />
+                            <span className="remove-option" onClick={this.handleOtherRemoveClick}>&times;</span>
+                        </div>
                         <div className='another' onClick={this.handleAnotherClick}>Add Another</div>
                     </div>
                     }
@@ -76,10 +78,9 @@ class CheckBoxOption extends Component {
         const {option} = this.props;
         return (
             <div className='checkbox-choice'>
-                <span className="remove-option" onClick={this.handleRemoveClick}>&times;</span>
                 <input type='checkbox' className='checkbox-choice-option' disabled={true} />
-                <input type='text' className='checkbox-choice-text' defaultValue={option} onChange={this.handleChange} />
-                <span className='bar' />
+                <input type='text' className='checkbox-choice-text' value={option} onChange={this.handleChange} />
+                <span className="remove-option" onClick={this.handleRemoveClick}>&times;</span>
             </div>
         )
     }

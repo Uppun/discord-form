@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FormActions from '../../actions/FormActions';
 import '../../Assets/Forms.css';
-import {debounce} from 'underscore';
 
 export default class dropdown extends Component {
 
@@ -10,11 +9,11 @@ export default class dropdown extends Component {
         FormActions.addOption(id, formId);
     }
 
-    handleOptionChange = debounce((index, value) => {
+    handleOptionChange = (index, value) => {
         const {id, formId} = this.props;
 
         FormActions.updateOption(id, index, value, formId);
-    }, 2000)
+    }
     
     handleRequireChange = () => {
         const {id, formId} = this.props;
@@ -48,12 +47,18 @@ class DropDownOption extends Component {
         onChange(index, value);
     }
 
+    handleRemoveClick = () => {
+        const {id, index, formId} = this.props;
+
+        FormActions.deleteOption(id, index, formId);
+    }
+
     render() {
-        const {option, required} = this.props;
+        const {option} = this.props;
         return (
             <div className='dropdown-choice'>
-                <input type='text' className='dropdown-choice-text' defaultValue={option} onChange={this.handleChange} />
-                <span className='bar' />
+                <input type='text' className='dropdown-choice-text' value={option} onChange={this.handleChange} />
+                <span className="remove-option" onClick={this.handleRemoveClick}>&times;</span>
             </div>
         )
     }

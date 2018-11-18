@@ -38,13 +38,27 @@
 .question-object {
     display: flex;
     flex-direction: column;
-    padding-bottom: 10px;
-    width: 400px;
+    padding-bottom: 30px;
+    width: 100%;
+    border-top: 1px solid #23272A;
+    overflow: hidden;
 }
 
-.title-entry, .description-entry, .question-entry, .multi-choice-text, .checkbox-choice-text, .dropdown-choice-text, .other-text {
+.title-entry, .description-entry, .question-entry, .other-text {
     border: 0;
     outline: 0;
+}
+
+.multi-choice-text, .checkbox-choice-text, .dropdown-choice-text {
+    outline: 0; 
+    background-color: #99AAB5;
+    border-radius: 10px;
+    margin-top: 5px;
+    border: 2px inset #2C2F33;
+}
+
+.multi-choice-text:focus, .checkbox-choice-text:focus, .dropdown-choice-text:focus {
+    background-color: #7289DA;
 }
 
 .title-entry {
@@ -57,6 +71,26 @@
 
 .question-entry {
     font-size: 30px;
+}
+
+.remove-question {
+    position: absolute;
+    left: 93%;
+    height: 5px;
+    width: 5px;
+}
+
+.remove-question:hover {
+    cursor: pointer;
+}
+
+.required-check {
+    position: absolute;
+    left: 80%;
+}
+
+.required-button:hover {
+    cursor: pointer;
 }
 
 .bar  { 
@@ -99,4 +133,11 @@ input:focus + .bar:before, input:focus + .bar:after {
     width: 600px;
     display: flex;
     flex-direction: column;
+}
+
+.another {
+    position: relative;
+    width: 100px;
+    cursor: pointer;
+    left: 35%;
 }

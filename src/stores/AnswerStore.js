@@ -49,7 +49,7 @@ class AnswerStore extends ReduceStore {
                 let canSubmit = true;
 
                 for (const id of required) {
-                    if (AnswersMap.get(id) == '') {
+                    if (AnswersMap.get(id) === '' || AnswersMap.get(id) === []) {
                         canSubmit = false;
                     }
                 }

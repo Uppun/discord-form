@@ -71,12 +71,12 @@ export default class QuestionObject extends Component {
         }
         return (
             <div className='question-object'>
+                <span className="remove-question" onClick={this.handleRemoveClick}>&times;</span>
                 <input type='text' ref={this.questionRef} className='question-entry' defaultValue={question} onChange={this.handleChange} />
                 <span className='bar' />
                 <div className='question-answers'>
                     {questionAnswers}
                 </div>
-                <span className="remove-question" onClick={this.handleRemoveClick}>&times;</span>
             </div>
         )
     }
