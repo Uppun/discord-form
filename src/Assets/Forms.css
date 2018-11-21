@@ -1,12 +1,41 @@
+body {
+    background-color: rgb(27, 30, 32);
+}
+
 .App {
-    width: 1200px;
+    max-width: 1200px;
     position: relative;
-    display: flex;
-    flex-direction: column;
+    margin: auto;
+}
+
+.edit-component {
+    display: inline-block;
+}
+
+.form {
+    margin-bottom: 10px;
+}
+
+.form-name {
+    font-size: 30px;
+    color: #ffffff; 
+}
+
+.preview-link {
+    position: relative;
+    display: block;
+    color: #ffffff;
+    background-color: #23272A;
+    box-shadow: 2px 2px 2px black;
+    text-decoration: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
+    width: 100px;
+    border-radius: 5px;
 }
 
 .button-panel-wrapper {
-    width: 600px; 
     margin: 15px auto; 
     position: relative; 
 }
@@ -15,24 +44,24 @@
     padding-left: 10px;
     width: 100px; 
     position: fixed; 
-    margin-left: 900px;
+    margin-left: 600px;
     display: flex;
     flex-direction: column;
 }
 
 .form-contents {
-    position: absolute;
     box-shadow: 2px 2px 2px black;
-    left: 50%;
     width: 600px;
     display: flex;
     flex-direction: column;
+    background-color: #23272A;
 }
 
 .title-object {
     display: flex;
     flex-direction: column;
     padding-bottom: 10px;
+    background-color: #23272A;
 }
 
 .question-object {
@@ -40,25 +69,29 @@
     flex-direction: column;
     padding-bottom: 30px;
     width: 100%;
-    border-top: 1px solid #23272A;
     overflow: hidden;
+    background-color: #23272A;
 }
 
-.title-entry, .description-entry, .question-entry, .other-text {
+.title-entry, .description-entry, .question-entry, .other-text, .checkbox-choice-options, .multiple-choice-options, .dropdown-choice-options, .paragraph-question, .short-answer-question {
+    color: #FFFFFF;
+    background-color: transparent;
     border: 0;
     outline: 0;
 }
 
 .multi-choice-text, .checkbox-choice-text, .dropdown-choice-text {
-    outline: 0; 
+    color: #FFFFFF;
+    outline: 0;
+    border: 2px solid #2C2F33;
     background-color: #99AAB5;
     border-radius: 10px;
     margin-top: 5px;
-    border: 2px inset #2C2F33;
+    background-color: #2C2F33;
 }
 
 .multi-choice-text:focus, .checkbox-choice-text:focus, .dropdown-choice-text:focus {
-    background-color: #7289DA;
+    border: 2px solid lightblue;
 }
 
 .title-entry {
@@ -69,24 +102,31 @@
     font-size: 20px;
 }
 
+.question-and-remove {
+    display: flex;
+    flex-direction: row;
+}
+
+.question-and-bar {
+    flex: 1;
+}
+
 .question-entry {
     font-size: 30px;
+    width: 100%;
 }
 
 .remove-question {
-    position: absolute;
-    left: 93%;
-    height: 5px;
-    width: 5px;
+    flex: 0;
+    font-size: 15px;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    color: white;
 }
 
 .remove-question:hover {
     cursor: pointer;
-}
-
-.required-check {
-    position: absolute;
-    left: 80%;
 }
 
 .required-button:hover {
@@ -105,7 +145,7 @@
   width: 0;
   bottom: 1px; 
   position: absolute;
-  background: blue; 
+  background: #7289DA; 
   transition: 0.3s ease all; 
 }
 .bar:before {

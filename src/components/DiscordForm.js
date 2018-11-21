@@ -71,8 +71,19 @@ class DiscordForm extends Component {
         const path = `/preview/${formId}`;
         return(
             <div className='form'>
-                {name}
-                <Link to={path} target='_blank'>Preview</Link>
+                <div className='form-name'>
+                    {name}
+                </div>
+                <Link className='preview-link' to={path} target='_blank'>Preview</Link>
+                <div className='button-panel-wrapper'>
+                    <div className="button-panel">
+                        <button className='add-short' onClick={this.handleClick}>Add Short</button>
+                        <button className='add-paragraph' onClick={this.handleClick}>Add Paragraph</button>
+                        <button className='add-multi' onClick={this.handleClick}>Add Multi</button>
+                        <button className='add-checkbox' onClick={this.handleClick}>Add Checkbox</button>
+                        <button className='add-dropdown' onClick={this.handleClick}>Add Dropdown</button>
+                    </div>
+                </div>
                 <div className='form-contents'>
                     {order ? order.map((id) => {
                         const element = idToFieldsMap.get(id.toString());
@@ -139,15 +150,6 @@ class DiscordForm extends Component {
                         }
                     })  :
                     null}
-                </div>
-                <div className='button-panel-wrapper'>
-                    <div className="button-panel">
-                        <button className='add-short' onClick={this.handleClick}>Add Short</button>
-                        <button className='add-paragraph' onClick={this.handleClick}>Add Paragraph</button>
-                        <button className='add-multi' onClick={this.handleClick}>Add Multi</button>
-                        <button className='add-checkbox' onClick={this.handleClick}>Add Checkbox</button>
-                        <button className='add-dropdown' onClick={this.handleClick}>Add Dropdown</button>
-                    </div>
                 </div>
             </div>
         )

@@ -7,7 +7,6 @@ export default class MultiResult extends Component {
         for (const [answer, aggregate] of this.props.options.entries()) {
             data.push([answer, aggregate]);
         }
-        console.log(data)
 
         return(
             <div className='multi-result'>

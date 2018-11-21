@@ -20,10 +20,17 @@ export default class ComponentManager extends Component {
             <DiscordForm formId={this.props.match.params} /> 
             : <ResultsSwitch formId={this.props.match.params} />;
         return(
-            <div className='switching-component'>
-            <button className='edit-button' onClick={this.handleEditClick}>Edit</button>
-            <button className='results-button' onClick={this.handleResultsClick}>Results</button>  
-                {renderedComponent}
+            
+            <div className='switching-component'>            
+                {this.state.editing ? 
+                <div className='edit-component'>
+                    <button className='results-button' onClick={this.handleResultsClick}>Results</button>
+                    {renderedComponent}
+                </div> :
+                <div className='edit-component'>
+                    <button className='edit-button' onClick={this.handleEditClick}>Edit</button>
+                    {renderedComponent}
+                </div>}
             </div>
         );
     }
