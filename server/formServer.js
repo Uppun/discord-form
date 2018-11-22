@@ -71,7 +71,7 @@ passport.deserializeUser(function(obj, done) {
 });
 
 app.get('/login', (req, res, next) => {
-    const state = req.query ? req.query.id : null;
+    const state = req.query ? JSON.stringify({id: req.query.id, path: req.query.path}) : null;
     if (state) {
       const authentication = passport.authenticate('discord', {state, scope: SCOPES});
       authentication(req, res, next);
@@ -85,9 +85,14 @@ app.get('/login', (req, res, next) => {
 );
 
 app.get('/auth', passport.authenticate('discord', {failureRedirect: 'http://localhost:3000/'}), (req, res) => {
-  const formId = req.query ? req.query.state : null;
-  if (formId) {
-    res.redirect(`http://localhost:3000/#/preview/${formId}`);
+  let state = null;
+  if (req.query.state) {
+    state = JSON.parse(req.query.state);
+  }
+  const formId = state ? state.id : null;
+  const path = state ? state.path : null;
+  if (formId && path) {
+    res.redirect(`http://localhost:3000/#/${path}/${formId}`);
     return;
   }
   res.redirect('http://localhost:3000/');

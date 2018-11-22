@@ -31,7 +31,9 @@ class DiscordForm extends Component {
                 res.form.name,
                 res.form.order,
                 res.form.objects,
-            )});
+            )}).catch(err => {
+                window.location.href = `http://localhost:5000/login?id=${formId}&path=edit`; 
+            });
     }
 
     handleClick = (event) => {
