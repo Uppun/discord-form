@@ -3,13 +3,27 @@ body {
 }
 
 .App {
-    max-width: 1200px;
     position: relative;
     margin: auto;
 }
 
 .edit-component {
     display: inline-block;
+}
+
+.edit-component, .result-component {
+    max-width: 1200px;
+}
+
+.top-bar {
+    height: 50px;
+    width: 100vw;
+    background-color: #7289DA;
+}
+
+.top-bar-content {
+    display: flex;
+    flex-direction: row;
 }
 
 .form {
@@ -33,6 +47,28 @@ body {
     padding: 10px;
     width: 100px;
     border-radius: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 15px;
+}
+
+.results-button, .edit-button {
+    outline: 0;
+    border: 0;
+    position: relative;
+    display: block;
+    color: #ffffff;
+    background-color: #23272A;
+    box-shadow: 2px 2px 2px black;
+    text-decoration: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
+    width: 100px;
+    border-radius: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 15px;
 }
 
 .button-panel-wrapper {

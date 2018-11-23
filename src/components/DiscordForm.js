@@ -8,8 +8,6 @@ import '../Assets/Forms.css';
 import QuestionTypes from '../Assets/QuestionTypes';
 import Question from './Question';
 import FormActions from '../actions/FormActions';
-import { Link } from 'react-router-dom';
-import middleware from '../middleware';
 
 class DiscordForm extends Component {
 
@@ -24,21 +22,9 @@ class DiscordForm extends Component {
         };
     }
 
-    componentDidMount() {
-        const { formId } = this.props.formId;
-        middleware.getForm(formId).then(res => {
-            FormActions.loadForm(
-                res.form.name,
-                res.form.order,
-                res.form.objects,
-            )}).catch(err => {
-                window.location.href = `http://localhost:5000/login?id=${formId}&path=edit`; 
-            });
-    }
-
     handleClick = (event) => {
         const buttonClass = event.target.className;
-        const { formId } = this.props.formId;
+        const { formId } = this.props;
         
         switch(buttonClass) {
             case 'add-short': {
@@ -70,13 +56,11 @@ class DiscordForm extends Component {
     render() {
         const {order, idToFieldsMap, name} = this.state;
         const {formId}= this.props.formId;
-        const path = `/preview/${formId}`;
         return(
             <div className='form'>
                 <div className='form-name'>
                     {name}
                 </div>
-                <Link className='preview-link' to={path} target='_blank'>Preview</Link>
                 <div className='button-panel-wrapper'>
                     <div className="button-panel">
                         <button className='add-short' onClick={this.handleClick}>Add Short</button>

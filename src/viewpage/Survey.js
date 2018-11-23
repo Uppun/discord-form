@@ -30,7 +30,7 @@ class Survey extends Component {
             res.form.order,
             res.form.objects,
         )).catch(err => {
-            window.location.href = `http://localhost:5000/login?id=${formId}&path=preview`; ;
+            window.location.href = `http://localhost:5000/login?id=${formId}&path=preview`;
         });
     }
 

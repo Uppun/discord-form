@@ -5,9 +5,10 @@ export default class TextResult extends Component {
         const {responses} = this.props;
         return (
             <div className='text-result'>
-                {responses.map((response, index) => {
+                {responses ? responses.map((response, index) => {
                     return <SingleTextBox key={index} user={response.username} response={response.response} />
-                })}
+                }):
+                null}
             </div>
         );
     }

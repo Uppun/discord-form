@@ -23,7 +23,7 @@ export default class ResultsManager extends Component {
     }
 
     componentDidMount() {
-        Middleware.getResults(this.props.formId.formId).then(result => {
+        Middleware.getResults(this.props.formId).then(result => {
             FormActions.setResults(result);
         }).catch(error => {
             FormActions.setResults(null);
@@ -31,7 +31,7 @@ export default class ResultsManager extends Component {
     }
 
     render() {
-        const {formId} = this.props.formId;
+        const {formId} = this.props;
         const renderedComponent = this.state.full ? 
             <FullResults formId={formId} /> 
             : <AggregateResults formId={formId} />;
