@@ -8,7 +8,7 @@ export default class FormCreationPage extends Component {
 
     componentDidMount() {
         Middleware.getForms().then(res => {
-            this.setState({res}); 
+            this.setState(res); 
         }).catch(err => {
             window.location.href = 'http://localhost:5000/login';
         });         
@@ -25,10 +25,10 @@ export default class FormCreationPage extends Component {
     }
 
     render() {
-        const {res} = this.state;
+        const {formsArray} = this.state;
         return(
             <div className='forms-listing'>
-                {res ? res.map((form, index) => {
+                {formsArray ? formsArray.map((form, index) => {
                     const path = `/edit/${form._id}`;
                     return(
                         <div className='form-preview' key={index}>
@@ -41,6 +41,21 @@ export default class FormCreationPage extends Component {
                 null}
                 <input type='text' className='name-box' ref={this.nameBoxRef} placeholder='Enter form name' />
                 <button className='form-create' onClick={this.handleClick}>Create Form</button>
+            </div>
+        )
+    }
+}
+
+class FormCreationTopBar extends Component {
+    render() {
+        const {id, icon} = this.props;
+        const imgSrc = `https://cdn.discordapp.com/avatars/${id}/${icon}.jpg`;
+        return(
+            <div className='form-creation-top-bar'>
+                {id&&icon ? 
+                    <img className='user-icon' src={imgSrc} Alt='icon' /> :
+                    null
+                }
             </div>
         )
     }

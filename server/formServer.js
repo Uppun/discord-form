@@ -116,7 +116,7 @@ app.get('/forms/', (req, res, next) => {
     },
     err => {
       if (!err) {
-        res.json(formsArray);
+        res.json({icon: req.user.avatar, userId, formsArray});
       } else {
         res.status(500);
         res.send('Something went wrong!');
@@ -128,9 +128,10 @@ app.get('/forms/', (req, res, next) => {
 app.get('/forms/:formId', (req, res, next) => {
   const _id = req.params.formId;
   const userId = req.user.id;
+  const userIcon = req.user.avatar;
   db.collection('forms').findOne({_id, userId}, (err, doc) => {
     if (doc) {
-      res.json(doc);
+      res.json({userId, userIcon, doc});
       return;
     } else {
       res.status(404);
@@ -209,6 +210,7 @@ app.post('/results/:formId', (req, res, next) => {
   const _id = req.params.formId;
   const userId = req.user.id;
   const username = req.user.username;
+  const icon = req.user.avatar;
   const submission = req.body;
 
   db.collection('results').findOne({_id}, (err, doc) => {
@@ -217,13 +219,13 @@ app.post('/results/:formId', (req, res, next) => {
       let found = false;
       for (let i = 0; i < results.length; i++) {
         if(results[i].userId == userId) {
-          results[i] = {userId, username, submission};
+          results[i] = {userId, username, icon, submission};
           found = true;
           break;
         }
       }
       if (!found) {
-        results.push({userId, username, submission});
+        results.push({userId, username, icon, submission});
       }
       db.collection('results').updateOne({_id}, {$set: {results}}, (err, result) => {
         if (result.result.ok === 1) {

@@ -23,7 +23,7 @@ body {
 
 .top-bar-content {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
 }
 
 .form {
@@ -35,7 +35,7 @@ body {
     color: #ffffff; 
 }
 
-.preview-link {
+.preview-link, .results-button, .edit-button {
     position: relative;
     display: block;
     color: #ffffff;
@@ -55,20 +55,14 @@ body {
 .results-button, .edit-button {
     outline: 0;
     border: 0;
-    position: relative;
-    display: block;
-    color: #ffffff;
-    background-color: #23272A;
-    box-shadow: 2px 2px 2px black;
-    text-decoration: none;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding: 10px;
-    width: 100px;
-    border-radius: 5px;
-    margin-left: 10px;
-    margin-right: 10px;
-    font-size: 15px;
+}
+
+.user-icon {
+    border-radius: 50%;
+    padding-top: 2px;
+    padding-right: 5px;
+    height: 45px;
+    width: 45px;
 }
 
 .button-panel-wrapper {
