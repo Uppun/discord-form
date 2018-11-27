@@ -12,7 +12,6 @@ function createForm(name) {
 }
 
 function updateForm(formData, formId) {
-    console.log(formData.objects.get('1'))
     return fetch(`http://localhost:5000/forms/${formId}`, {
         method: 'PUT',
         headers: {

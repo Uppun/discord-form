@@ -40,7 +40,9 @@ export default class QuestionObject extends Component {
         }
         return (
             <div className='survey-question-object'>
-                {question}
+                <div className='survey-question-question'>
+                    {question}
+                </div>
                 <div className='survey-question-answers'>
                     {questionAnswers}
                 </div>

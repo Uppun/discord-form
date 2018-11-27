@@ -32,6 +32,10 @@ export default class ComponentManager extends Component {
         this.setState({editing: false});
     }
 
+    handleHomeClick = () => {
+        window.location.href = `http://localhost:3000/`; 
+    }
+
     render() {
         const {formId} = this.props.match.params;
         const {id, icon} = this.state;
@@ -44,12 +48,15 @@ export default class ComponentManager extends Component {
             <div className='switching-component'> 
                 <div className='top-bar'>
                     <div className='top-bar-content'>
-                        <img className='user-icon' src={imgSrc} Alt='icon' />
+                        <img className='user-icon' src={imgSrc} alt='icon' />
                         <Link className='preview-link' to={path} target='_blank'>Preview</Link>
                         {this.state.editing ? 
                             <button className='results-button' onClick={this.handleResultsClick}>Results</button> :
                             <button className='edit-button' onClick={this.handleEditClick}>Edit</button>
                         }
+                    </div>
+                    <div className='home-button-content'>
+                        <button className='home-button' onClick={this.handleHomeClick}>Home</button>
                     </div>
                 </div>      
                 {this.state.editing ? 

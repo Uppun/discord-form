@@ -84,7 +84,9 @@ class CheckboxOption extends Component {
                     checked={checked}
                     onChange={this.handleChange} 
                 />
-                {option}
+                <div className='option-text'>
+                    {option}
+                </div>
             </div>
         )
     }

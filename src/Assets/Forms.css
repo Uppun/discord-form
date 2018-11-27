@@ -19,11 +19,20 @@ body {
     height: 50px;
     width: 100vw;
     background-color: #7289DA;
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 .top-bar-content {
+    flex: .5;
     display: flex;
     flex-direction: row-reverse;
+}
+
+.home-button-content {
+    flex: .5;
+    display: flex;
+    justify-content: right;
 }
 
 .form {
@@ -35,7 +44,7 @@ body {
     color: #ffffff; 
 }
 
-.preview-link, .results-button, .edit-button {
+.preview-link, .results-button, .edit-button, .home-button {
     position: relative;
     display: block;
     color: #ffffff;
@@ -52,7 +61,7 @@ body {
     font-size: 15px;
 }
 
-.results-button, .edit-button {
+.results-button, .edit-button, .home-button {
     outline: 0;
     border: 0;
 }
@@ -90,8 +99,48 @@ body {
 .title-object {
     display: flex;
     flex-direction: column;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
     background-color: #23272A;
+}
+.title-display {
+    color: #FFFFFF;
+    font-size: 40px;
+}
+
+.description-display {
+    color: #FFFFFF;
+    font-size: 20px;
+}
+
+.option-text {
+    color: #ffffff;
+}
+
+.survey-question-object {
+    margin-bottom: 10px;
+    background-color: #23272A;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.survey-question-question {
+    color: #ffffff;
+    font-size: 20px;
+    text-align: left;
+    margin-left: 5px;
+}
+
+.survey-short-answer-entry, .survey-paragraph-entry {
+    width: 90%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.survey-checkbox-choice, .survey-multi-choice, .survey-dropdown-choice-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    text-align: left;
 }
 
 .question-object {
@@ -155,11 +204,7 @@ body {
     color: white;
 }
 
-.remove-question:hover {
-    cursor: pointer;
-}
-
-.required-button:hover {
+.remove-question:hover, .required-button:hover, .home-button:hover, .edit-button:hover, .results-button:hover {
     cursor: pointer;
 }
 
@@ -196,10 +241,14 @@ input:focus + .bar:before, input:focus + .bar:after {
     align-content: left;
 }
 
+.survey-form {
+    max-width: 1200px;
+    display: inline-block;
+}
+
 .survey-contents {
-    position: absolute;
+    margin-top: 10px;
     box-shadow: 2px 2px 2px black;
-    left: 50%;
     width: 600px;
     display: flex;
     flex-direction: column;

@@ -55,7 +55,7 @@ class DiscordForm extends Component {
 
     render() {
         const {order, idToFieldsMap, name} = this.state;
-        const {formId}= this.props.formId;
+        const {formId}= this.props;
         return(
             <div className='form'>
                 <div className='form-name'>

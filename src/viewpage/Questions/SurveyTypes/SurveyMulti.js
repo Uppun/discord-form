@@ -67,7 +67,9 @@ class MultipleChoiceOption extends Component {
                     checked={checked === option ? true : false} 
                     onChange={this.handleChange} 
                 />
-                {option}
+                <div className='option-text'>
+                    {option}
+                </div>
             </div>
         )
     }

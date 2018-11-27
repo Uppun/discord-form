@@ -26,9 +26,9 @@ class Survey extends Component {
     componentDidMount() {
         const { formId } = this.props.match.params;
         middleware.getForm(formId).then(res => FormActions.loadForm(
-            res.form.name,
-            res.form.order,
-            res.form.objects,
+            res.doc.form.name,
+            res.doc.form.order,
+            res.doc.form.objects,
         )).catch(err => {
             window.location.href = `http://localhost:5000/login?id=${formId}&path=preview`;
         });
@@ -40,7 +40,9 @@ class Survey extends Component {
 
         return (
             <div className='survey-form'>
-                {name}
+                <div className='form-name'>
+                    {name}
+                </div>
                 <div className='survey-contents'>
                     <form action={submitUrl} method='post'>
                         {order ? order.map(id => {
