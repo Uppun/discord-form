@@ -5,6 +5,8 @@ import ResultsStore from '../../stores/ResultsStore';
 import {Container} from 'flux/utils';
 import * as ResultComponents from './ResultObjects';
 
+import './Results.css';
+
 class AggregateResults extends Component {
     static getStores() {
         return [FormStore, FormOrderStore, ResultsStore];

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Middleware from '../middleware';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default class FormCreationPage extends Component {
     state = {};
@@ -24,21 +24,28 @@ export default class FormCreationPage extends Component {
         });
     }
 
+    handleFormClick = () => {
+
+    }
+
     render() {
-        const {formsArray} = this.state;
+        const {formsArray, userId, icon} = this.state;
         return(
-            <div className='forms-listing'>
-                {formsArray ? formsArray.map((form, index) => {
-                    const path = `/edit/${form._id}`;
-                    return(
-                        <div className='form-preview' key={index}>
-                            <Link to={path}>
-                                {form.form.name}
-                            </Link>
-                        </div>
-                    )})
-                :
-                null}
+            <div className='form-page'>
+                <FormCreationTopBar id={userId} icon={icon} />
+                <div className='forms-listing'>
+                    {formsArray ? formsArray.map((form, index) => {
+                        const path = `/edit/${form._id}`;
+                        return(
+                            <div className='form-preview' key={index}>
+                                <NavLink to={path} role='button' className='form-link'>
+                                    {form.form.name}
+                                </NavLink>
+                            </div>
+                        )})
+                    :
+                    null}
+                </div>
                 <input type='text' className='name-box' ref={this.nameBoxRef} placeholder='Enter form name' />
                 <button className='form-create' onClick={this.handleClick}>Create Form</button>
             </div>

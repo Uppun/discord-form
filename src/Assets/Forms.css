@@ -29,6 +29,14 @@ body {
     flex-direction: row-reverse;
 }
 
+.form-creation-top-bar {
+    height: 50px;
+    width: 100vw;
+    background-color: #7289DA;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
 .home-button-content {
     flex: .5;
     display: flex;
@@ -259,4 +267,33 @@ input:focus + .bar:before, input:focus + .bar:after {
     width: 100px;
     cursor: pointer;
     left: 35%;
+}
+
+.forms-listing {
+    display: grid;
+    width: 1200px;
+    grid-template-columns: 175px 175px 175px 175px 175px;
+    margin: 100px;
+}
+
+.form-preview {
+    background-color: #23272A;
+    height: 100px;
+    width: 150px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 2px 2px 2px black;
+}
+
+.form-link {
+    padding: 30px;
+}
+
+.form-preview > a {
+    text-decoration: none;
+    color: white;
 }
