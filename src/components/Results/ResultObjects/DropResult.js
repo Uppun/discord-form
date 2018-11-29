@@ -32,10 +32,11 @@ export default class DropResult extends Component {
                             },
                             hAxis: {
                                 gridlines: {
-                                    color: 'white',
+                                    color: '#A9A9A9',
                                 },
+                                baselineColor: 'white',
                                 minorGridlines: {
-                                    color: '#D3D3D3',
+                                    color: '#555555',
                                 },
                                 textStyle: {
                                     color: 'white'
@@ -43,10 +44,11 @@ export default class DropResult extends Component {
                             },
                             vAxis: {
                                 gridlines: {
-                                    color: 'white',
+                                    color: '#A9A9A9',
                                 },
+                                baselineColor: 'white',
                                 minorGridlines: {
-                                    color: '#D3D3D3',
+                                    color: '#555555',
                                 },
                                 textStyle: {
                                     color: 'white'
