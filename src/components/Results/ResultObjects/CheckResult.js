@@ -7,8 +7,7 @@ export default class CheckResult extends Component {
         for (const [answer, aggregate] of this.props.options.entries()) {
             data.push([answer, aggregate]);
         }
-        console.log(data)
-
+        const {question} = this.props;
         return(
             <div className='check-result'>
                 <div className='response-chart'>
@@ -19,6 +18,39 @@ export default class CheckResult extends Component {
                         loader={<div className='loading-result'>Loading Responses...</div>}
                         data={data}
                         legendToggle
+                        options={{
+                            title: question,
+                            titleTextStyle: {
+                                color: 'white',
+                                fontSize: 20,
+                            },
+                            legend: 'none',
+                            backgroundColor: { 
+                                fill:'#2C2F33',
+                            },
+                            hAxis: {
+                                gridlines: {
+                                    color: 'white',
+                                },
+                                minorGridlines: {
+                                    color: 'white',
+                                },
+                                textStyle: {
+                                    color: 'white'
+                                },
+                            },
+                            vAxis: {
+                                gridlines: {
+                                    color: 'white',
+                                },
+                                minorGridlines: {
+                                    color: 'white',
+                                },
+                                textStyle: {
+                                    color: 'white'
+                                },
+                            }
+                        }}
                     />
                 </div>
             </div>

@@ -3,6 +3,7 @@ import FormStore from '../../stores/FormStore';
 import FormOrderStore from '../../stores/FormOrderStore';
 import ResultsStore from '../../stores/ResultsStore';
 import {Container} from 'flux/utils';
+import './Results.css';
 
 class FullResults extends Component {
     static getStores() {
@@ -29,8 +30,12 @@ class FullResults extends Component {
                             fields.push({answer: result.submission[key], question});
                         }
                     }
+                    const imgSrc = `https://cdn.discordapp.com/avatars/${result.userId}/${result.icon}.jpg`;
                     return (
                         <div key={index} className='result-form'>
+                            <div className='result-icon'>
+                                <img className='user-icon' src={imgSrc} alt='icon' /> 
+                            </div>
                             <div className='result-user'>
                                 {result.username}
                             </div>

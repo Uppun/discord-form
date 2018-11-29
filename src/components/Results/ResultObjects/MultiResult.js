@@ -7,7 +7,7 @@ export default class MultiResult extends Component {
         for (const [answer, aggregate] of this.props.options.entries()) {
             data.push([answer, aggregate]);
         }
-
+        const {question} = this.props;
         return(
             <div className='multi-result'>
                 <div className='response-chart'>
@@ -18,6 +18,40 @@ export default class MultiResult extends Component {
                         loader={<div className='loading-result'>Loading Responses...</div>}
                         data={data}
                         legendToggle
+                        backgroundColor='#2C2F33'
+                        options={{
+                            title: question,
+                            titleTextStyle: {
+                                color: 'white',
+                                fontSize: 20,
+                            },
+                            legend: 'none',
+                            backgroundColor: { 
+                                fill:'#2C2F33',
+                            },
+                            hAxis: {
+                                gridlines: {
+                                    color: 'white',
+                                },
+                                minorGridlines: {
+                                    color: 'white',
+                                },
+                                textStyle: {
+                                    color: 'white'
+                                },
+                            },
+                            vAxis: {
+                                gridlines: {
+                                    color: 'white',
+                                },
+                                minorGridlines: {
+                                    color: 'white',
+                                },
+                                textStyle: {
+                                    color: 'white'
+                                },
+                            }
+                        }}
                     />
                 </div>
             </div>

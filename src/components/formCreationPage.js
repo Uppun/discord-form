@@ -60,7 +60,7 @@ class FormCreationTopBar extends Component {
         return(
             <div className='form-creation-top-bar'>
                 {id&&icon ? 
-                    <img className='user-icon' src={imgSrc} Alt='icon' /> :
+                    <img className='user-icon' src={imgSrc} alt='icon' /> :
                     null
                 }
             </div>

@@ -3,6 +3,7 @@ import FullResults from './FullResults';
 import AggregateResults from './Aggregate';
 import FormActions from '../../actions/FormActions';
 import Middleware from '../../middleware';
+import './Results.css';
 
 
 export default class ResultsManager extends Component {
@@ -32,13 +33,16 @@ export default class ResultsManager extends Component {
 
     render() {
         const {formId} = this.props;
-        const renderedComponent = this.state.full ? 
+        const {full} = this.state;
+        const renderedComponent = full ? 
             <FullResults formId={formId} /> 
             : <AggregateResults formId={formId} />;
         return(
             <div className='switching-component'>
-            <button className='full-button' onClick={this.handleFullClick}>Full</button>
-            <button className='aggregate-button' onClick={this.handleAggregateClick}>Aggregate</button>  
+                {full ? 
+                    <button className='aggregate-button' onClick={this.handleAggregateClick}>Aggregate</button> :
+                    <button className='full-button' onClick={this.handleFullClick}>Full</button>  
+                } 
                 {renderedComponent}
             </div>
         );

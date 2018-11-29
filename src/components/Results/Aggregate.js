@@ -68,19 +68,19 @@ class AggregateResults extends Component {
                     if (element) {
                         switch(element.type) {
                             case 'CHECKBOX': {
-                                return <ResultComponents.CheckBox key={id} options={aggResults.get(id.toString())} />;
+                                return <ResultComponents.CheckBox key={id} options={aggResults.get(id.toString())} question={element.question} />;
                             }
                             case 'DROPDOWN': {
-                                return <ResultComponents.DropDown key={id} options={aggResults.get(id.toString())} />;
+                                return <ResultComponents.DropDown key={id} options={aggResults.get(id.toString())} question={element.question} />;
                             }
                             case 'MULTIPLE_CHOICE': {
-                                return <ResultComponents.MultipleChoice key={id} options={aggResults.get(id.toString())} />
+                                return <ResultComponents.MultipleChoice key={id} options={aggResults.get(id.toString())} question={element.question} />
                             }
                             case 'PARAGRAPH': {
-                                return <ResultComponents.TextResult key={id} responses={aggregate.get(id.toString())} />
+                                return <ResultComponents.TextResult key={id} responses={aggregate.get(id.toString())} question={element.question} />
                             }
                             case 'SHORT': {
-                                return <ResultComponents.TextResult key={id} responses={aggregate.get(id.toString())} />
+                                return <ResultComponents.TextResult key={id} responses={aggregate.get(id.toString())} question={element.question} />
                             }
                             default: {
                                 return null;

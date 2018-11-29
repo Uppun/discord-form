@@ -16,6 +16,7 @@ class MultipleChoice extends Component {
     }
 
     handleChange = (event) => {
+        console.log(event.target.value)
         FormActions.updateAnswer(this.props.id, event.target.value);
     }
 
@@ -54,7 +55,7 @@ class MultipleChoiceOption extends Component {
     handleChange = (event) => {
         this.props.onChange(event);
     }
-
+    
     render() {
         const {option, id, checked} = this.props;
         return (
@@ -64,7 +65,7 @@ class MultipleChoiceOption extends Component {
                     className='survey-multi-choice-option' 
                     name={id} 
                     value={option} 
-                    checked={checked === option ? true : false} 
+                    checked={checked == option ? true : false} 
                     onChange={this.handleChange} 
                 />
                 <div className='option-text'>

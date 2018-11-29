@@ -297,3 +297,7 @@ input:focus + .bar:before, input:focus + .bar:after {
     text-decoration: none;
     color: white;
 }
+
+.required-notice {
+    color: red;
+}
