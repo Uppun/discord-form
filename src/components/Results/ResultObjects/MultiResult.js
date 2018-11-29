@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import Chart from 'react-google-charts';
+import '../Results.css';
 
 export default class MultiResult extends Component {
     render() {
-        const data = [['answer', 'aggregate']];
-        for (const [answer, aggregate] of this.props.options.entries()) {
-            data.push([answer, aggregate]);
+        const data = [['answer', 'total']];
+        for (const [answer, total] of this.props.options.entries()) {
+            data.push([answer, total]);
         }
         const {question} = this.props;
+
         return(
             <div className='multi-result'>
                 <div className='response-chart'>
@@ -34,7 +36,7 @@ export default class MultiResult extends Component {
                                     color: 'white',
                                 },
                                 minorGridlines: {
-                                    color: 'white',
+                                    color: '#696969',
                                 },
                                 textStyle: {
                                     color: 'white'
@@ -45,7 +47,7 @@ export default class MultiResult extends Component {
                                     color: 'white',
                                 },
                                 minorGridlines: {
-                                    color: 'white',
+                                    color: '#696969',
                                 },
                                 textStyle: {
                                     color: 'white'

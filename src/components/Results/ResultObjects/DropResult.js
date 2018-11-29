@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Chart from 'react-google-charts';
+import '../Results.css';
 
 export default class DropResult extends Component {
     render() {
@@ -34,7 +35,7 @@ export default class DropResult extends Component {
                                     color: 'white',
                                 },
                                 minorGridlines: {
-                                    color: 'white',
+                                    color: '#D3D3D3',
                                 },
                                 textStyle: {
                                     color: 'white'
@@ -45,7 +46,7 @@ export default class DropResult extends Component {
                                     color: 'white',
                                 },
                                 minorGridlines: {
-                                    color: 'white',
+                                    color: '#D3D3D3',
                                 },
                                 textStyle: {
                                     color: 'white'

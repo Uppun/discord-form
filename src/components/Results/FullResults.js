@@ -34,7 +34,7 @@ class FullResults extends Component {
                     return (
                         <div key={index} className='result-form'>
                             <div className='result-icon'>
-                                <img className='user-icon' src={imgSrc} alt='icon' /> 
+                                <img className='result-icon-image' src={imgSrc} alt='icon' /> 
                             </div>
                             <div className='result-user'>
                                 {result.username}

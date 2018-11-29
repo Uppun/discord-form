@@ -65,7 +65,7 @@ class MultipleChoiceOption extends Component {
                     className='survey-multi-choice-option' 
                     name={id} 
                     value={option} 
-                    checked={checked == option ? true : false} 
+                    checked={checked === option[0] ? true : false} 
                     onChange={this.handleChange} 
                 />
                 <div className='option-text'>

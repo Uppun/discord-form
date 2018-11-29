@@ -24,7 +24,9 @@ class ResultsStore extends ReduceStore {
                                     key, 
                                     aggregate.get(key).push(
                                         {
-                                            username: result.username, 
+                                            username: result.username,
+                                            userId: result.userId,
+                                            icon: result.icon, 
                                             response: result.submission[key],
                                         }
                                     )
@@ -32,12 +34,13 @@ class ResultsStore extends ReduceStore {
                             } else {
                                 aggregate.set(key, [{
                                     username: result.username,
+                                    userId: result.userId,
+                                    icon: result.icon,
                                     response: result.submission[key],
                                 }]);
                             }
                         }
                     }
-
                     return {
                         results,
                         aggregate,

@@ -36,9 +36,9 @@ class AggregateResults extends Component {
                 if (element.type === 'CHECKBOX' || element.type === 'DROPDOWN' || element.type === 'MULTIPLE_CHOICE') {
                     for (const option of element.options) {
                         if (!aggResults.get(id.toString())) {
-                            aggResults.set(id.toString(), new Map([[option, 0]]));
+                            aggResults.set(id.toString(), new Map([[option[0], 0]]));
                         } else {
-                            aggResults.set(id.toString(), aggResults.get(id.toString()).set(option, 0));
+                            aggResults.set(id.toString(), aggResults.get(id.toString()).set(option[0], 0));
                         }
                     }
                 }

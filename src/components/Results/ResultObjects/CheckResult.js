@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Chart from 'react-google-charts';
+import '../Results.css';
 
 export default class CheckResult extends Component {
     render() {
@@ -33,7 +34,7 @@ export default class CheckResult extends Component {
                                     color: 'white',
                                 },
                                 minorGridlines: {
-                                    color: 'white',
+                                    color: '#696969',
                                 },
                                 textStyle: {
                                     color: 'white'
@@ -44,7 +45,7 @@ export default class CheckResult extends Component {
                                     color: 'white',
                                 },
                                 minorGridlines: {
-                                    color: 'white',
+                                    color: '#696969',
                                 },
                                 textStyle: {
                                     color: 'white'
