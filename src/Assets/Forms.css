@@ -15,7 +15,7 @@ body {
     max-width: 1200px;
 }
 
-.top-bar {
+.top-bar, .survey-top-bar {
     height: 50px;
     width: 100vw;
     background-color: #7289DA;
@@ -23,7 +23,7 @@ body {
     flex-direction: row-reverse;
 }
 
-.top-bar-content {
+.top-bar-content, .survey-top-bar-content {
     flex: .5;
     display: flex;
     flex-direction: row-reverse;

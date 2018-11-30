@@ -11,12 +11,14 @@ import middleware from '../middleware';
 import FormActions from '../actions/FormActions';
 
 class Survey extends Component {
+    state = {};
     static getStores() {
         return [FormStore, FormOrderStore, AnswerStore];
     }
     
     static calculateState(prevState) {
         return {
+            ...prevState,
             ...FormOrderStore.getState(),
             ...FormStore.getState(),
             ...AnswerStore.getState(),
@@ -25,92 +27,121 @@ class Survey extends Component {
 
     componentDidMount() {
         const { formId } = this.props.match.params;
-        middleware.getForm(formId).then(res => FormActions.loadForm(
+        middleware.getForm(formId).then(res => {
+            this.setState({icon: res.userIcon, id: res.userId});
+            FormActions.loadForm(
             res.doc.form.name,
             res.doc.form.order,
             res.doc.form.objects,
-        )).catch(err => {
+        )}).catch(err => {
             window.location.href = `http://localhost:5000/login?id=${formId}&path=preview`;
         });
     }
 
     render() {
-        const {order, idToFieldsMap, name, canSubmit} = this.state;
+        const {order, idToFieldsMap, name, canSubmit, icon, id} = this.state;
         const submitUrl = `http://localhost:5000/results/${this.props.match.params.formId}`;
 
         return (
-            <div className='survey-form'>
-                <div className='form-name'>
-                    {name}
+            <div className='survey-containter'>
+                <SurveyTopBar id={id} icon={icon} />
+                <div className='survey-form'>
+                    <div className='form-name'>
+                        {name}
+                    </div>
+                    <div className='survey-contents'>
+                        <form action={submitUrl} method='post'>
+                            {order ? order.map(id => {
+                                const element = idToFieldsMap.get(id.toString());
+                                switch(element.type) {
+                                    case QuestionTypes.TITLE: {
+                                        return <SurveyTitle key={id} id={id} title={element.title} description={element.description} />
+                                    }
+                                    case QuestionTypes.SHORT || QuestionTypes.PARAGRAPH: {
+                                        return <SurveyQuestion 
+                                            key={id} 
+                                            id={id} 
+                                            question={element.question} 
+                                            format={element.type}
+                                            required={element.required} 
+                                        />
+                                    }
+                                    case QuestionTypes.PARAGRAPH: {
+                                        return <SurveyQuestion 
+                                            key={id} 
+                                            id={id} 
+                                            question={element.question} 
+                                            format={element.type}
+                                            required={element.required}  
+                                        />
+                                    }
+                                    case QuestionTypes.MULTIPLE_CHOICE: {
+                                        return <SurveyQuestion 
+                                            key={id} 
+                                            id={id} 
+                                            question={element.question} 
+                                            options={element.options} 
+                                            otherNotSet={element.otherNotSet} 
+                                            format={element.type} 
+                                            required={element.required} 
+                                        />
+                                    }
+                                    case QuestionTypes.CHECKBOX: { 
+                                        return <SurveyQuestion 
+                                            key={id} 
+                                            id={id} 
+                                            question={element.question} 
+                                            options={element.options} 
+                                            otherNotSet={element.otherNotSet} 
+                                            format={element.type}
+                                            required={element.required} 
+                                        />
+                                    }
+                                    case QuestionTypes.DROPDOWN: {
+                                        return <SurveyQuestion 
+                                            key={id} 
+                                            id={id} 
+                                            question={element.question} 
+                                            options={element.options} 
+                                            format={element.type} 
+                                            required={element.required} 
+                                        />
+                                    }
+                                    default: {
+                                        return null;
+                                    }
+                                }
+                            }) :
+                            null}
+                            <div>
+                                {canSubmit ? <input type='submit' value='Submit' /> : <input type='submit' value='Submit' disabled />}
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div className='survey-contents'>
-                    <form action={submitUrl} method='post'>
-                        {order ? order.map(id => {
-                            const element = idToFieldsMap.get(id.toString());
-                            switch(element.type) {
-                                case QuestionTypes.TITLE: {
-                                    return <SurveyTitle key={id} id={id} title={element.title} description={element.description} />
-                                }
-                                case QuestionTypes.SHORT || QuestionTypes.PARAGRAPH: {
-                                    return <SurveyQuestion 
-                                        key={id} 
-                                        id={id} 
-                                        question={element.question} 
-                                        format={element.type}
-                                        required={element.required} 
-                                    />
-                                }
-                                case QuestionTypes.PARAGRAPH: {
-                                    return <SurveyQuestion 
-                                        key={id} 
-                                        id={id} 
-                                        question={element.question} 
-                                        format={element.type}
-                                        required={element.required}  
-                                    />
-                                }
-                                case QuestionTypes.MULTIPLE_CHOICE: {
-                                    return <SurveyQuestion 
-                                        key={id} 
-                                        id={id} 
-                                        question={element.question} 
-                                        options={element.options} 
-                                        otherNotSet={element.otherNotSet} 
-                                        format={element.type} 
-                                        required={element.required} 
-                                    />
-                                }
-                                case QuestionTypes.CHECKBOX: { 
-                                    return <SurveyQuestion 
-                                        key={id} 
-                                        id={id} 
-                                        question={element.question} 
-                                        options={element.options} 
-                                        otherNotSet={element.otherNotSet} 
-                                        format={element.type}
-                                        required={element.required} 
-                                    />
-                                }
-                                case QuestionTypes.DROPDOWN: {
-                                    return <SurveyQuestion 
-                                        key={id} 
-                                        id={id} 
-                                        question={element.question} 
-                                        options={element.options} 
-                                        format={element.type} 
-                                        required={element.required} 
-                                    />
-                                }
-                                default: {
-                                    return null;
-                                }
-                            }
-                        }) :
-                        null}
-                        <div>
-                            {canSubmit ? <input type='submit' value='Submit' /> : <input type='submit' value='Submit' disabled />}
-                        </div>
-                    </form>
+            </div>
+        )
+    }
+}
+
+class SurveyTopBar extends Component {
+    handleHomeClick = () => {
+        window.location.href = `http://localhost:3000/`; 
+    }
+
+    render() {
+        const {id, icon} = this.props;
+        const imgSrc = `https://cdn.discordapp.com/avatars/${id}/${icon}.jpg`;
+        return(
+            <div className='survey-top-bar'>
+                <div className='survey-top-bar-content'>
+                    {id&&icon ? 
+                        <img className='user-icon' src={imgSrc} alt='icon' /> :
+                        null
+                    }
+                </div>
+                <div className='home-button-content'>
+                        <button className='home-button' onClick={this.handleHomeClick}>Home</button>
                 </div>
             </div>
         )

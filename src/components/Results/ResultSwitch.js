@@ -24,10 +24,11 @@ export default class ResultsManager extends Component {
     }
 
     componentDidMount() {
-        Middleware.getResults(this.props.formId).then(result => {
+        const {formId} = this.props;
+        Middleware.getResults(formId).then(result => {
             FormActions.setResults(result);
         }).catch(error => {
-            FormActions.setResults(null);
+            window.location.href = `http://localhost:5000/login?id=${formId}&path=edit`; 
         });
     }
 

@@ -14,7 +14,7 @@ export default class ComponentManager extends Component {
     componentDidMount() {
         const { formId } = this.props.match.params;
         middleware.getForm(formId).then(res => {
-            this.setState({...this.state, icon: res.userIcon, id: res.userId});
+            this.setState({icon: res.userIcon, id: res.userId});
             FormActions.loadForm(
                 res.doc.form.name,
                 res.doc.form.order,
