@@ -69,6 +69,39 @@ body {
     font-size: 15px;
 }
 
+.add-short, .add-paragraph, .add-checkbox, .add-dropdown, .add-multi {
+    background-color: #23272A;
+    outline: none;
+    border: none;
+    margin-bottom: 5px;
+    color: #ffffff;
+    box-shadow: 2px 2px 2px black;
+}
+
+.submit-active, .submit-disabled {
+    height: 25px;
+    width: 75px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #23272A;
+    outline: none;
+    border: none; 
+    color: #ffffff;
+    box-shadow: 2px 2px 2px black;
+}
+
+.submit-active:hover {
+    cursor: pointer;
+}
+
+.submit-disabled {
+    color: gray;
+}
+
+.add-short:hover, .add-paragraph:hover, .add-checkbox:hover, .add-dropdown:hover, .add-multi:hover {
+    cursor: pointer;
+}
+
 .results-button, .edit-button, .home-button {
     outline: 0;
     border: 0;
@@ -125,7 +158,6 @@ body {
 }
 
 .survey-question-object {
-    margin-bottom: 10px;
     background-color: #23272A;
     padding-top: 10px;
     padding-bottom: 10px;

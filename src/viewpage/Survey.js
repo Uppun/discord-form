@@ -114,7 +114,9 @@ class Survey extends Component {
                             }) :
                             null}
                             <div>
-                                {canSubmit ? <input type='submit' value='Submit' /> : <input type='submit' value='Submit' disabled />}
+                                {canSubmit ? <input className='submit-active' type='submit' value='Submit' /> : 
+                                            <input className='submit-disabled' type='submit' value='Submit' disabled />
+                                }
                             </div>
                         </form>
                     </div>
