@@ -58,7 +58,7 @@ class DiscordForm extends Component {
         const {formId}= this.props;
         return(
             <div className='form'>
-                <div className='form-name'>
+                <div className='header'>
                     {name}
                 </div>
                 <div className='button-panel-wrapper'>

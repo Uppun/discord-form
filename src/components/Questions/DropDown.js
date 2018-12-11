@@ -23,7 +23,7 @@ export default class dropdown extends Component {
     render() {
         const {options, id, required} = this.props;
         return(
-            <div className='dropdown-choice-options'>
+            <div className='options'>
                 {options.map((option, index) => {
                     return(
                         <DropDownOption key={index} index={index} option={option} id={id} onChange={this.handleOptionChange} />
@@ -56,8 +56,11 @@ class DropDownOption extends Component {
     render() {
         const {option} = this.props;
         return (
-            <div className='dropdown-choice'>
-                <input type='text' className='dropdown-choice-text' value={option} onChange={this.handleChange} />
+            <div className='option'>
+                <div>
+                    <input type='text' className='option-text' value={option} onChange={this.handleChange} />
+                    <span className='bar' />
+                </div>
                 <span className="remove-option" onClick={this.handleRemoveClick}>&times;</span>
             </div>
         )

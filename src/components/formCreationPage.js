@@ -14,7 +14,8 @@ export default class FormCreationPage extends Component {
         });         
     }
 
-    handleClick = () => {
+    handleSumbit = (event) => {
+        event.preventDefault();
         const name = this.nameBoxRef.current.value;
         const formName = name ? {name} : {name: 'Untitled form'};
         Middleware.createForm(formName).then(res => {
@@ -24,31 +25,35 @@ export default class FormCreationPage extends Component {
         });
     }
 
-    handleFormClick = () => {
-
-    }
 
     render() {
         const {formsArray, userId, icon} = this.state;
         return(
-            <div className='form-page'>
+            <React.Fragment>
                 <FormCreationTopBar id={userId} icon={icon} />
-                <div className='forms-listing'>
-                    {formsArray ? formsArray.map((form, index) => {
-                        const path = `/edit/${form._id}`;
-                        return(
-                            <div className='form-preview' key={index}>
-                                <NavLink to={path} role='button' className='form-link'>
-                                    {form.form.name}
-                                </NavLink>
-                            </div>
-                        )})
-                    :
-                    null}
+                <div className='content-wrapper'>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className='header'>Create a form</div>
+                        <input type='text' className='name-box' ref={this.nameBoxRef} placeholder='Enter form name' />
+                        <button type='submit' className='form-create'>Create Form</button>
+                    </form>
+                    <div className='form-page'>
+                        <div className='forms-listing'>
+                            {formsArray ? formsArray.map((form, index) => {
+                                const path = `/edit/${form._id}`;
+                                return(
+                                    <div className='form-preview' key={index}>
+                                        <NavLink to={path} role='button' className='form-link'>
+                                            {form.form.name}
+                                        </NavLink>
+                                    </div>
+                                )})
+                            :
+                            null}
+                        </div>
+                    </div>
                 </div>
-                <input type='text' className='name-box' ref={this.nameBoxRef} placeholder='Enter form name' />
-                <button className='form-create' onClick={this.handleClick}>Create Form</button>
-            </div>
+            </React.Fragment>
         )
     }
 }
@@ -58,7 +63,7 @@ class FormCreationTopBar extends Component {
         const {id, icon} = this.props;
         const imgSrc = `https://cdn.discordapp.com/avatars/${id}/${icon}.jpg`;
         return(
-            <div className='form-creation-top-bar'>
+            <div className='top-bar'>
                 {id&&icon ? 
                     <img className='user-icon' src={imgSrc} alt='icon' /> :
                     null

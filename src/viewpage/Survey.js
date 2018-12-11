@@ -43,85 +43,87 @@ class Survey extends Component {
         const submitUrl = `http://localhost:5000/results/${this.props.match.params.formId}`;
 
         return (
-            <div className='survey-containter'>
+            <React.Fragment>
                 <SurveyTopBar id={id} icon={icon} />
-                <div className='survey-form'>
-                    <div className='form-name'>
-                        {name}
-                    </div>
-                    <div className='survey-contents'>
-                        <form action={submitUrl} method='post'>
-                            {order ? order.map(id => {
-                                const element = idToFieldsMap.get(id.toString());
-                                switch(element.type) {
-                                    case QuestionTypes.TITLE: {
-                                        return <SurveyTitle key={id} id={id} title={element.title} description={element.description} />
+                <div className='content-wrapper'>
+                    <div className='survey-form'>
+                        <div className='form-name'>
+                            {name}
+                        </div>
+                        <div className='survey-contents'>
+                            <form action={submitUrl} method='post'>
+                                {order ? order.map(id => {
+                                    const element = idToFieldsMap.get(id.toString());
+                                    switch(element.type) {
+                                        case QuestionTypes.TITLE: {
+                                            return <SurveyTitle key={id} id={id} title={element.title} description={element.description} />
+                                        }
+                                        case QuestionTypes.SHORT || QuestionTypes.PARAGRAPH: {
+                                            return <SurveyQuestion 
+                                                key={id} 
+                                                id={id} 
+                                                question={element.question} 
+                                                format={element.type}
+                                                required={element.required} 
+                                            />
+                                        }
+                                        case QuestionTypes.PARAGRAPH: {
+                                            return <SurveyQuestion 
+                                                key={id} 
+                                                id={id} 
+                                                question={element.question} 
+                                                format={element.type}
+                                                required={element.required}  
+                                            />
+                                        }
+                                        case QuestionTypes.MULTIPLE_CHOICE: {
+                                            return <SurveyQuestion 
+                                                key={id} 
+                                                id={id} 
+                                                question={element.question} 
+                                                options={element.options} 
+                                                otherNotSet={element.otherNotSet} 
+                                                format={element.type} 
+                                                required={element.required} 
+                                            />
+                                        }
+                                        case QuestionTypes.CHECKBOX: { 
+                                            return <SurveyQuestion 
+                                                key={id} 
+                                                id={id} 
+                                                question={element.question} 
+                                                options={element.options} 
+                                                otherNotSet={element.otherNotSet} 
+                                                format={element.type}
+                                                required={element.required} 
+                                            />
+                                        }
+                                        case QuestionTypes.DROPDOWN: {
+                                            return <SurveyQuestion 
+                                                key={id} 
+                                                id={id} 
+                                                question={element.question} 
+                                                options={element.options} 
+                                                format={element.type} 
+                                                required={element.required} 
+                                            />
+                                        }
+                                        default: {
+                                            return null;
+                                        }
                                     }
-                                    case QuestionTypes.SHORT || QuestionTypes.PARAGRAPH: {
-                                        return <SurveyQuestion 
-                                            key={id} 
-                                            id={id} 
-                                            question={element.question} 
-                                            format={element.type}
-                                            required={element.required} 
-                                        />
+                                }) :
+                                null}
+                                <div>
+                                    {canSubmit ? <input className='submit-active' type='submit' value='Submit' /> : 
+                                                <input className='submit-disabled' type='submit' value='Submit' disabled />
                                     }
-                                    case QuestionTypes.PARAGRAPH: {
-                                        return <SurveyQuestion 
-                                            key={id} 
-                                            id={id} 
-                                            question={element.question} 
-                                            format={element.type}
-                                            required={element.required}  
-                                        />
-                                    }
-                                    case QuestionTypes.MULTIPLE_CHOICE: {
-                                        return <SurveyQuestion 
-                                            key={id} 
-                                            id={id} 
-                                            question={element.question} 
-                                            options={element.options} 
-                                            otherNotSet={element.otherNotSet} 
-                                            format={element.type} 
-                                            required={element.required} 
-                                        />
-                                    }
-                                    case QuestionTypes.CHECKBOX: { 
-                                        return <SurveyQuestion 
-                                            key={id} 
-                                            id={id} 
-                                            question={element.question} 
-                                            options={element.options} 
-                                            otherNotSet={element.otherNotSet} 
-                                            format={element.type}
-                                            required={element.required} 
-                                        />
-                                    }
-                                    case QuestionTypes.DROPDOWN: {
-                                        return <SurveyQuestion 
-                                            key={id} 
-                                            id={id} 
-                                            question={element.question} 
-                                            options={element.options} 
-                                            format={element.type} 
-                                            required={element.required} 
-                                        />
-                                    }
-                                    default: {
-                                        return null;
-                                    }
-                                }
-                            }) :
-                            null}
-                            <div>
-                                {canSubmit ? <input className='submit-active' type='submit' value='Submit' /> : 
-                                            <input className='submit-disabled' type='submit' value='Submit' disabled />
-                                }
-                            </div>
-                        </form>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </React.Fragment>
         )
     }
 }

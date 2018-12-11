@@ -33,7 +33,7 @@ export default class CheckBox extends Component {
     render() {
         const {options, otherNotSet, id, formId, required} = this.props;
         return(
-            <div className='checkbox-choice-options'>
+            <div className='options'>
                 {options.map((option, index) => {
                     return(
                         <CheckBoxOption key={index} index={index} option={option} id={id} onChange={this.handleOptionChange} formId={formId} />
@@ -43,14 +43,14 @@ export default class CheckBox extends Component {
                         <button onClick={this.handleOtherClick}>Add other</button> or <button onClick={this.handleAnotherClick}>Add another</button>
                     </div>
                     :
-                    <div className='other-and-another'>
-                        <div className='other-grouping'>
+                    <React.Fragment>
+                        <div className='option'>
                             <input type='checkbox' className='checkbox-choice-other' disabled />
                             <input type='text' className='other-text' defaultValue='Other' readOnly />
                             <span className="remove-option" onClick={this.handleOtherRemoveClick}>&times;</span>
                         </div>
                         <div className='another' onClick={this.handleAnotherClick}>Add Another</div>
-                    </div>
+                    </React.Fragment>
                     }
                     <div className='required-check'>
                         <input type='checkbox' className='required-button' checked={required} onChange={this.handleRequireChange} /> Required
@@ -77,9 +77,12 @@ class CheckBoxOption extends Component {
     render() {
         const {option} = this.props;
         return (
-            <div className='checkbox-choice'>
+            <div className='option'>
                 <input type='checkbox' className='checkbox-choice-option' disabled={true} />
-                <input type='text' className='checkbox-choice-text' value={option} onChange={this.handleChange} />
+                <div>
+                    <input type='text' className='option-text' value={option} onChange={this.handleChange} />
+                    <span className='bar' />
+                </div>
                 <span className="remove-option" onClick={this.handleRemoveClick}>&times;</span>
             </div>
         )

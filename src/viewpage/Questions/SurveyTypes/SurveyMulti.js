@@ -16,7 +16,6 @@ class MultipleChoice extends Component {
     }
 
     handleChange = (event) => {
-        console.log(event.target.value)
         FormActions.updateAnswer(this.props.id, event.target.value);
     }
 
@@ -34,7 +33,7 @@ class MultipleChoice extends Component {
                 {otherNotSet ? 
                     null
                     :
-                    <div className='other'>
+                    <label className='other'>
                         <input 
                             type='radio' 
                             className='multi-choice-other' 
@@ -44,7 +43,7 @@ class MultipleChoice extends Component {
                             onChange={this.handleChange} 
                         />
                         Other
-                    </div>
+                    </label>
                     }
             </div>
         )
@@ -59,19 +58,19 @@ class MultipleChoiceOption extends Component {
     render() {
         const {option, id, checked} = this.props;
         return (
-            <div className='survey-multi-choice'>
+            <label className='survey-multi-choice'>
                 <input 
                     type='radio' 
                     className='survey-multi-choice-option' 
                     name={id} 
                     value={option} 
-                    checked={checked === option[0] ? true : false} 
+                    checked={checked === option ? true : false} 
                     onChange={this.handleChange} 
                 />
                 <div className='option-text'>
                     {option}
                 </div>
-            </div>
+            </label>
         )
     }
 }

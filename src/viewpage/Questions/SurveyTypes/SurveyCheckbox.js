@@ -43,14 +43,14 @@ class Checkbox extends Component {
         return(
             <div className='survey-multiple-choice-options'>
                 {options.map((option, index) => {
-                    const checked = Answers ? Answers.includes(option[0]) : false;
+                    const checked = Answers ? Answers.includes(option) : false;
                     return(
                         <CheckboxOption key={index} option={option} id={id} checked={checked} onChange={this.handleChange} index={index} />
                     )})}
                 {otherNotSet ? 
                     null
                     :
-                    <div className='other'>
+                    <label className='other'>
                         <input 
                             type='checkbox' 
                             className='checkbox-choice-other' 
@@ -60,7 +60,7 @@ class Checkbox extends Component {
                             onChange={this.handleChange} 
                         />
                         Other
-                    </div>
+                    </label>
                     }
             </div>
         )
@@ -75,7 +75,7 @@ class CheckboxOption extends Component {
     render() {
         const {option, id, checked} = this.props;
         return (
-            <div className='survey-checkbox-choice'>
+            <label className='survey-checkbox-choice'>
                 <input 
                     type='checkbox' 
                     className='survey-checkbox-choice-option' 
@@ -87,7 +87,7 @@ class CheckboxOption extends Component {
                 <div className='option-text'>
                     {option}
                 </div>
-            </div>
+            </label>
         )
     }
 }

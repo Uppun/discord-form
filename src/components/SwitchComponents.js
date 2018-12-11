@@ -45,7 +45,7 @@ export default class ComponentManager extends Component {
             : <ResultsSwitch formId={formId} />;
         const imgSrc = `https://cdn.discordapp.com/avatars/${id}/${icon}.jpg`;
         return(
-            <div className='switching-component'> 
+            <React.Fragment> 
                 <div className='top-bar'>
                     <div className='top-bar-content'>
                         <img className='user-icon' src={imgSrc} alt='icon' />
@@ -60,13 +60,13 @@ export default class ComponentManager extends Component {
                     </div>
                 </div>      
                 {this.state.editing ? 
-                <div className='edit-component'>
+                <div className='content-wrapper'>
                     {renderedComponent}
                 </div> :
-                <div className='result-component'>
+                <div className='content-wrapper'>
                     {renderedComponent}
                 </div>}    
-            </div>
+            </React.Fragment>
         );
     }
 } 

@@ -24,10 +24,15 @@ export default class MultipleChoice extends Component {
         FormActions.setRequired(id, formId);
     }
 
+    handleOtherRemoveClick = () => {
+        const {id, formId} = this.props;
+        FormActions.deleteOther(id, formId);
+    }
+
     render() {
         const {options, otherNotSet, id, required} = this.props;
         return(
-            <div className='multiple-choice-options'>
+            <div className='options'>
                 {options.map((option, index) => {
                     return(
                         <MultipleChoiceOption key={index} index={index} option={option} id={id} onChange={this.handleOptionChange} />
@@ -37,14 +42,14 @@ export default class MultipleChoice extends Component {
                         <button onClick={this.handleOtherClick}>Add other</button> or <button onClick={this.handleAnotherClick}>Add another</button>
                     </div>
                     :
-                    <div className='other-and-another'>
-                        <div className='other-grouping'>
-                            <input type='checkbox' className='checkbox-choice-other' disabled />
+                    <React.Fragment>
+                        <div className='option'>
+                            <input type='radio' className='checkbox-choice-other' disabled />
                             <input type='text' className='other-text' defaultValue='Other' readOnly />
                             <span className="remove-option" onClick={this.handleOtherRemoveClick}>&times;</span>
                         </div>
                         <div className='another' onClick={this.handleAnotherClick}>Add Another</div>
-                    </div>
+                    </React.Fragment>
                     }
                     <div className='required-check'>
                         <input type='checkbox' className='required-button' checked={required} onChange={this.handleRequireChange} /> Required
@@ -71,9 +76,12 @@ class MultipleChoiceOption extends Component {
     render() {
         const {option} = this.props;
         return (
-            <div className='multi-choice'>
+            <div className='option'>
                 <input type='radio' className='multi-choice-option' disabled />
-                <input type='text' className='multi-choice-text' value={option} onChange={this.handleChange} />
+                <div>
+                    <input type='text' className='option-text' value={option} onChange={this.handleChange} />
+                    <span className='bar' />
+                </div>
                 <span className="remove-option" onClick={this.handleRemoveClick}>&times;</span>
             </div>
         )
