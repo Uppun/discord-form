@@ -144,10 +144,13 @@ app.get('/forms/:formId', (req, res, next) => {
 app.post('/forms/', asyncMiddleware(async (req, res, next) => {
   const _id = uuidv4();
   const name = req.body.name;
+  const date = req.body.date;
   const userId = req.user.id;
+  console.log(req.body)
   const form = {
     order: [0],
-    name, 
+    name,
+    date, 
     objects: {
       0: {
         type: 'TITLE',

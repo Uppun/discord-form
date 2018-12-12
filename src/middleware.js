@@ -1,11 +1,11 @@
-function createForm(name) {
+function createForm(name, date) {
     return fetch(`http://localhost:5000/forms/`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json; charset=utf-8",
         },
         mode: 'cors',
-        body: JSON.stringify(name),
+        body: JSON.stringify({name, date}),
         credentials: 'include',
     })
     .then(response => response.json())

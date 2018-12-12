@@ -15,10 +15,13 @@ export default class FormCreationPage extends Component {
     }
 
     handleSumbit = (event) => {
+        console.log('wew')
         event.preventDefault();
         const name = this.nameBoxRef.current.value;
         const formName = name ? {name} : {name: 'Untitled form'};
-        Middleware.createForm(formName).then(res => {
+        const date = new Date();
+        const creationDate = (date.getMonth() + 1) + '/' + (date.getDate()) + '/' + (date.getFullYear());
+        Middleware.createForm(formName, creationDate).then(res => {
             window.location.href = `http://localhost:3000/#/edit/${res}`;
         }).catch(err => {
             console.log(err);
@@ -35,7 +38,7 @@ export default class FormCreationPage extends Component {
                     <form onSubmit={this.handleSubmit}>
                         <div className='header'>Create a form</div>
                         <input type='text' className='name-box' ref={this.nameBoxRef} placeholder='Enter form name' />
-                        <button type='submit' className='form-create'>Create Form</button>
+                        <input type='submit' className='form-create' value='Create Form' />
                     </form>
                     <div className='form-page'>
                         <div className='forms-listing'>
@@ -45,6 +48,7 @@ export default class FormCreationPage extends Component {
                                     <div className='form-preview' key={index}>
                                         <NavLink to={path} role='button' className='form-link'>
                                             {form.form.name}
+                                            {form.form.date}
                                         </NavLink>
                                     </div>
                                 )})
