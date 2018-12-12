@@ -107,23 +107,18 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/forms/', (req, res, next) => {
+app.get('/forms/', asyncMiddleware(async (req, res, next) => {
   const userId = req.user.id;
-  db.collection('forms').find({userId}, (err, docs) => {
-    const formsArray = [];
-    docs.forEach(doc => {
-      formsArray.push(doc);
-    },
-    err => {
-      if (!err) {
-        res.json({icon: req.user.avatar, userId, formsArray});
-      } else {
-        res.status(500);
-        res.send('Something went wrong!');
-      }
-    })
-  })
-});
+
+  const forms = await db.collection('forms').find({userId}).toArray();
+  const formsAndResultsArray = [];
+  for (const form of forms) {
+    const results = await db.collection('results').findOne({_id: form._id, userId});
+    formsAndResultsArray.push({form, results: results.results.length});
+  }
+
+  res.json({icon: req.user.avatar, userId, formsAndResultsArray});
+}));
 
 app.get('/forms/:formId', (req, res, next) => {
   const _id = req.params.formId;
@@ -146,7 +141,6 @@ app.post('/forms/', asyncMiddleware(async (req, res, next) => {
   const name = req.body.name;
   const date = req.body.date;
   const userId = req.user.id;
-  console.log(req.body)
   const form = {
     order: [0],
     name,

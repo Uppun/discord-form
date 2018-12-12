@@ -10,15 +10,15 @@ export default class FormCreationPage extends Component {
         Middleware.getForms().then(res => {
             this.setState(res); 
         }).catch(err => {
+            console.log(err)
             window.location.href = 'http://localhost:5000/login';
         });         
     }
 
-    handleSumbit = (event) => {
-        console.log('wew')
+    handleSubmit = (event) => {
         event.preventDefault();
         const name = this.nameBoxRef.current.value;
-        const formName = name ? {name} : {name: 'Untitled form'};
+        const formName = name ? name : 'Untitled form';
         const date = new Date();
         const creationDate = (date.getMonth() + 1) + '/' + (date.getDate()) + '/' + (date.getFullYear());
         Middleware.createForm(formName, creationDate).then(res => {
@@ -30,7 +30,7 @@ export default class FormCreationPage extends Component {
 
 
     render() {
-        const {formsArray, userId, icon} = this.state;
+        const {formsAndResultsArray, userId, icon} = this.state;
         return(
             <React.Fragment>
                 <FormCreationTopBar id={userId} icon={icon} />
@@ -42,13 +42,32 @@ export default class FormCreationPage extends Component {
                     </form>
                     <div className='form-page'>
                         <div className='forms-listing'>
-                            {formsArray ? formsArray.map((form, index) => {
+                            {formsAndResultsArray ? <div className='header'>Choose a form</div> : null}
+                            <div className='form-titles'>
+                                <div className='display'>
+                                    Name
+                                </div>
+                                <div className='display'>
+                                    Date
+                                </div>
+                                <div className='display'>
+                                    Submissions
+                                </div>
+                            </div>
+                            {formsAndResultsArray ? formsAndResultsArray.map(({form, results}, index) => {
                                 const path = `/edit/${form._id}`;
                                 return(
                                     <div className='form-preview' key={index}>
                                         <NavLink to={path} role='button' className='form-link'>
-                                            {form.form.name}
-                                            {form.form.date}
+                                            <div className='preview name'>
+                                                {form.form.name}
+                                            </div>
+                                            <div className='preview date'>
+                                                {form.form.date}
+                                            </div>
+                                            <div className='preview results'>
+                                                {results}
+                                            </div>
                                         </NavLink>
                                     </div>
                                 )})

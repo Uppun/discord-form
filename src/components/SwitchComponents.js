@@ -17,6 +17,7 @@ export default class ComponentManager extends Component {
             this.setState({icon: res.userIcon, id: res.userId});
             FormActions.loadForm(
                 res.doc.form.name,
+                res.doc.form.date,
                 res.doc.form.order,
                 res.doc.form.objects,
             )}).catch(err => {

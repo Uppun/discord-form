@@ -75,12 +75,13 @@ export default {
             formId,
         });
     },
-    loadForm(name, order, objects) {
+    loadForm(name, date, order, objects) {
         Dispatcher.dispatch({
             type: ActionTypes.LOADFORM,
             order,
             objects,
             name,
+            date,
         });
     },
     setResults(results) {

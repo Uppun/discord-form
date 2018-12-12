@@ -175,6 +175,7 @@ class FormStore extends ReduceStore {
                 return {
                     ...state,
                     name: action.name,
+                    date: action.date,
                     idToFieldsMap: Map(action.objects),
                 }
             }

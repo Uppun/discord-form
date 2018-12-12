@@ -53,7 +53,34 @@ body {
 
 .header {
     font-size: 30px;
+    margin-bottom: 10px;
     color: #ffffff; 
+}
+
+.form-create {
+    background-color: #23272A;
+    box-shadow: 2px 2px 2px black;
+    color: #ffffff;
+    border: 0;
+    width: 100px;
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.form-create:hover {
+    cursor: pointer;
+}
+
+.name-box {
+    box-shadow: 2px 2px 2px black;
+    padding: 5px;
+    border: 0;
+    height: 15px;
+}
+
+.name-box:focus {
+    outline: 2px solid #7289DA; 
 }
 
 .preview-link, .results-button, .edit-button, .home-button {
@@ -308,19 +335,15 @@ input:focus + .bar:before, input:focus + .bar:after {
 .forms-listing {
     display: flex;
     width: 1200px;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
     margin-top: 100px;
 }
 
 .form-preview {
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-bottom: 50px;
+    margin-bottom: 5px;
     background-color: #23272A;
-    height: 100px;
-    width: 150px;
-    border-radius: 20px;
+    height: 50px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -330,7 +353,16 @@ input:focus + .bar:before, input:focus + .bar:after {
 }
 
 .form-link {
-    padding: 30px;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.preview {
+    flex: 1;
+    width: 100%;
 }
 
 .form-preview > a {
@@ -350,4 +382,16 @@ input:focus + .bar:before, input:focus + .bar:after {
 
 .options {
     padding-left: 10px;
+}
+
+.form-titles {
+    display: flex;
+    flex-direction: row;
+}
+
+.display {
+    color: white;
+    flex: 1;
+    font-size: 20px;
+    margin-bottom: 5px;
 }
