@@ -5,23 +5,39 @@ import AnswerStore from '../../../stores/AnswerStore';
 import FormActions from '../../../actions/FormActions';
 
 class MultipleChoice extends Component {
+    state = {
+        otherVal: 'other',
+        otherChecked: false,
+    }
+
+    otherRef = React.createRef();
+
     static getStores() {
         return [AnswerStore];
     }
     
     static calculateState(prevState) {
         return {
+            ...prevState,
             ...AnswerStore.getState(),
         };
     }
 
     handleChange = (event) => {
+        if (event.target === this.otherRef.current) {
+            this.setState({otherChecked: !this.state.otherChecked});
+        }
+
         FormActions.updateAnswer(this.props.id, event.target.value);
+    }
+
+    handleOtherTextChange = (event) => {
+        this.setState({otherVal: event.target.value});
     }
 
     render() {
         const {options, otherNotSet, id} = this.props;
-        const {AnswersMap} = this.state;
+        const {AnswersMap, otherVal, otherChecked} = this.state;
         const checked = AnswersMap.get(id.toString());
 
         return(
@@ -38,11 +54,12 @@ class MultipleChoice extends Component {
                             type='radio' 
                             className='multi-choice-other' 
                             name={id} 
-                            value='other' 
-                            checked={checked === 'other' ? true : false} 
-                            onChange={this.handleChange} 
+                            value={otherVal} 
+                            checked={otherChecked} 
+                            onChange={this.handleChange}
+                            ref={this.otherRef}
                         />
-                        Other
+                        Other <input type='text' className='other-text-box' onChange={this.handleOtherTextChange} />
                     </label>
                     }
             </div>

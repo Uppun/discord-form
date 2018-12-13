@@ -5,12 +5,20 @@ import AnswerStore from '../../../stores/AnswerStore';
 import FormActions from '../../../actions/FormActions';
 
 class Checkbox extends Component {
+    state = {
+        otherVal: 'other',
+        otherChecked: false,
+    }
+
+    otherRef = React.createRef();
+
     static getStores() {
         return [AnswerStore];
     }
     
     static calculateState(prevState) {
         return {
+            ...prevState,
             ...AnswerStore.getState(),
         };
     }
@@ -18,6 +26,11 @@ class Checkbox extends Component {
     handleChange = (event) => {
         const {id} = this.props;
         const {AnswersMap} = this.state;
+
+        if (event.target === this.otherRef.current) {
+            this.setState({otherChecked: !this.state.otherChecked});
+        }
+
         let Answers = AnswersMap.get(id.toString());
         if (!Answers) {
             Answers = [];
@@ -35,9 +48,13 @@ class Checkbox extends Component {
         FormActions.updateAnswer(this.props.id, Answers);
     }
 
+    handleOtherTextChange = (event) => {
+        this.setState({otherVal: event.target.value});
+    }
+
     render() {
         const {options, otherNotSet, id} = this.props;
-        const {AnswersMap} = this.state;
+        const {AnswersMap, otherVal, otherChecked} = this.state;
         const Answers = AnswersMap.get(id.toString());
 
         return(
@@ -55,11 +72,12 @@ class Checkbox extends Component {
                             type='checkbox' 
                             className='checkbox-choice-other' 
                             name={id} 
-                            value='other' 
-                            checked={Answers ? Answers.includes('other') : false}
-                            onChange={this.handleChange} 
+                            value={otherVal} 
+                            checked={otherChecked}
+                            onChange={this.handleChange}
+                            ref={this.otherRef}
                         />
-                        Other
+                        Other <input type='text' className='other-text-box' onChange={this.handleOtherTextChange} />
                     </label>
                     }
             </div>

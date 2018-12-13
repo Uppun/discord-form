@@ -76,6 +76,12 @@ export default {
         });
     },
     loadForm(name, date, order, objects) {
+        for (const id of order) {
+            if (id > idIncrementor) {
+                idIncrementor = id;
+            }
+        }
+
         Dispatcher.dispatch({
             type: ActionTypes.LOADFORM,
             order,

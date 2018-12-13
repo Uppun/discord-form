@@ -60,6 +60,8 @@ export default class MultipleChoice extends Component {
 }
 
 class MultipleChoiceOption extends Component {
+    optionRef = React.createRef();
+
     handleChange = (event) => {
         const {index, onChange} = this.props;
         const {value} = event.target;
@@ -73,13 +75,17 @@ class MultipleChoiceOption extends Component {
         FormActions.deleteOption(id, index, formId);
     }
 
+    componentDidMount() {
+        this.optionRef.focus();
+    }
+
     render() {
         const {option} = this.props;
         return (
             <div className='option'>
                 <input type='radio' className='multi-choice-option' disabled />
                 <div>
-                    <input type='text' className='option-text' value={option} onChange={this.handleChange} />
+                    <input type='text' ref={element => this.optionRef = element} className='option-text' value={option} onChange={this.handleChange} />
                     <span className='bar' />
                 </div>
                 <span className="remove-option" onClick={this.handleRemoveClick}>&times;</span>
