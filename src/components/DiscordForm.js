@@ -83,6 +83,7 @@ class DiscordForm extends Component {
                                     id={id} 
                                     question={element.question} 
                                     format={element.type} 
+                                    formId={formId}
                                     required={element.required} 
                                 />
                             }
@@ -92,6 +93,7 @@ class DiscordForm extends Component {
                                     id={id} 
                                     question={element.question} 
                                     format={element.type} 
+                                    formId={formId}
                                     required={element.required} 
                                 />
                             }

@@ -3,12 +3,12 @@ import FormActions from '../../actions/FormActions';
 import '../../Assets/Forms.css';
 
 export default class MultipleChoice extends Component {
-    handleOtherClick = () => {
+    handleOtherFocus = () => {
         const {id, formId} = this.props;
         FormActions.addOther(id, formId);
     }
 
-    handleAnotherClick = () => {
+    handleAnotherFocus = () => {
         const {id, formId} = this.props;
         FormActions.addOption(id, formId);
     }
@@ -38,17 +38,21 @@ export default class MultipleChoice extends Component {
                         <MultipleChoiceOption key={index} index={index} option={option} id={id} onChange={this.handleOptionChange} />
                     )})}
                 {otherNotSet ? 
-                    <div className='other-or-another'>
-                        <button onClick={this.handleOtherClick}>Add other</button> or <button onClick={this.handleAnotherClick}>Add another</button>
+                    <div className='more-options'>
+                        <input type='text' className='another-box' ref={this.nameBoxRef} placeholder='Add option' onFocus={this.handleAnotherFocus} />
+                        or
+                        <input type='text' className='other-box' ref={this.nameBoxRef} placeholder='Add other' onFocus={this.handleOtherFocus} />
                     </div>
                     :
                     <React.Fragment>
                         <div className='option'>
-                            <input type='radio' className='checkbox-choice-other' disabled />
+                            <input type='radio' className='checkbox-choice-option' disabled />
                             <input type='text' className='other-text' defaultValue='Other' readOnly />
                             <span className="remove-option" onClick={this.handleOtherRemoveClick}>&times;</span>
                         </div>
-                        <div className='another' onClick={this.handleAnotherClick}>Add Another</div>
+                        <div className='more-options'>
+                            <input type='text' className='another-box' ref={this.nameBoxRef} placeholder='Add option' onFocus={this.handleAnotherFocus} />
+                        </div>
                     </React.Fragment>
                     }
                     <div className='required-check'>
@@ -79,13 +83,17 @@ class MultipleChoiceOption extends Component {
         this.optionRef.focus();
     }
 
+    handleFocus = () => {
+        this.optionRef.select();
+    }
+
     render() {
         const {option} = this.props;
         return (
             <div className='option'>
                 <input type='radio' className='multi-choice-option' disabled />
                 <div>
-                    <input type='text' ref={element => this.optionRef = element} className='option-text' value={option} onChange={this.handleChange} />
+                    <input type='text' ref={element => this.optionRef = element} className='option-text' value={option} onChange={this.handleChange} onFocus={this.handleFocus} />
                     <span className='bar' />
                 </div>
                 <span className="remove-option" onClick={this.handleRemoveClick}>&times;</span>

@@ -52,14 +52,18 @@ class MultipleChoice extends Component {
                     <label className='other'>
                         <input 
                             type='radio' 
-                            className='multi-choice-other' 
+                            className='multi-choice-option' 
                             name={id} 
                             value={otherVal} 
                             checked={otherChecked} 
                             onChange={this.handleChange}
                             ref={this.otherRef}
                         />
-                        Other <input type='text' className='other-text-box' onChange={this.handleOtherTextChange} />
+                        Other: 
+                        <div className='other-and-bar'>
+                            <input type='text' className='other-text-box' onChange={this.handleOtherTextChange} placeholder='Enter Answer' />
+                            <span className='bar' />
+                        </div>     
                     </label>
                     }
             </div>
@@ -73,7 +77,12 @@ class MultipleChoiceOption extends Component {
     }
     
     render() {
-        const {option, id, checked} = this.props;
+        let {option}= this.props;
+        const {id, checked} = this.props;
+        if (Array.isArray(option)) {
+            option = option[0];
+        }
+
         return (
             <label className='survey-multi-choice'>
                 <input 

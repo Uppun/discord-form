@@ -26,7 +26,7 @@ class DropDown extends Component {
 
         return(
             <div className='survey-dropdown-choice-options'>
-                <select name={id} value={value} onChange={this.handleChange} >
+                <select name={id} value={value} className='survey-select' onChange={this.handleChange} >
                     <option value='Select one'>Select one</option> 
                     {options.map((option, index) => {
                         return(

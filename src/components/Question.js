@@ -20,6 +20,10 @@ export default class QuestionObject extends Component {
         FormActions.deleteQuestion(id, formId);
     }
 
+    handleFocus = () => {
+        this.questionRef.current.select();
+    }
+
     render() {
         const {format, question, id, formId, required} = this.props;
         let questionAnswers;
@@ -73,7 +77,7 @@ export default class QuestionObject extends Component {
             <div className='question-object'>
                 <div className='question-and-remove'>
                     <div className='question-and-bar'>
-                        <input type='text' ref={this.questionRef} className='question-entry' defaultValue={question} onChange={this.handleChange} />
+                        <input type='text' ref={this.questionRef} className='question-entry' defaultValue={question} onChange={this.handleChange} onFocus={this.handleFocus} />
                         <span className='bar' />
                     </div>
                     <button className="remove-question" onClick={this.handleRemoveClick}>&times;</button>

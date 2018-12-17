@@ -15,13 +15,21 @@ export default class TitleObject extends Component {
         FormActions.updateTitle(id, titleVal, descriptionVal, formId);
     }, 2000)
 
+    handleFocusTitle = () => {
+        this.titleRef.current.select();
+    }
+
+    handleFocusDescription = () => {
+        this.descriptionRef.current.select();
+    }
+
     render() {
         const {title, description} = this.props;
         return(
             <div className='title-object'>
-                <input type='text' ref={this.titleRef} className='title-entry' defaultValue={title} onChange={this.handleChange} />
+                <input type='text' ref={this.titleRef} className='title-entry' defaultValue={title} onChange={this.handleChange} onFocus={this.handleFocusTitle} />
                 <span className='bar' />
-                <input type='description' ref={this.descriptionRef} className='description-entry' defaultValue={description} onChange={this.handleChange} />
+                <input type='description' ref={this.descriptionRef} className='description-entry' defaultValue={description} onChange={this.handleChange} onFocus={this.handleFocusDescription} />
                 <span className='bar' />
             </div>
         )

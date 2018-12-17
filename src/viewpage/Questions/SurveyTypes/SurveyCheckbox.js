@@ -70,14 +70,18 @@ class Checkbox extends Component {
                     <label className='other'>
                         <input 
                             type='checkbox' 
-                            className='checkbox-choice-other' 
+                            className='checkbox-choice-option' 
                             name={id} 
                             value={otherVal} 
                             checked={otherChecked}
                             onChange={this.handleChange}
                             ref={this.otherRef}
                         />
-                        Other <input type='text' className='other-text-box' onChange={this.handleOtherTextChange} />
+                        Other: 
+                        <div className='other-and-bar'>
+                            <input type='text' className='other-text-box' onChange={this.handleOtherTextChange} placeholder='Enter Answer' />
+                            <span className='bar' />
+                        </div>     
                     </label>
                     }
             </div>
@@ -91,7 +95,12 @@ class CheckboxOption extends Component {
     }
 
     render() {
-        const {option, id, checked} = this.props;
+        let {option}= this.props;
+        const {id, checked} = this.props;
+        if (Array.isArray(option)) {
+            option = option[0];
+        }
+
         return (
             <label className='survey-checkbox-choice'>
                 <input 

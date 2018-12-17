@@ -73,14 +73,52 @@ body {
 }
 
 .name-box {
-    box-shadow: 2px 2px 2px black;
-    padding: 5px;
+    outline: 0;
+    background-color: transparent;
     border: 0;
-    height: 15px;
+    height: 100%;
+    font-size: 20px;
+    color: white;
 }
 
-.name-box:focus {
-    outline: 2px solid #7289DA; 
+.form-name-text {
+    font-size: 30px;
+    color: white;
+    margin-right: 10px;
+}
+
+select {
+    background-color: transparent;
+    outline: 0;
+    border: none;
+    color: white;
+    font-size: 20px;
+    margin: 5px;
+}
+
+select:focus {
+    border: 0;
+}
+
+label {
+    display: flex;
+    align-items: center;
+}
+
+option {
+    background-color: #23272A;
+}
+
+.name-and-bar {
+    margin-top: 2px;
+    width: 150px;
+    height: 30px;
+}
+
+.form-creation {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .preview-link, .results-button, .edit-button, .home-button {
@@ -175,7 +213,7 @@ body {
 .title-object {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    padding-bottom: 10px;
     background-color: #23272A;
 }
 .title-display {
@@ -198,6 +236,10 @@ body {
     padding-bottom: 10px;
 }
 
+.survey-question-answers {
+    display: flex;
+}
+
 .survey-question-question {
     color: #ffffff;
     font-size: 20px;
@@ -209,6 +251,7 @@ body {
     width: 90%;
     margin-bottom: 10px;
     margin-top: 10px;
+    margin-left: 10px;
 }
 
 .survey-checkbox-choice, .survey-multi-choice, .survey-dropdown-choice-options {
@@ -216,6 +259,11 @@ body {
     flex-direction: row;
     justify-content: left;
     text-align: left;
+}
+
+.survey-multi-choice-option, .survey-checkbox-choice-option, .checkbox-choice-option, .multi-choice-option {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .question-object {
@@ -235,6 +283,29 @@ body {
     color: #FFFFFF;
 }
 
+.other-and-bar {
+    margin-left: 10px;
+}
+
+.other-text-box {
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    font-size: 20px;
+}
+
+.more-options {
+    display: flex;
+}
+
+.another-box, .other-box {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px gray dotted;
+    width: 65px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
 .option-text {
     color: #FFFFFF;
     outline: 0;
@@ -317,7 +388,7 @@ input:focus + .bar:before, input:focus + .bar:after {
     display: inline-block;
 }
 
-.survey-contents {
+.survey-questions {
     margin-top: 10px;
     box-shadow: 2px 2px 2px black;
     width: 600px;
@@ -377,6 +448,7 @@ input:focus + .bar:before, input:focus + .bar:after {
 .option {
     display: flex;
     padding-bottom: 2px;
+    margin-bottom: 5px;
     align-items: center;
 }
 

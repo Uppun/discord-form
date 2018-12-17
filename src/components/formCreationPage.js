@@ -28,6 +28,10 @@ export default class FormCreationPage extends Component {
         });
     }
 
+    handleFormNameFocus = (event) => {
+        this.nameBoxRef.current.select();
+    }
+
 
     render() {
         const {formsAndResultsArray, userId, icon} = this.state;
@@ -37,8 +41,16 @@ export default class FormCreationPage extends Component {
                 <div className='content-wrapper'>
                     <form onSubmit={this.handleSubmit}>
                         <div className='header'>Create a form</div>
-                        <input type='text' className='name-box' ref={this.nameBoxRef} placeholder='Enter form name' />
-                        <input type='submit' className='form-create' value='Create Form' />
+                        <div className='form-creation'>
+                            <div className='form-name-text'>
+                                Name: 
+                            </div>
+                            <div className='name-and-bar'>
+                                <input type='text' className='name-box' ref={this.nameBoxRef} placeholder='Enter form name' onFocus={this.handleFormNameFocus} />
+                                <span className='bar' />
+                            </div>
+                            <input type='submit' className='form-create' value='Create Form' />
+                        </div>
                     </form>
                     <div className='form-page'>
                         <div className='forms-listing'>

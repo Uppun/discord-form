@@ -4,7 +4,7 @@ import '../../Assets/Forms.css';
 
 export default class dropdown extends Component {
 
-    handleAnotherClick = () => {
+    handleAnotherFocus = () => {
         const {id, formId} = this.props;
         FormActions.addOption(id, formId);
     }
@@ -28,9 +28,9 @@ export default class dropdown extends Component {
                     return(
                         <DropDownOption key={index} index={index} option={option} id={id} onChange={this.handleOptionChange} />
                     )})}
-                <div className='dropdown-another'>
-                    <div className='another' onClick={this.handleAnotherClick}>Add Another</div>
-                </div>
+                    <div className='more-options'>
+                        <input type='text' className='another-box' ref={this.nameBoxRef} placeholder='Add option' onFocus={this.handleAnotherFocus} />
+                    </div>
                 <div className='required-check'>
                     <input type='checkbox' className='required-button' checked={required} onChange={this.handleRequireChange} /> Required
                 </div>
@@ -59,12 +59,16 @@ class DropDownOption extends Component {
         this.optionRef.focus();
     }
 
+    handleFocus = () => {
+        this.optionRef.select();
+    }
+
     render() {
         const {option} = this.props;
         return (
             <div className='option'>
                 <div>
-                    <input type='text' ref={element => this.optionRef = element} className='option-text' value={option} onChange={this.handleChange} />
+                    <input type='text' ref={element => this.optionRef = element} className='option-text' value={option} onChange={this.handleChange} onFocus={this.handleFocus} />
                     <span className='bar' />
                 </div>
                 <span className="remove-option" onClick={this.handleRemoveClick}>&times;</span>
