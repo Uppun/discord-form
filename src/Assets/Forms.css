@@ -87,26 +87,9 @@ body {
     margin-right: 10px;
 }
 
-select {
-    background-color: transparent;
-    outline: 0;
-    border: none;
-    color: white;
-    font-size: 20px;
-    margin: 5px;
-}
-
-select:focus {
-    border: 0;
-}
-
 label {
     display: flex;
     align-items: center;
-}
-
-option {
-    background-color: #23272A;
 }
 
 .name-and-bar {
@@ -259,6 +242,10 @@ option {
     flex-direction: row;
     justify-content: left;
     text-align: left;
+}
+
+.survey-dropdown-choice-options {
+    margin: 10px 0px 0px 10px;
 }
 
 .survey-multi-choice-option, .survey-checkbox-choice-option, .checkbox-choice-option, .multi-choice-option {
