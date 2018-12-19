@@ -110,4 +110,12 @@ export default {
             formId,
         });
     },
+    addTitle(formId) {
+        idIncrementor++;
+        Dispatcher.dispatch({
+            type: ActionTypes.ADDTITLE,
+            id: idIncrementor,
+            formId,
+        });
+    },
 }

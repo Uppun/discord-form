@@ -26,6 +26,7 @@ class MultipleChoice extends Component {
     handleChange = (event) => {
         if (event.target === this.otherRef.current) {
             this.setState({otherChecked: !this.state.otherChecked});
+            this.otherTextRef.current.focus();
         }
 
         FormActions.updateAnswer(this.props.id, event.target.value);
@@ -33,6 +34,10 @@ class MultipleChoice extends Component {
 
     handleOtherTextChange = (event) => {
         this.setState({otherVal: event.target.value});
+    }
+
+    otherFocus = () => {
+        this.otherTextRef.select();
     }
 
     render() {
@@ -59,9 +64,11 @@ class MultipleChoice extends Component {
                             onChange={this.handleChange}
                             ref={this.otherRef}
                         />
-                        Other: 
+                        <div className='option-text'>
+                            Other:
+                        </div> 
                         <div className='other-and-bar'>
-                            <input type='text' className='other-text-box' onChange={this.handleOtherTextChange} placeholder='Enter Answer' />
+                            <input type='text' className='other-text-box' ref={this.otherTextRef} onChange={this.handleOtherTextChange} onFocus={this.otherFocus} placeholder='Enter Answer' />
                             <span className='bar' />
                         </div>     
                     </label>

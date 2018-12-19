@@ -22,11 +22,15 @@ export default class dropdown extends Component {
 
     render() {
         const {options, id, required} = this.props;
+        let canRemove = false;
+        if (options) {
+            canRemove = options.length > 1 ? true : false;
+        }
         return(
             <div className='options'>
                 {options.map((option, index) => {
                     return(
-                        <DropDownOption key={index} index={index} option={option} id={id} onChange={this.handleOptionChange} />
+                        <DropDownOption key={index} index={index} option={option} id={id} onChange={this.handleOptionChange} canRemove={canRemove}/>
                     )})}
                     <div className='more-options'>
                         <input type='text' className='another-box' ref={this.nameBoxRef} placeholder='Add option' onFocus={this.handleAnotherFocus} />
@@ -64,14 +68,14 @@ class DropDownOption extends Component {
     }
 
     render() {
-        const {option} = this.props;
+        const {option, canRemove} = this.props;
         return (
             <div className='option'>
                 <div>
                     <input type='text' ref={element => this.optionRef = element} className='option-text' value={option} onChange={this.handleChange} onFocus={this.handleFocus} />
                     <span className='bar' />
                 </div>
-                <span className="remove-option" onClick={this.handleRemoveClick}>&times;</span>
+                {canRemove ? <span className="remove-option" onClick={this.handleRemoveClick}>&times;</span> : null}
             </div>
         )
     }

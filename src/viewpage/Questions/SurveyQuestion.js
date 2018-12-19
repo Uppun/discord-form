@@ -42,14 +42,14 @@ export default class QuestionObject extends Component {
             <div className='survey-question-object'>
                 <div className='survey-question-question'>
                     {question}
+                    {required ? 
+                        <div className='required-notice'>&nbsp;*</div> :
+                        null
+                    }
                 </div>
                 <div className='survey-question-answers'>
                     {questionAnswers}
                 </div>
-                {required ? 
-                    <div className='required-notice'>* This field is required. </div> :
-                    null
-                }
             </div>
         )
     }

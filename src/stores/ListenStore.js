@@ -7,7 +7,16 @@ import middleware from '../middleware';
 Dispatcher.register(action => {
     switch(action.type) {
         case ActionTypes.ADDQUESTION: {
-            console.log(FormStore.getState());
+            Dispatcher.waitFor([FormStore.getDispatchToken(), FormOrderStore.getDispatchToken()]); 
+            middleware.updateForm({
+                ...FormOrderStore.getState(),
+                name: FormStore.getState().name,
+                date: FormStore.getState().date,
+                objects: FormStore.getState().idToFieldsMap,
+            }, action.formId);
+            break;
+        }
+        case ActionTypes.ADDTITLE: {
             Dispatcher.waitFor([FormStore.getDispatchToken(), FormOrderStore.getDispatchToken()]); 
             middleware.updateForm({
                 ...FormOrderStore.getState(),

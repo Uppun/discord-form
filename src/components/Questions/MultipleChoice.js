@@ -31,11 +31,19 @@ export default class MultipleChoice extends Component {
 
     render() {
         const {options, otherNotSet, id, required} = this.props;
+        let canRemove = false;
+        if (options) {
+            let optionsLength = options.length;
+            if (!otherNotSet) {
+                optionsLength++;
+            }
+            canRemove = optionsLength > 1 ? true : false;
+        }
         return(
             <div className='options'>
                 {options.map((option, index) => {
                     return(
-                        <MultipleChoiceOption key={index} index={index} option={option} id={id} onChange={this.handleOptionChange} />
+                        <MultipleChoiceOption key={index} index={index} option={option} id={id} onChange={this.handleOptionChange} canRemove={canRemove}/>
                     )})}
                 {otherNotSet ? 
                     <div className='more-options'>
@@ -48,7 +56,7 @@ export default class MultipleChoice extends Component {
                         <div className='option'>
                             <input type='radio' className='checkbox-choice-option' disabled />
                             <input type='text' className='other-text' defaultValue='Other' readOnly />
-                            <span className="remove-option" onClick={this.handleOtherRemoveClick}>&times;</span>
+                            {canRemove ? <span className="remove-option" onClick={this.handleOtherRemoveClick}>&times;</span> : null}
                         </div>
                         <div className='more-options'>
                             <input type='text' className='another-box' ref={this.nameBoxRef} placeholder='Add option' onFocus={this.handleAnotherFocus} />
@@ -88,7 +96,7 @@ class MultipleChoiceOption extends Component {
     }
 
     render() {
-        const {option} = this.props;
+        const {option, canRemove} = this.props;
         return (
             <div className='option'>
                 <input type='radio' className='multi-choice-option' disabled />
@@ -96,7 +104,7 @@ class MultipleChoiceOption extends Component {
                     <input type='text' ref={element => this.optionRef = element} className='option-text' value={option} onChange={this.handleChange} onFocus={this.handleFocus} />
                     <span className='bar' />
                 </div>
-                <span className="remove-option" onClick={this.handleRemoveClick}>&times;</span>
+                {canRemove ? <span className="remove-option" onClick={this.handleRemoveClick}>&times;</span> : null}
             </div>
         )
     }

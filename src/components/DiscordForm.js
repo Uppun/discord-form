@@ -47,6 +47,9 @@ class DiscordForm extends Component {
                 FormActions.addQuestion(QuestionTypes.DROPDOWN, formId);
                 break;
             }
+            case 'add-title': {
+                FormActions.addTitle(formId);
+            }
             default: {
                 break;
             }
@@ -68,6 +71,7 @@ class DiscordForm extends Component {
                         <button className='add-multi' onClick={this.handleClick}>Add Multi</button>
                         <button className='add-checkbox' onClick={this.handleClick}>Add Checkbox</button>
                         <button className='add-dropdown' onClick={this.handleClick}>Add Dropdown</button>
+                        <button className='add-title' onClick={this.handleClick}>Add Title</button>
                     </div>
                 </div>
                 <div className='form-contents'>

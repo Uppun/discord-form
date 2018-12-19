@@ -52,13 +52,13 @@ body {
 }
 
 .header {
-    font-size: 30px;
+    font-size: 40px;
     margin-bottom: 10px;
     color: #ffffff; 
 }
 
-.form-create {
-    background-color: #23272A;
+.form-create, .form-create-disabled {
+    background-color: #7289DA;
     box-shadow: 2px 2px 2px black;
     color: #ffffff;
     border: 0;
@@ -66,6 +66,15 @@ body {
     padding: 5px;
     border-radius: 5px;
     margin-left: 10px;
+}
+
+.form-create-disabled {
+    filter: grayscale(75%);
+    color: lightgray;
+}
+
+.form-create-disabled:hover {
+    cursor: not-allowed;
 }
 
 .form-create:hover {
@@ -121,8 +130,8 @@ label {
     font-size: 15px;
 }
 
-.add-short, .add-paragraph, .add-checkbox, .add-dropdown, .add-multi {
-    background-color: #23272A;
+.add-short, .add-paragraph, .add-checkbox, .add-dropdown, .add-multi, .add-title {
+    background-color: #7289DA;
     outline: none;
     border: none;
     margin-bottom: 5px;
@@ -133,15 +142,17 @@ label {
 }
 
 .submit-active, .submit-disabled {
-    height: 25px;
-    width: 75px;
+    height: 31px;
+    width: 94px;
     margin-top: 5px;
     margin-bottom: 5px;
-    background-color: #23272A;
+    background-color: #7289DA;
     outline: none;
     border: none; 
     color: #ffffff;
+    border-radius: 5px;
     box-shadow: 2px 2px 2px black;
+    font-size: 20px;
 }
 
 .submit-active:hover {
@@ -149,10 +160,15 @@ label {
 }
 
 .submit-disabled {
-    color: gray;
+    color: lightgray;
+    filter: grayscale(75%);
 }
 
-.add-short:hover, .add-paragraph:hover, .add-checkbox:hover, .add-dropdown:hover, .add-multi:hover {
+.submit-disabled:hover {
+    cursor: not-allowed;
+}
+
+.add-short:hover, .add-paragraph:hover, .add-checkbox:hover, .add-dropdown:hover, .add-multi:hover, .add-title:hover {
     cursor: pointer;
 }
 
@@ -195,10 +211,20 @@ label {
 
 .title-object {
     display: flex;
+    flex: 1;
     flex-direction: column;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
     background-color: #23272A;
 }
+
+.title-container {
+    display: flex;
+}
+
+.title-remove-container {
+    color: white;
+}
+
 .title-display {
     color: #FFFFFF;
     font-size: 40px;
@@ -217,10 +243,13 @@ label {
     background-color: #23272A;
     padding-top: 10px;
     padding-bottom: 10px;
+    padding-left: 10px;
+    margin-bottom: 10px;
 }
 
 .survey-question-answers {
     display: flex;
+    margin-left: 5px;
 }
 
 .survey-question-question {
@@ -228,6 +257,9 @@ label {
     font-size: 20px;
     text-align: left;
     margin-left: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
 }
 
 .survey-short-answer-entry, .survey-paragraph-entry {
@@ -237,12 +269,20 @@ label {
     margin-left: 10px;
 }
 
+.survey-contents {
+    background-color: #23272A;
+    box-shadow: 2px 2px 2px black;
+    margin-bottom: 20px;
+}
+
 .survey-checkbox-choice, .survey-multi-choice, .survey-dropdown-choice-options {
     display: flex;
     flex-direction: row;
     justify-content: left;
     text-align: left;
+    margin-bottom: 5px;
 }
+
 
 .survey-dropdown-choice-options {
     margin: 10px 0px 0px 10px;
@@ -267,15 +307,18 @@ label {
 }
 
 .other {
+    padding-top: 3px;
     color: #FFFFFF;
 }
 
 .other-and-bar {
+    margin-top: 5px;
     margin-left: 10px;
 }
 
 .other-text-box {
     background-color: transparent;
+    color: white;
     border: 0;
     outline: 0;
     font-size: 20px;
@@ -324,7 +367,11 @@ label {
     width: 100%;
 }
 
-.remove-question {
+.remove-option {
+    padding-right: 6px;
+}
+
+.remove-question, .remove-option {
     flex: 0;
     font-size: 15px;
     border: 0;
@@ -377,7 +424,6 @@ input:focus + .bar:before, input:focus + .bar:after {
 
 .survey-questions {
     margin-top: 10px;
-    box-shadow: 2px 2px 2px black;
     width: 600px;
     display: flex;
     flex-direction: column;
@@ -430,6 +476,8 @@ input:focus + .bar:before, input:focus + .bar:after {
 
 .required-notice {
     color: red;
+    font-size: 30px;
+    padding-right: 20px;
 }
 
 .option {

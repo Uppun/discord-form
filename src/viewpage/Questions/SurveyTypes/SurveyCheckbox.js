@@ -11,6 +11,7 @@ class Checkbox extends Component {
     }
 
     otherRef = React.createRef();
+    otherTextRef = React.createRef();
 
     static getStores() {
         return [AnswerStore];
@@ -29,6 +30,7 @@ class Checkbox extends Component {
 
         if (event.target === this.otherRef.current) {
             this.setState({otherChecked: !this.state.otherChecked});
+            this.otherTextRef.current.focus();
         }
 
         let Answers = AnswersMap.get(id.toString());
@@ -50,6 +52,10 @@ class Checkbox extends Component {
 
     handleOtherTextChange = (event) => {
         this.setState({otherVal: event.target.value});
+    }
+
+    otherFocus = () => {
+        this.otherTextRef.current.select();
     }
 
     render() {
@@ -77,9 +83,11 @@ class Checkbox extends Component {
                             onChange={this.handleChange}
                             ref={this.otherRef}
                         />
-                        Other: 
+                        <div className='option-text'>
+                            Other:
+                        </div> 
                         <div className='other-and-bar'>
-                            <input type='text' className='other-text-box' onChange={this.handleOtherTextChange} placeholder='Enter Answer' />
+                            <input type='text' className='other-text-box' ref={this.otherTextRef} onChange={this.handleOtherTextChange} onFocus={this.otherFocus} placeholder='Enter Answer' />
                             <span className='bar' />
                         </div>     
                     </label>

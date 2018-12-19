@@ -18,6 +18,12 @@ class FormOrderStore extends ReduceStore {
                     order,
                 };
             }
+            case ActionTypes.ADDTITLE: {
+                const order = [...state.order, action.id];
+                return {
+                    order,
+                };
+            }
             case ActionTypes.DELETEQUESTION: {
                 const order = [];
                 for (let id of state.order) {

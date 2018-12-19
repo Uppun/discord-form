@@ -32,11 +32,19 @@ export default class CheckBox extends Component {
 
     render() {
         const {options, otherNotSet, id, formId, required} = this.props;
+        let canRemove = false;
+        if (options) {
+            let optionsLength = options.length;
+            if (!otherNotSet) {
+                optionsLength++;
+            }
+            canRemove = optionsLength > 1 ? true : false;
+        }
         return(
             <div className='options'>
                 {options.map((option, index) => {
                     return(
-                        <CheckBoxOption key={index} index={index} option={option} id={id} onChange={this.handleOptionChange} formId={formId} />
+                        <CheckBoxOption key={index} index={index} option={option} id={id} onChange={this.handleOptionChange} formId={formId} canRemove={canRemove} />
                     )})}
                 {otherNotSet ? 
                     <div className='more-options'>
@@ -49,7 +57,7 @@ export default class CheckBox extends Component {
                         <div className='option'>
                             <input type='checkbox' className='checkbox-choice-option' disabled />
                             <input type='text' className='other-text' defaultValue='Other' readOnly />
-                            <span className="remove-option" onClick={this.handleOtherRemoveClick}>&times;</span>
+                            {canRemove ? <span className="remove-option" onClick={this.handleOtherRemoveClick}>&times;</span> : null}
                         </div>
                         <div className='more-options'>
                             <input type='text' className='another-box' ref={this.nameBoxRef} placeholder='Add option' onFocus={this.handleAnotherFocus} />
@@ -89,7 +97,7 @@ class CheckBoxOption extends Component {
     }
 
     render() {
-        const {option} = this.props;
+        const {option, canRemove} = this.props;
         return (
             <div className='option'>
                 <input type='checkbox' className='checkbox-choice-option' disabled={true} />
@@ -97,7 +105,7 @@ class CheckBoxOption extends Component {
                     <input type='text' ref={element => this.optionRef = element} className='option-text' value={option} onChange={this.handleChange} onFocus={this.handleFocus} />
                     <span className='bar' />
                 </div>
-                <span className="remove-option" onClick={this.handleRemoveClick}>&times;</span>
+                {canRemove ? <span className="remove-option" onClick={this.handleRemoveClick}>&times;</span> : null}
             </div>
         )
     }

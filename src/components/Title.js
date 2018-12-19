@@ -23,14 +23,24 @@ export default class TitleObject extends Component {
         this.descriptionRef.current.select();
     }
 
+    handleRemoveClick = () => {
+        const {id, formId} = this.props;
+        FormActions.deleteQuestion(id, formId);
+    }
+
     render() {
-        const {title, description} = this.props;
+        const {title, description, id} = this.props;
         return(
-            <div className='title-object'>
-                <input type='text' ref={this.titleRef} className='title-entry' defaultValue={title} onChange={this.handleChange} onFocus={this.handleFocusTitle} />
-                <span className='bar' />
-                <input type='description' ref={this.descriptionRef} className='description-entry' defaultValue={description} onChange={this.handleChange} onFocus={this.handleFocusDescription} />
-                <span className='bar' />
+            <div className='title-container'>
+                <div className='title-object'>
+                    <input type='text' ref={this.titleRef} className='title-entry' defaultValue={title} onChange={this.handleChange} onFocus={this.handleFocusTitle} />
+                    <span className='bar' />
+                    <input type='description' ref={this.descriptionRef} className='description-entry' defaultValue={description} onChange={this.handleChange} onFocus={this.handleFocusDescription} />
+                    <span className='bar' />
+                </div>
+                <div className='title-remove-container'>
+                    {id === 0 ? null : <span className="remove-option" onClick={this.handleRemoveClick}>&times;</span>}
+                </div>
             </div>
         )
     }

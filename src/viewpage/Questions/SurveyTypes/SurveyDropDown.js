@@ -38,6 +38,7 @@ const selectStyle = {
         return {
             ...styles,
             backgroundColor: '#23272A',
+            boxShadow: '2px 2px 2px black',
         }
     }
 }

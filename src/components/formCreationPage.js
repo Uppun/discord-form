@@ -3,7 +3,9 @@ import Middleware from '../middleware';
 import { NavLink } from 'react-router-dom';
 
 export default class FormCreationPage extends Component {
-    state = {};
+    state = {
+        currentNameValue: '',
+    };
     nameBoxRef = React.createRef();
 
     componentDidMount() {
@@ -32,9 +34,11 @@ export default class FormCreationPage extends Component {
         this.nameBoxRef.current.select();
     }
 
-
+    handleFormNameChange = () => {
+        this.setState({currentNameValue: this.nameBoxRef.current.value});
+    }
     render() {
-        const {formsAndResultsArray, userId, icon} = this.state;
+        const {formsAndResultsArray, userId, icon, currentNameValue} = this.state;
         return(
             <React.Fragment>
                 <FormCreationTopBar id={userId} icon={icon} />
@@ -46,10 +50,12 @@ export default class FormCreationPage extends Component {
                                 Name: 
                             </div>
                             <div className='name-and-bar'>
-                                <input type='text' className='name-box' ref={this.nameBoxRef} placeholder='Enter form name' onFocus={this.handleFormNameFocus} />
+                                <input type='text'  ref={this.nameBoxRef} className='name-box' placeholder='Enter form name' onChange={this.handleFormNameChange} value={currentNameValue} onFocus={this.handleFormNameFocus} />
                                 <span className='bar' />
                             </div>
-                            <input type='submit' className='form-create' value='Create Form' />
+                            {currentNameValue ? 
+                                <input type='submit' className='form-create' value='Create Form' /> :
+                                <input type='button' className='form-create-disabled' value='Create Form' />}
                         </div>
                     </form>
                     <div className='form-page'>

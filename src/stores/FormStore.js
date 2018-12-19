@@ -140,6 +140,21 @@ class FormStore extends ReduceStore {
                 }
             }
 
+            case ActionTypes.ADDTITLE: {
+                const {id} = action;
+                let idToFieldsMap; 
+                idToFieldsMap = state.idToFieldsMap.set(id.toString(),
+                {
+                    type: QuestionTypes.TITLE,
+                    title: 'Enter Title',
+                    description: 'Enter description',
+                })
+                return {
+                    ...state,
+                    idToFieldsMap,
+                }
+            }
+
             case ActionTypes.ADDOTHEROPTION: {
                 const {id} = action;
                 const element = state.idToFieldsMap.get(id.toString());

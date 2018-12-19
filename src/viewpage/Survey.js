@@ -40,8 +40,14 @@ class Survey extends Component {
     }
 
     render() {
-        const {order, idToFieldsMap, name, canSubmit, icon, id} = this.state;
+        const {order, idToFieldsMap, name, canSubmit, icon, id, required} = this.state;
         const submitUrl = `http://localhost:5000/results/${this.props.match.params.formId}`;
+        console.log(required)
+        let hasRequired = false;
+        
+        if (required) {
+            hasRequired = required.length > 0 ? true : false;
+        }
 
         return (
             <React.Fragment>
@@ -58,7 +64,7 @@ class Survey extends Component {
                                         const element = idToFieldsMap.get(id.toString());
                                         switch(element.type) {
                                             case QuestionTypes.TITLE: {
-                                                return <SurveyTitle key={id} id={id} title={element.title} description={element.description} />
+                                                return <SurveyTitle key={id} id={id} title={element.title} description={element.description} hasRequired={hasRequired} />
                                             }
                                             case QuestionTypes.SHORT || QuestionTypes.PARAGRAPH: {
                                                 return <SurveyQuestion 
