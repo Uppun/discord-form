@@ -8,6 +8,7 @@ export default class DropResult extends Component {
         for (const [answer, aggregate] of this.props.options.entries()) {
             data.push([answer, aggregate]);
         }
+        console.log(data)
         const {question} = this.props;
         return(
             <div className='drop-result'>

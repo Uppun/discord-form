@@ -22,7 +22,7 @@ class AggregateResults extends Component {
 
     render() {
         const {aggregate, order, idToFieldsMap} = this.state;
-        if (!aggregate) {
+        if (!aggregate || aggregate.length === 0) {
             return (
                 <div>
                     There are no results to display.
@@ -36,9 +36,15 @@ class AggregateResults extends Component {
                 if (element.type === 'CHECKBOX' || element.type === 'DROPDOWN' || element.type === 'MULTIPLE_CHOICE') {
                     for (const option of element.options) {
                         if (!aggResults.get(id.toString())) {
-                            aggResults.set(id.toString(), new Map([[option[0], 0]]));
+                            if(Array.isArray(option)) {
+                                aggResults.set(id.toString(), new Map([[option[0], 0]]));
+                            }
+                            aggResults.set(id.toString(), new Map([[option, 0]]));
                         } else {
-                            aggResults.set(id.toString(), aggResults.get(id.toString()).set(option[0], 0));
+                            if(Array.isArray(option)) {
+                                aggResults.set(id.toString(), aggResults.get(id.toString()).set(option[0], 0));
+                            }
+                            aggResults.set(id.toString(), aggResults.get(id.toString()).set(option, 0));
                         }
                     }
                 }
@@ -51,10 +57,14 @@ class AggregateResults extends Component {
                 for (const answer of value) {
                     if (Array.isArray(answer.response)) {
                         for (const option of answer.response) {
-                            optionsMap.set(option, optionsMap.get(option) + 1);
+                            optionsMap.get(option) ? 
+                                optionsMap.set(option, optionsMap.get(option) + 1) :
+                                optionsMap.set(option, 1);
                         }
                     } else {
-                        optionsMap.set(answer.response, optionsMap.get(answer.response) + 1);
+                        optionsMap.get(answer.response) ?
+                            optionsMap.set(answer.response, optionsMap.get(answer.response) + 1) :
+                            optionsMap.set(answer.response, 1);
                     }
                 }
                 aggResults.set(key, optionsMap);

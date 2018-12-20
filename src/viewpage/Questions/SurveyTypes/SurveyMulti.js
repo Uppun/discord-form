@@ -11,6 +11,7 @@ class MultipleChoice extends Component {
     }
 
     otherRef = React.createRef();
+    otherTextRef = React.createRef();
 
     static getStores() {
         return [AnswerStore];
@@ -37,7 +38,7 @@ class MultipleChoice extends Component {
     }
 
     otherFocus = () => {
-        this.otherTextRef.select();
+        this.otherTextRef.current.select();
     }
 
     render() {

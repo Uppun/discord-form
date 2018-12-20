@@ -10,6 +10,7 @@
     background-color: #2C2F33;
     display: flex;
     flex-direction: column;
+    border-radius: 10px;
     box-shadow: 2px 2px 2px black;
 }
 
@@ -110,4 +111,22 @@
     margin-top: 10px;
     margin-bottom: 50px;
     box-shadow: 2px 2px 2px black;
+}
+
+.aggregate-button, .full-button {
+    height: 31px;
+    width: 110px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #7289DA;
+    outline: none;
+    border: none; 
+    color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px black;
+    font-size: 20px;
+}
+
+.aggregate-button:hover, .full-button:hover {
+    cursor: pointer;
 }

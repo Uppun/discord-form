@@ -9,7 +9,6 @@ export default class MultiResult extends Component {
             data.push([answer, total]);
         }
         const {question} = this.props;
-
         return(
             <div className='multi-result'>
                 <div className='response-chart'>

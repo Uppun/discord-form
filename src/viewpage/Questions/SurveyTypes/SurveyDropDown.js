@@ -78,6 +78,7 @@ class DropDown extends Component {
             <div className='survey-dropdown-choice-options'>
                 <Select
                     value={value}
+                    name={id}
                     onChange={this.handleChange}
                     label='Single select'
                     options={optionsArray}
