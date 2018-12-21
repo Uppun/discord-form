@@ -46,9 +46,9 @@ class FullResults extends Component {
                                             {field.question.question}
                                         </div>
                                         <div className='result-answer'>
-                                            {Array.isArray(field.answer) ? field.answer.map(answer => {
+                                            {Array.isArray(field.answer) ? field.answer.map((answer, index) => {
                                                 return (
-                                                    <div>
+                                                    <div key={index}>
                                                         {answer}<br/>
                                                     </div>
                                                 )

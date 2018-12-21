@@ -49,6 +49,7 @@ class DiscordForm extends Component {
             }
             case 'add-title': {
                 FormActions.addTitle(formId);
+                break;
             }
             default: {
                 break;
