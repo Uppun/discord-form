@@ -35,9 +35,9 @@ export default class dropdown extends Component {
                     <div className='more-options'>
                         <input type='text' className='another-box' ref={this.nameBoxRef} placeholder='Add option' onFocus={this.handleAnotherFocus} />
                     </div>
-                <div className='required-check'>
+                <label className='required-check'>
                     <input type='checkbox' className='required-button' checked={required} onChange={this.handleRequireChange} /> Required
-                </div>
+                </label>
             </div>
         )
     }
@@ -71,7 +71,7 @@ class DropDownOption extends Component {
         const {option, canRemove} = this.props;
         return (
             <div className='option'>
-                <div>
+                <div className='dropdown-option'>
                     <input type='text' ref={element => this.optionRef = element} className='option-text' value={option} onChange={this.handleChange} onFocus={this.handleFocus} />
                     <span className='bar' />
                 </div>

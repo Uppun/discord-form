@@ -46,7 +46,7 @@ MongoClient.connect(url, { useNewUrlParser: true }, (err, mongoClient) => {
 app.use(cookieParser('b1d30G4m35'));
 app.use(cookieSession({
   secret: 'b1d30G4m35',
-  maxAge:  7 * 24 * 60 * 60,
+  maxAge:  7 * 24 * 60 * 60 * 1000,
 }));
 
 app.use(passport.initialize());

@@ -6,7 +6,7 @@ export default class MultiResult extends Component {
     render() {
         const data = [['answer', 'total']];
         for (const [answer, total] of this.props.options.entries()) {
-            data.push([answer, total]);
+            data.push([Array.isArray(answer) ? answer[0] : answer, total]);
         }
         const {question} = this.props;
         return(

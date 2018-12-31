@@ -6,7 +6,7 @@ export default class DropResult extends Component {
     render() {
         const data = [['answer', 'aggregate']];
         for (const [answer, aggregate] of this.props.options.entries()) {
-            data.push([answer, aggregate]);
+            data.push([Array.isArray(answer) ? answer[0] : answer, aggregate]);
         }
         const {question} = this.props;
         return(

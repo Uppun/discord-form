@@ -120,7 +120,7 @@ class FormStore extends ReduceStore {
                         {
                             type: format,
                             question: 'Enter Question',
-                            options: ['option 1'],
+                            options: ['Option 1'],
                             otherNotSet: true,
                             required: false,
                         })
@@ -129,7 +129,7 @@ class FormStore extends ReduceStore {
                         {
                             type: format,
                             question: 'Enter Question',
-                            options: ['option 1'],
+                            options: ['Option 1'],
                             required: false,
                         })
                 }
@@ -177,7 +177,7 @@ class FormStore extends ReduceStore {
                 const idToFieldsMap = state.idToFieldsMap.set(id.toString(),
                     {
                         ...element,
-                        options: [...element.options, 'option ' + newElementNumber],
+                        options: [...element.options, 'Option ' + newElementNumber],
                     });
 
                 return {

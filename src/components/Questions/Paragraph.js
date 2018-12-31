@@ -13,9 +13,9 @@ export default class Paragraph extends Component {
         return(
             <div className='paragraph-question'>
                 <textarea className='paragraph-entry' rows='10' cols='50' disabled />
-                <div className='required-check'>
+                <label className='required-check'>
                         <input type='checkbox' className='required-button' checked={required} onChange={this.handleRequireChange} /> Required
-                </div>
+                </label>
             </div>
         )
     }

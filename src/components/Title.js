@@ -33,9 +33,23 @@ export default class TitleObject extends Component {
         return(
             <div className='title-container'>
                 <div className='title-object'>
-                    <input type='text' ref={this.titleRef} className='title-entry' defaultValue={title} onChange={this.handleChange} onFocus={this.handleFocusTitle} />
+                    <input type='text' 
+                        ref={this.titleRef} 
+                        className='title-entry' 
+                        defaultValue={title} 
+                        onChange={this.handleChange} 
+                        onFocus={this.handleFocusTitle}
+                        placeholder='Enter Title' 
+                    />
                     <span className='bar' />
-                    <input type='description' ref={this.descriptionRef} className='description-entry' defaultValue={description} onChange={this.handleChange} onFocus={this.handleFocusDescription} />
+                    <input type='text' 
+                        ref={this.descriptionRef} 
+                        className='description-entry' 
+                        defaultValue={description} 
+                        onChange={this.handleChange} 
+                        onFocus={this.handleFocusDescription} 
+                        placeholder='Enter Description'
+                    />
                     <span className='bar' />
                 </div>
                 <div className='title-remove-container'>

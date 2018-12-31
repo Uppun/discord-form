@@ -13,9 +13,9 @@ export default class ShortAnswer extends Component {
         return(
             <div className='short-answer-question'>
                 <input type='text' className='short-answer-entry' value='Short answer text' disabled />
-                <div className='required-check'>
+                <label className='required-check'>
                         <input type='checkbox' className='required-button' checked={required} onChange={this.handleRequireChange} /> Required
-                </div>
+                </label>
             </div>
         )
     }

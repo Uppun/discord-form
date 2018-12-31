@@ -53,10 +53,11 @@ export default class FormCreationPage extends Component {
                                 <input type='text'  ref={this.nameBoxRef} className='name-box' placeholder='Enter form name' onChange={this.handleFormNameChange} value={currentNameValue} onFocus={this.handleFormNameFocus} />
                                 <span className='bar' />
                             </div>
-                            {currentNameValue ? 
-                                <input type='submit' className='form-create' value='Create Form' /> :
-                                <input type='button' className='form-create-disabled' value='Create Form' />}
                         </div>
+                        <input type='submit' 
+                            className={'form-create' + currentNameValue ? '' : ' disabled'} 
+                            value='Create Form'
+                            disabled={currentNameValue ? false : true} />
                     </form>
                     <div className='form-page'>
                         <div className='forms-listing'>

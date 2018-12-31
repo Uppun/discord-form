@@ -64,9 +64,9 @@ export default class CheckBox extends Component {
                         </div>
                     </React.Fragment>
                     }
-                    <div className='required-check'>
+                    <label className='required-check'>
                         <input type='checkbox' className='required-button' checked={required} onChange={this.handleRequireChange} /> Required
-                    </div>
+                    </label>
             </div>
         )
     }

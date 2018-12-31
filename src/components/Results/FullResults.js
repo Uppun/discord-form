@@ -48,7 +48,7 @@ class FullResults extends Component {
                                         <div className='result-answer'>
                                             {Array.isArray(field.answer) ? field.answer.map((answer, index) => {
                                                 return (
-                                                    <div key={index}>
+                                                    <div key={index} className='result-single-answer'>
                                                         {answer}<br/>
                                                     </div>
                                                 )
