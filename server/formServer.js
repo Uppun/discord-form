@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const MongoClient = require('mongodb').MongoClient;
+const serve = require('./serve');
 const port = process.env.PORT || 5000;
 const SCOPES = ['identify'];
 
@@ -34,14 +35,16 @@ app.use(function(req, res, next) {
   });
 
 // Initialize connection once
-MongoClient.connect(url, { useNewUrlParser: true }, (err, mongoClient) => {
+/*MongoClient.connect(url, { useNewUrlParser: true }, (err, mongoClient) => {
   if(err) throw err;
 
     client = mongoClient;
     db = client.db('formdb');
   // Start the application after the database connection is ready
-  app.listen(port, () => console.log(`Listening on port ${port}`));
-});
+  
+});*/
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
 
 app.use(cookieParser('b1d30G4m35'));
 app.use(cookieSession({
@@ -237,3 +240,5 @@ app.post('/results/:formId', (req, res, next) => {
     }
   });
 });
+
+serve(app);
