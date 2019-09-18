@@ -27,7 +27,7 @@ const asyncMiddleware = fn =>
   };
 
 app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Origin', '/');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Credentials', 'true');
@@ -59,7 +59,7 @@ app.use(passport.session());
 passport.use(new DiscordStrategy({
   clientID: '502382704529244190',
   clientSecret: 'ydzghjCI6K3RY3XcDfonHEgvSFtt_Lro',
-  callbackURL: 'http://localhost:5000/auth',
+  callbackURL: '/api/auth',
   scope: SCOPES
 },
 (accessToken, refreshToken, profile, cb) => {
@@ -73,7 +73,9 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-app.get('/login', (req, res, next) => {
+const router = express.Router();
+
+router.get('/login', (req, res, next) => {
     const state = req.query ? JSON.stringify({id: req.query.id, path: req.query.path}) : null;
     if (state) {
       const authentication = passport.authenticate('discord', {state, scope: SCOPES});
@@ -87,7 +89,7 @@ app.get('/login', (req, res, next) => {
   }
 );
 
-app.get('/auth', passport.authenticate('discord', {failureRedirect: 'http://localhost:3000/'}), (req, res) => {
+router.get('/auth', passport.authenticate('discord', {failureRedirect: '/'}), (req, res) => {
   let state = null;
   if (req.query.state) {
     state = JSON.parse(req.query.state);
@@ -95,13 +97,13 @@ app.get('/auth', passport.authenticate('discord', {failureRedirect: 'http://loca
   const formId = state ? state.id : null;
   const path = state ? state.path : null;
   if (formId && path) {
-    res.redirect(`http://localhost:3000/#/${path}/${formId}`);
+    res.redirect(`/#/${path}/${formId}`);
     return;
   }
-  res.redirect('http://localhost:3000/');
+  res.redirect('/');
 });
 
-app.use((req, res, next) => {
+router.use((req, res, next) => {
   if (!req.isAuthenticated() && req.method !== 'OPTIONS') {
     res.status(401);
     res.json("not authorized!");
@@ -110,7 +112,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/forms/', asyncMiddleware(async (req, res, next) => {
+router.get('/forms/', asyncMiddleware(async (req, res, next) => {
   const userId = req.user.id;
 
   const forms = await db.collection('forms').find({userId}).toArray();
@@ -123,7 +125,7 @@ app.get('/forms/', asyncMiddleware(async (req, res, next) => {
   res.json({icon: req.user.avatar, userId, formsAndResultsArray});
 }));
 
-app.get('/forms/:formId', (req, res, next) => {
+router.get('/forms/:formId', (req, res, next) => {
   const _id = req.params.formId;
   const userId = req.user.id;
   const userIcon = req.user.avatar;
@@ -139,7 +141,7 @@ app.get('/forms/:formId', (req, res, next) => {
   })
 });
 
-app.post('/forms/', asyncMiddleware(async (req, res, next) => {
+router.post('/forms/', asyncMiddleware(async (req, res, next) => {
   const _id = uuidv4();
   const name = req.body.name;
   const date = req.body.date;
@@ -172,7 +174,7 @@ app.post('/forms/', asyncMiddleware(async (req, res, next) => {
   }
 }));
 
-app.put('/forms/:formId', asyncMiddleware(async (req, res, next) => {
+router.put('/forms/:formId', asyncMiddleware(async (req, res, next) => {
   const form = req.body;
   const userId = req.user.id;
   const _id = req.params.formId;
@@ -191,7 +193,7 @@ app.put('/forms/:formId', asyncMiddleware(async (req, res, next) => {
   }
 }));
 
-app.get('/results/:formId', asyncMiddleware(async (req, res, next) => {
+router.get('/results/:formId', asyncMiddleware(async (req, res, next) => {
   const _id = req.params.formId;
   const userId = req.user.id;
 
@@ -207,7 +209,7 @@ app.get('/results/:formId', asyncMiddleware(async (req, res, next) => {
   })
 }))
 
-app.post('/results/:formId', (req, res, next) => {
+router.post('/results/:formId', (req, res, next) => {
   const _id = req.params.formId;
   const userId = req.user.id;
   const username = req.user.username;
@@ -230,15 +232,17 @@ app.post('/results/:formId', (req, res, next) => {
       }
       db.collection('results').updateOne({_id}, {$set: {results}}, (err, result) => {
         if (result.result.ok === 1) {
-          res.redirect('http://localhost:3000/');
+          res.redirect('/');
           return;
         } else {
-          res.redirect('http://localhost:3000/');
+          res.redirect('/');
           return;
         }
       });
     }
   });
 });
+
+app.use('/api', router);
 
 serve(app);

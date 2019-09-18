@@ -21,7 +21,7 @@ export default class ComponentManager extends Component {
                 res.doc.form.order,
                 res.doc.form.objects,
             )}).catch(err => {
-                window.location.href = `http://localhost:5000/login?id=${formId}&path=edit`; 
+                window.location = `/api/login?id=${formId}&path=edit`; 
             });
     }
 
@@ -34,7 +34,7 @@ export default class ComponentManager extends Component {
     }
 
     handleHomeClick = () => {
-        window.location.href = `http://localhost:3000/`; 
+        window.location = `/`; 
     }
 
     render() {

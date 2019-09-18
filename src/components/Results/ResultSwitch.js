@@ -28,7 +28,7 @@ export default class ResultsManager extends Component {
         Middleware.getResults(formId).then(result => {
             FormActions.setResults(result);
         }).catch(error => {
-            window.location.href = `http://localhost:5000/login?id=${formId}&path=edit`; 
+            window.location = `/api/login?id=${formId}&path=edit`; 
         });
     }
 

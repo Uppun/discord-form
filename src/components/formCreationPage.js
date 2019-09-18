@@ -13,7 +13,7 @@ export default class FormCreationPage extends Component {
             this.setState(res); 
         }).catch(err => {
             console.log(err)
-            window.location.href = 'http://localhost:5000/login';
+            window.location = '/api/login';
         });         
     }
 
@@ -24,7 +24,7 @@ export default class FormCreationPage extends Component {
         const date = new Date();
         const creationDate = (date.getMonth() + 1) + '/' + (date.getDate()) + '/' + (date.getFullYear());
         Middleware.createForm(formName, creationDate).then(res => {
-            window.location.href = `http://localhost:3000/#/edit/${res}`;
+            window.location = `/#/edit/${res}`;
         }).catch(err => {
             console.log(err);
         });

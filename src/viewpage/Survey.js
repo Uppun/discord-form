@@ -35,14 +35,14 @@ class Survey extends Component {
             res.doc.form.order,
             res.doc.form.objects,
         )}).catch(err => {
-            window.location.href = `http://localhost:5000/login?id=${formId}&path=preview`;
+            window.location = `/api/login?id=${formId}&path=preview`;
         });
     }
 
     render() {
         const {order, idToFieldsMap, name, canSubmit, icon, id, required} = this.state;
-        const submitUrl = `http://localhost:5000/results/${this.props.match.params.formId}`;
-        console.log(required)
+        const submitUrl = `/api/results/${this.props.match.params.formId}`;
+
         let hasRequired = false;
         
         if (required) {
@@ -135,7 +135,7 @@ class Survey extends Component {
 
 class SurveyTopBar extends Component {
     handleHomeClick = () => {
-        window.location.href = `http://localhost:3000/`; 
+        window.location = `/`; 
     }
 
     render() {
