@@ -35,14 +35,14 @@ app.use(function(req, res, next) {
   });
 
 // Initialize connection once
-/*MongoClient.connect(url, { useNewUrlParser: true }, (err, mongoClient) => {
+MongoClient.connect(url, { useNewUrlParser: true }, (err, mongoClient) => {
   if(err) throw err;
 
     client = mongoClient;
     db = client.db('formdb');
   // Start the application after the database connection is ready
   
-});*/
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
