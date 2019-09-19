@@ -18,7 +18,7 @@ const SCOPES = ['identify'];
 
 let db;
 let client;
-const url = 'mongodb://localhost:27017/formdb';
+const url = process.env.MONGODB_URI;
 
 const asyncMiddleware = fn =>
   (req, res, next) => {
