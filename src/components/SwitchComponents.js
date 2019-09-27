@@ -21,7 +21,8 @@ export default class ComponentManager extends Component {
                 res.doc.form.order,
                 res.doc.form.objects,
             )}).catch(err => {
-                window.location = `/api/login?id=${formId}&path=edit`; 
+                console.log(err);
+                window.location = `/`; 
             });
     }
 
