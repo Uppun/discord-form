@@ -32,6 +32,16 @@ class ResultsStore extends ReduceStore {
                                         }
                                     )
                                 );
+                                console.log(
+                                    aggregate.get(key).push(
+                                        {
+                                            username: result.username,
+                                            userId: result.userId,
+                                            icon: result.icon, 
+                                            response: result.submission[key],
+                                        }
+                                    )
+                                )
                                 console.log(aggregate.get(key))
                             } else {
                                 aggregate.set(key, [{
