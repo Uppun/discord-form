@@ -33,7 +33,6 @@ class ResultsStore extends ReduceStore {
                                     key, 
                                     currentAggregate,
                                 );
-                                console.log(aggregate.get(key))
                             } else {
                                 aggregate.set(key, [{
                                     username: result.username,

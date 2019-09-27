@@ -22,7 +22,6 @@ class AggregateResults extends Component {
 
     render() {
         const {aggregate, order, idToFieldsMap} = this.state;
-        console.log(this.state)
         if (!aggregate || aggregate.length === 0) {
             return (
                 <div>
@@ -55,7 +54,6 @@ class AggregateResults extends Component {
         for (const [key, value] of aggregate.entries()) {
             const optionsMap = aggResults.get(key);
             if (optionsMap) {
-                console.log(value)
                 for (const answer of value) {
                     if (Array.isArray(answer.response)) {
                         for (const option of answer.response) {
@@ -72,9 +70,6 @@ class AggregateResults extends Component {
                 aggResults.set(key, optionsMap);
             }
         }
-        console.log(order)
-        console.log(idToFieldsMap)
-        console.log(aggResults)
 
         return (
             <div className='aggregate-responses'>

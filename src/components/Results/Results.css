@@ -112,6 +112,8 @@
 .response-chart {
     margin-top: 10px;
     margin-bottom: 50px;
+    height: 500px;
+    width: 500px;
     box-shadow: 2px 2px 2px black;
 }
 
