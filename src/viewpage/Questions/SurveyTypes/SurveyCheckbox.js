@@ -66,9 +66,7 @@ class Checkbox extends Component {
         return(
             <div className='survey-multiple-choice-options'>
                 {options.map((option, index) => {
-                    console.log(option)
-                    const checked = Answers ? Answers.includes(option) : false;
-                    console.log(checked)
+                    const checked = Answers ? Answers.includes(option[0]) : false;
                     return(
                         <CheckboxOption key={index} option={option} id={id} checked={checked} onChange={this.handleChange} index={index} />
                     )})}
