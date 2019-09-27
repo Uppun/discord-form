@@ -76,6 +76,7 @@ class AggregateResults extends Component {
             <div className='aggregate-responses'>
                 {order.map(id => {
                     const element = idToFieldsMap.get(id.toString());
+                    console.log(element);
                     if (element) {
                         switch(element.type) {
                             case 'CHECKBOX': {
