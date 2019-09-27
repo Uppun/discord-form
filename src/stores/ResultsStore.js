@@ -20,6 +20,7 @@ class ResultsStore extends ReduceStore {
                     for (const result of results) {
                         for (const key in result.submission) {
                             if (aggregate.has(key)) {
+                                console.log(aggregate.get(key))
                                 aggregate.set(
                                     key, 
                                     aggregate.get(key).push(
@@ -31,6 +32,7 @@ class ResultsStore extends ReduceStore {
                                         }
                                     )
                                 );
+                                console.log(aggregate.get(key))
                             } else {
                                 aggregate.set(key, [{
                                     username: result.username,
