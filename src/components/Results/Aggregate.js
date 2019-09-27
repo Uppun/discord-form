@@ -55,6 +55,7 @@ class AggregateResults extends Component {
         for (const [key, value] of aggregate.entries()) {
             const optionsMap = aggResults.get(key);
             if (optionsMap) {
+                console.log(value)
                 for (const answer of value) {
                     if (Array.isArray(answer.response)) {
                         for (const option of answer.response) {
