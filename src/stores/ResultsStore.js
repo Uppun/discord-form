@@ -21,6 +21,16 @@ class ResultsStore extends ReduceStore {
                         for (const key in result.submission) {
                             if (aggregate.has(key)) {
                                 console.log(aggregate.get(key))
+                                console.log(
+                                    aggregate.get(key).push(
+                                        {
+                                            username: result.username,
+                                            userId: result.userId,
+                                            icon: result.icon, 
+                                            response: result.submission[key],
+                                        }
+                                    )
+                                )
                                 aggregate.set(
                                     key, 
                                     aggregate.get(key).push(
@@ -32,16 +42,7 @@ class ResultsStore extends ReduceStore {
                                         }
                                     )
                                 );
-                                console.log(
-                                    aggregate.get(key).push(
-                                        {
-                                            username: result.username,
-                                            userId: result.userId,
-                                            icon: result.icon, 
-                                            response: result.submission[key],
-                                        }
-                                    )
-                                )
+
                                 console.log(aggregate.get(key))
                             } else {
                                 aggregate.set(key, [{
