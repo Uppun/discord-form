@@ -129,7 +129,7 @@ router.get('/forms/:formId', (req, res, next) => {
   const _id = req.params.formId;
   const userId = req.user.id;
   const userIcon = req.user.avatar;
-  db.collection('forms').findOne({_id, userId}, (err, doc) => {
+  db.collection('forms').findOne({_id}, (err, doc) => {
     if (doc) {
       res.json({userId, userIcon, doc});
       return;

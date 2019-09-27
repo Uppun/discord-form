@@ -21,7 +21,7 @@ export default class ComponentManager extends Component {
                 res.doc.form.order,
                 res.doc.form.objects,
             )}).catch(err => {
-                console.log(err);
+                window.location = '/';
             });
     }
 
