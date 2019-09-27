@@ -71,12 +71,14 @@ class AggregateResults extends Component {
                 aggResults.set(key, optionsMap);
             }
         }
+        console.log(order)
+        console.log(idToFieldsMap)
+        console.log(aggResults)
 
         return (
             <div className='aggregate-responses'>
                 {order.map(id => {
                     const element = idToFieldsMap.get(id.toString());
-                    console.log(element);
                     if (element) {
                         switch(element.type) {
                             case 'CHECKBOX': {
