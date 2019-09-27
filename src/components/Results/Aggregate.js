@@ -22,6 +22,7 @@ class AggregateResults extends Component {
 
     render() {
         const {aggregate, order, idToFieldsMap} = this.state;
+        console.log(this.state)
         if (!aggregate || aggregate.length === 0) {
             return (
                 <div>
